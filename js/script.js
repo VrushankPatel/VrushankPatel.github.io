@@ -1,5 +1,5 @@
 var portfolio = [
-    "http://vrushankpatel.000webhostapp.com/"
+    "https://vrushankpatel.000webhostapp.com/"
 ]
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
