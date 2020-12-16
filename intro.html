@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<link href="css/introStyle.css" rel="stylesheet" />
+		<script
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=UA-100556360-1"
+		></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+
+			gtag("config", "UA-100556360-1");
+		</script>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Vrushank Patel - Software Engineer</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body class="coming-soon night">
+		<div class="night-toggle">Toggle <span>night</span></div>
+		<header>
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="content-box">
+							<h1>Vrushank Patel</h1>
+							<h2>Software Engineer</h2>
+							<h3>New projects coming soon...</h3>
+							<p>
+								Hello. My name is Vrushank Patel. I'm a Software Engineer based
+								in Bangalore, India. I currently work for an awesome company
+								called
+								<a href="https://www.capsys.hu/" target="_blank"
+									>Capsystematic Technologies</a
+								>, Coding and analytical skilled mindset with focus excellence
+								in Data science and Machine learning. I am a driven individual
+								with the ability to adapt to any situation and proven potential
+								to grow self and others. <br /><br />
+								Want to chat? Get in touch by dropping me an
+								<a href="mailto:vrushankofficial@gmail.com" target="_blank"
+									>email</a
+								>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<script>
+			window.onload = () => {
+				const night_toggle = document.querySelector(".night-toggle");
+
+				night_toggle.addEventListener("click", () => {
+					document.querySelector("body").classList.toggle("night");
+				});
+			};
+		</script>
+	</body>
+</html>
