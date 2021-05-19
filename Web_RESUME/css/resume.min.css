@@ -176,3 +176,7 @@ a:focus,
 a:hover {
 	color: #824027
 }
+
+.justifytext{
+	text-align: justify;
+}
