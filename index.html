@@ -26,7 +26,6 @@
 
 <body class="dark" data-spy="scroll" data-target="#scrollspy" data-offset="1">
 
-
     <div class="menu-toggle" id="menuToggle">
         <span></span>
     </div>
@@ -34,9 +33,9 @@
 
     <div class="header-left" id="scrollspy">
 
-        <div class="logo bg-base-color" style="background-image: url('assets/img/hero-dark.jpg');background-repeat: no-repeat;background-size: cover;">
+        <div class="logo bg-base-color"
+            style="background-image: url('assets/img/hero-dark.jpg');background-repeat: no-repeat;background-size: cover;">
             <a href="index-dark.html" class="mb-0">
-                <!-- <img src="assets/img/hero-dark.jpg" style="border-radius:1000px;" alt=""> -->
             </a>
         </div>
 
@@ -47,28 +46,13 @@
             </div>
             <nav class="menu">
                 <ul class="menu-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home">Home</a>
-                    </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="#about">About </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#services">Skills</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#works">Works</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#blog">Posts</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a type="button" class="nav-link" data-toggle="modal" data-target="#projectsModal">Works</a>
                     </li>
 
                     <li class="nav-item" style="cursor: pointer;" title="Toggle Theme">
@@ -86,112 +70,10 @@
 
 
     <div class="main">
-
-        <section class="home bg-light vh-100" id="home" style="background-image: url('assets/img/bg/bg-2.jpg')">
-            <div class="container-fluid">
-                <div class="row ">
-                    <div class="col-lg-12 ">
-
-                        <div class="social-home">
-                            <ul class="list-inline">
-                                <li>
-                                    <a target="_blank" href="https://www.linkedin.com/in/vrushank-patel-69b682180/">
-                                        <i class="fab fa-linkedin"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a target="_blank" href="https://github.com/VrushankPatel">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a target="_blank" href="https://profile.codersrank.io/user/vrushankpatel">
-                                        <i class="fab fa-codiepie "></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a target="_blank" href="https://twitter.com/3f3bd3892d154aa">
-                                        <i class="fab fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a target="_blank" href="https://www.instagram.com/vrushank_patel_/">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a target="_blank" href="https://www.youtube.com/channel/UCcwDI6ADiBSD2PecimHt17w">
-                                        <i class="fab fa-youtube"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a target="_blank" href="https://vrushankpatel5.medium.com/">
-                                        <i class="fab fa-medium"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a target="_blank" href="https://g.dev/vrushank">
-                                        <i class="fab fa-google"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="d-flex align-items-center vh-100">
-                            <div class="full-width">
-                                <div class="banner">
-                                    <h6>Hi There,</h6>
-                                    <h1 class="cd-headline clip">I Am
-                                        <span class="cd-words-wrapper">
-                                            <b class="is-visible">a Developer</b>
-                                            <b>a Software Engineer</b>
-                                            <b>a Freelancer</b>
-                                            <b>a Backend Developer</b>
-                                            <b>a Proud Indian</b>
-                                            <b>an Opportunist</b>
-                                        </span>
-                                    </h1>
-                                    <p class="max-width-450  mt-20 mb-30">
-                                        It is better to be clear than to be clever.
-                                    </p>
-                                    <a href="#about" class="btn-custom">
-                                        <span><i class="fas fa-user"></i></span>
-                                        <span> More About Me</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="my-info">
-                            <div class="item">
-                                <p class="font-w-700 mb-0">Email</p>
-                                <p class="mb-0">vrushankpatel5@gmail.com</p>
-                            </div>
-
-                            <!-- <div class="item">
-                                <p class="font-w-700 mb-0">Phone</p>
-                                <p class="mb-0">+113-804-9098</p>
-                            </div> -->
-
-                            <div class="item">
-                                <p class="font-w-700  mb-0">Location</p>
-                                <p class="mb-0">Bangalore, India</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
         <section id="about" class="section about">
             <div class="container-fluid">
                 <div class="row mb-50 pt-30">
                     <div class="col-md-12">
-                        <div class="section-title">
-                            <h2 class="mb-0">About me</h2>
-                            <p class="text-muted mb-0">More about me and what I love to do.</p>
-                        </div>
                     </div>
                 </div>
 
@@ -203,11 +85,12 @@
                     </div>
 
                     <div class="col-lg-7 d-flex align-items-center">
-                        <div class="details">
+                        <div class="details text-justify">
                             <h5>Hello, I'm Vrushank Patel, Based in Bangalore, India.</h5>
                             <p class="mb-25">
                                 Hi I am Vrushank Patel, a 24 years old Developer living in Bangalore, India. I am a
-                                Senior Software Engineer with overall experience of more than 3 years working on the fintech projects.
+                                Senior Software Engineer with overall experience of more than 3 years working on the
+                                fintech projects.
                                 Currently I'm working with awesome folks at NASDAQ.
                                 Have a look at my <a target="_blank" class="linkcapt"
                                     href="https://vrushankpatel.github.io/Resume/Vrushank_Resume.pdf">Resume</a>,
@@ -229,169 +112,338 @@
                                         href="mailto:vrushankpatel5@gmail.com">vrushankpatel5@gmail.com</a></li>
                                 <li><span>Nationality :</span> Indian</li>
                                 <li><span>Location :</span> Bangalore</li>
-                                <li><span>Work Status :</span> Senior Software Engineer (Full time)</li>
+                                <li><span>Work Status :</span> Senior Software Engineer</li>
                                 <li><span>Freelancer :</span> Available</li>
                             </ul>
+                            <ul class="m-3">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="p-2 col-xl-4 col-lg-6 col-sm-5 col-xs-12">
+                                            <a class="btn-custom" style="background-color: green;" data-toggle="modal"
+                                                data-target="#resumeWebModal">
+                                                <span><i class="fas fa-globe"></i></span>
+                                                <span>Resume <sup>web</sup></span>
+                                            </a>
+                                        </div>
+                                        <div class="p-2 col-xl-4 col-lg-6 col-sm-5 col-xs-12">
+                                            <a type="button" class="btn-custom" data-toggle="modal"
+                                                data-target="#resumePdfModal">
+                                                <span><i class="fas fa-cloud-download-alt"></i></span>
+                                                <span>Resume <sup>pdf</sup></span>
+                                            </a>
+                                        </div>
+                                        <div class="p-2 col-xl-4 col-lg-6 col-sm-5 col-xs-12">
+                                            <a type="button" class="btn-custom" style="background-color: brown;"
+                                                data-toggle="modal" data-target="#experienceModal">
+                                                <span><i class="fas fa-building"></i></span>
+                                                <span>Experience <sup>4+</sup></span>
+                                            </a>
+                                        </div>
+                                        <div class="p-2 col-xl-4 col-lg-6 col-sm-5 col-xs-12">
+                                            <a type="button" class="btn-custom" style="background-color: teal;"
+                                                data-toggle="modal" data-target="#educationModal">
+                                                <span><i class="fas fa-school"></i></span>
+                                                Education
+                                            </a>
+                                        </div>
 
-                            <a target="_blank" href="Web_RESUME/index.html" class="btn-custom"
-                                style="background-color: green;">
-                                <span><i class="fas fa-cloud-download-alt"></i></span>
-                                <span>Show My CV <sup>web</sup></span>
-                            </a> &nbsp;
+                                        <div class="p-2 col-xl-4 col-lg-6 col-sm-5 col-xs-12">
+                                            <a type="button" class="btn-custom" style="background-color: darkmagenta;"
+                                                data-toggle="modal" data-target="#skillsModal">
+                                                <span><i class="fab fa-superpowers"></i></span>
+                                                <span>Skills <sup>+</sup></span>
+                                            </a>
+                                        </div>
 
-                            <a target="_blank" href="/Resume/Vrushank_Resume.pdf" class="btn-custom">
-                                <span><i class="fas fa-cloud-download-alt"></i></span>
-                                <span>Downland My CV <sup>pdf</sup></span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                                        <div class="p-2 col-xl-4 col-lg-6 col-sm-5 col-xs-12">
+                                            <a type="button" class="btn-custom" style="background-color: sienna;"
+                                                data-toggle="modal" data-target="#projectsModal">
+                                                <span><i class="far fa-paper-plane"></i></span>
+                                                Projects
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
 
-                <!-- 
-                <div class="row features mb-20">
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="item">
-                            <div class="icon mb-10"><i class="fas fa-user"></i></div>
-                            <p class="mb-0">129 Projects Complate</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="item">
-                            <div class="icon mb-10">
-                                <i class="fas fa-coffee"></i>
-                            </div>
-                            <p class="mb-0">1000 Cup of coffee</p>
-                        </div>
-                    </div>
+                            <!-- Experience Modal -->
+                            <div class="modal fade" id="experienceModal" tabindex="-1" role="dialog"
+                                aria-labelledby="experienceModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl" role="document">
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="timeline">
+                                                    <h5 class="display-4 m-4" id="experienceModalLabel">Experience</h5>
+                                                    <div class="item">
+                                                        <div class="content">
+                                                            <h6 class="mb-0">Senior software engineer
+                                                                <span class="text-muted"> - </span> NASDAQ
+                                                            </h6>
+                                                            <small class="text-muted">Nov 2022 - present</small>
+                                                            <p class="pt-15 mb-0" style="text-align: justify;">
+                                                            <ul>
+                                                                <li><b>Multi Matching Engine (MME)</b> - MME is a
+                                                                    trading solution enabling
+                                                                    automatic trade matching across diverse
+                                                                    financial instruments such as forex,
+                                                                    equity, and derivatives empowering exchanges,
+                                                                    banks, and brokers. My role
+                                                                    encompasses:</li>
+                                                                <li>Actively involved in developing, maintaining,
+                                                                    and enhancing product features
+                                                                    and components to facilitate automatic trade
+                                                                    matching across multiple
+                                                                    assets/instruments.</li>
+                                                                <li>Extend core product functionalities to deliver
+                                                                    tailored solutions for
+                                                                    customers, emphasizing adaptation to meet
+                                                                    customer-specific requirements.
+                                                                </li>
+                                                                <li>Conduct comprehensive requirements analysis,
+                                                                    coding, and unit testing
+                                                                    (Maintaining consistent code coverage of at
+                                                                    least 90%), leveraging
+                                                                    innovative solutions to optimize trade matching
+                                                                    processes.</li>
+                                                                <li>Facilitate code reviews and provide constructive
+                                                                    feedback to enhance
+                                                                    development quality, including designing
+                                                                    checkstyles and establishing coding
+                                                                    conventions to uphold rigorous code quality
+                                                                    standards.</li>
+                                                                <li>Successfully improved Sonatype threat score for
+                                                                    dependencies from 9 to 1.5,
+                                                                    significantly enhancing software supply chain
+                                                                    security.</li>
+                                                                <li>Rectified version compatibility issues of unit
+                                                                    testing frameworks to ensure
+                                                                    the functionality of over 2500 unit test cases,
+                                                                    resulting in a notable
+                                                                    increase in code coverage.</li>
+                                                                <li>Administer critical tools such as TaskTop
+                                                                    integration, repository access
+                                                                    management, and CI pipeline automation for
+                                                                    seamless builds, publishing, and
+                                                                    deployments.</li>
+                                                            </ul>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="content">
+                                                            <h6 class="mb-0">Software Development Engineer
+                                                                <span class="text-muted"> - </span> Capsys Financial
+                                                                Technologies
+                                                            </h6>
+                                                            <small class="text-muted">Dec 2019 - Nov 2022</small>
+                                                            <p class="pt-15 mb-0" style="text-align: justify;">
+                                                            <ul>
+                                                                <li>Worked as a full-time Software engineer for
+                                                                    fintech software development
+                                                                    where I was responsible for analyzing,
+                                                                    programming, unit testing and
+                                                                    documenting of software
+                                                                    components and features. Mostly worked on Java,
+                                                                    Spring Boot, Python Flask,
+                                                                    Informix, Docker,
+                                                                    Apache Camel, Apache CXF, Orika, Mapstruct.</li>
+                                                                <li><b>Zeus-GPI (General process interface)</b></li>
+                                                                <li> - Developed SOAP and REST services and
+                                                                    delivered ESB
+                                                                    based solutions for delivering messages (like
+                                                                    Swift MT and MX) from and to
+                                                                    multiple different
+                                                                    endpoints (like DB, MQ, SOAP, HTTP, Filesystem).
+                                                                </li>
+                                                                <li><b>Zeus-CMS (Card Management System)</b></li>
+                                                                <li> - Developed REST services for corporate cards
+                                                                    and
+                                                                    Payments for back office that serves both
+                                                                    Acquires and Issuers and is
+                                                                    typically used by banks and
+                                                                    payment service providers.</li>
+                                                                <li><b>Tool-suite</b></li>
+                                                                <li> - Designed and developed an automation tool
+                                                                    that generates the code (POJOs
+                                                                    and
+                                                                    Mappings) from SQL procedures and Swift MT and
+                                                                    MX messages.</li>
+                                                            </ul>
+                                                            </p>
+                                                        </div>
+                                                    </div>
 
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="item">
-                            <div class="icon mb-10">
-                                <i class="fas fa-smile"></i>
-                            </div>
-                            <p class="mb-0">400 Satisfied Clients</p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="item">
-                            <div class="icon mb-10">
-                                <i class="fas fa-certificate"></i>
-                            </div>
-                            <p class="mb-0">8 Years job experience</p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="item">
-                            <div class="icon mb-10">
-                                <i class="fas fa-medal"></i>
-                            </div>
-                            <p class=" mb-0">+15 awards won</p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="item">
-                            <div class="icon mb-10">
-                                <i class="fas fa-code"></i>
-                            </div>
-                            <p class="mb-0">2000 lines of code</p>
-                        </div>
-                    </div>
-                </div> -->
-
-                <div class="row ">
-                    <div class="col-lg-12">
-
-                        <h5 class="mb-30">My Expericence</h5>
-                        <div class="timeline">
-
-                            <div class="item">
-                                <div class="content">
-                                    <h6 class="mb-0">Senior software engineer
-                                        <span class="text-muted"> - </span> NASDAQ
-                                    </h6>
-                                    <small class="text-muted">Nov 2022 - present</small>
-                                    <p class="pt-15 mb-0" style="text-align: justify;">
-                                    <ul>
-                                        <li><b>Multi Matching Engine (MME)</b> - MME is a trading solution enabling automatic trade matching across diverse financial instruments such as forex, equity, and derivatives empowering exchanges, banks, and brokers. My role encompasses:</li>
-                                        <li>Actively involved in developing, maintaining, and enhancing product features and components to facilitate automatic trade matching across multiple assets/instruments.</li>
-                                        <li>Extend core product functionalities to deliver tailored solutions for customers, emphasizing adaptation to meet customer-specific requirements.</li>
-                                        <li>Conduct comprehensive requirements analysis, coding, and unit testing (Maintaining consistent code coverage of at least 90%), leveraging innovative solutions to optimize trade matching processes.</li>
-                                        <li>Facilitate code reviews and provide constructive feedback to enhance development quality, including designing checkstyles and establishing coding conventions to uphold rigorous code quality standards.</li>
-                                        <li>Successfully improved Sonatype threat score for dependencies from 9 to 1.5, significantly enhancing software supply chain security.</li>
-                                        <li>Rectified version compatibility issues of unit testing frameworks to ensure the functionality of over 2500 unit test cases, resulting in a notable increase in code coverage.</li>
-                                        <li>Administer critical tools such as TaskTop integration, repository access management, and CI pipeline automation for seamless builds, publishing, and deployments.</li>
-
-
-                                    </ul>
-                                    </p>
+                                                    <div class="item">
+                                                        <div class="content">
+                                                            <h6 class="mb-0">SDE intern
+                                                                <span class="text-muted"> - </span> Capsys Financial
+                                                                Technologies
+                                                            </h6>
+                                                            <small class="text-muted">Sept 2019 - Dec 2019</small>
+                                                            <p class="pt-15 mb-0" style="text-align: justify;">Full
+                                                                time Internship at Capsys
+                                                                financial technologies pvt ltd
+                                                                on Financial applications development for banking
+                                                                and trading with Real time
+                                                                development with Java based technologies (Spring,
+                                                                Hibernate, ActiveMQ).<br>
+                                                                EAMS : Built a full working prototype by
+                                                                implementation of one of my idea in
+                                                                under 3 months.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="item">
-                                <div class="content">
-                                    <h6 class="mb-0">Software Development Engineer
-                                        <span class="text-muted"> - </span> Capsys Financial Technologies
-                                    </h6>
-                                    <small class="text-muted">Dec 2019 - Nov 2022</small>
-                                    <p class="pt-15 mb-0" style="text-align: justify;">
-                                        <ul>
-                                            <li>Worked as a full-time Software engineer for fintech software development where I was responsible for analyzing, programming, unit testing and documenting of software
-                                            components and features. Mostly worked on Java, Spring Boot, Python Flask, Informix, Docker,
-                                            Apache Camel, Apache CXF, Orika, Mapstruct.</li>
-                                            <li><b>Zeus-GPI (General process interface)</b></li>
-                                            <li> - Developed SOAP and REST services and delivered ESB
-                                            based solutions for delivering messages (like Swift MT and MX) from and to multiple different
-                                            endpoints (like DB, MQ, SOAP, HTTP, Filesystem).</li>
-                                            <li><b>Zeus-CMS (Card Management System)</b></li>
-                                            <li> - Developed REST services for corporate cards and
-                                            Payments for back office that serves both Acquires and Issuers and is typically used by banks and
-                                            payment service providers.</li>
-                                            <li><b>Tool-suite</b></li>
-                                            <li> - Designed and developed an automation tool that generates the code (POJOs and
-                                            Mappings) from SQL procedures and Swift MT and MX messages.</li>
-                                        </ul>
-                                    </p>
+                            <!-- Education Modal -->
+                            <div class="modal fade" id="educationModal" tabindex="-1" role="dialog"
+                                aria-labelledby="educationModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl" role="document">
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="timeline">
+                                                    <h5 class="display-4 m-4" id="experienceModalLabel">Education</h5>
+                                                    <div class="item">
+                                                        <div class="content">
+                                                            <h6 class="mb-0">B.E Information Technology <span
+                                                                    class="text-muted"> - </span>
+                                                                Apollo Institute of engineering</h6>
+                                                            <small class="text-muted">July 2015 - May 2019</small>
+                                                            <br>
+                                                            University : Gujarat technological university
+                                                            <p class="pt-15 mb-0" style="text-align: justify;">
+
+                                                                Main coursework: Data Structures, Design and analysis of
+                                                                Algorithms, Systems Design, RDBMS,
+                                                                Operating Systems, Software Engineering, Artificial
+                                                                Intelligence, Internet of
+                                                                Things.
+                                                            </p>
+                                                            <h6 style="font-size: 15px;">CGPA : 8.24</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="item">
-                                <div class="content">
-                                    <h6 class="mb-0">SDE intern
-                                        <span class="text-muted"> - </span> Capsys Financial Technologies
-                                    </h6>
-                                    <small class="text-muted">Sept 2019 - Dec 2019</small>
-                                    <p class="pt-15 mb-0" style="text-align: justify;">Full time Internship at Capsys
-                                        financial technologies pvt ltd
-                                        on Financial applications development for banking and trading with Real time
-                                        development with Java based technologies (Spring, Hibernate, ActiveMQ).<br>
-                                        EAMS : Built a full working prototype by implementation of one of my idea in
-                                        under 3 months.</p>
+                            <!-- Skills Modal -->
+                            <div class="modal fade" id="skillsModal" tabindex="-1" role="dialog"
+                                aria-labelledby="skillsModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl" role="document">
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="timeline">
+                                                    <h5 class="display-4 m-4" id="experienceModalLabel">Skills</h5>
+                                                    <!-- <ul class="p-4">
+                                                        <li class="p-2"><b>Programming language</b> - Java, Python</li>
+                                                        <li class="p-2"><b>Libraries/Frameworks</b> - Spring Boot, Flask, FastAPI, Glasnost Orika, Mapstruct</li>
+                                                        <li class="p-2"><b>Databases</b> - MySQL, Informix</li>
+                                                        <li class="p-2"><b>VCS</b> - Git, Mercurial, Kallithea SCM</li>
+                                                        <li class="p-2"><b>Other</b> - Reactive Microservices, Apache Kafka, Docker, GitHub-Actions, Gitlab Pipelines, Teamcity</li>
+                                                        <li class="p-2">Proficient in harnessing the capabilities of generative AI tools such as ChatGPT, GitHub Copilot, and Diffblue to enhance productivity and streamline software development processes.</li>
+                                                    </ul> -->
+                                                    <table class="p-4">
+                                                        <tr>
+                                                            <td class="p-2"><b>Programming language</b></td>
+                                                            <td class="p-2"> Java, Python</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="p-2"><b>Libraries/Frameworks</b></td>
+                                                            <td class="p-2"> Spring Boot, Flask, FastAPI, Glasnost
+                                                                Orika, Mapstruct</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="p-2"><b>Databases</b></td>
+                                                            <td class="p-2"> MySQL, Informix</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="p-2"><b>VCS</b></td>
+                                                            <td class="p-2"> Git, Mercurial, Kallithea SCM</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="p-2"><b>Other</b></td>
+                                                            <td class="p-2"> Reactive Microservices, Apache Kafka,
+                                                                Docker, GitHub-Actions, Gitlab Pipelines, Teamcity</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="p-2" colspan="2">Proficient in harnessing the
+                                                                capabilities of generative AI tools such as ChatGPT,
+                                                                GitHub Copilot, and Diffblue to enhance productivity and
+                                                                streamline software development processes.</td>
+                                                        </tr>
+                                                    </table>
+
+
+
+
+
+                                                    <!-- <div class="item">
+                                                        <div class="content">
+                                                            <h6 class="mb-0">Programming - </h6> Java
+                                                            <small class="text-muted">July 2015 - May 2019</small>
+                                                            <br>
+                                                            University : Gujarat technological university
+                                                            <p class="pt-15 mb-0" style="text-align: justify;">
+
+                                                                Main coursework: Data Structures, Design and analysis of
+                                                                Algorithms, Systems Design, RDBMS,
+                                                                Operating Systems, Software Engineering, Artificial
+                                                                Intelligence, Internet of
+                                                                Things.
+                                                            </p>
+                                                            <h6 style="font-size: 15px;">CGPA : 8.24</h6>
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <h5 class="mb-30">My Education</h5>
-                        <div class="timeline">
 
-                            <div class="item">
-                                <div class="content">
-                                    <h6 class="mb-0">B.E Information Technology <span class="text-muted"> - </span>
-                                        Apollo Institute of engineering</h6>
-                                    <small class="text-muted">July 2015 - May 2019</small>
-                                    <br>
-                                    University : Gujarat technological university
-                                    <p class="pt-15 mb-0" style="text-align: justify;">
+                            <!-- RESUME WEB modal -->
+                            <div class="modal fade" id="resumeWebModal">
+                                <div class="modal-dialog modal-xl" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <object type="text/html" data="/Web_RESUME/index.html" width="100%"
+                                                height="500" style="height: 85vh;">No Support</object>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                                        Main coursework: Data Structures, Design and analysis of
-                                        Algorithms, Systems Design, RDBMS,
-                                        Operating Systems, Software Engineering, Artificial Intelligence, Internet of
-                                        Things.
-                                    </p>
-                                    <h6 style="font-size: 15px;">CGPA : 8.24</h6>
+                            <!-- Resume PDF Modal -->
+                            <div class="modal fade" id="resumePdfModal">
+                                <div class="modal-dialog modal-xl" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <object type="application/pdf" data="/Resume/Vrushank_Resume.pdf"
+                                                width="100%" height="500" style="height: 85vh;">No Support</object>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Projects -->
+                            <div class="modal fade" id="projectsModal">
+                                <div class="modal-dialog modal-xl" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <object type="text/html" data="/Work/AllProjects.html" width="100%"
+                                                height="500" style="height: 85vh;">No Support</object>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -399,614 +451,7 @@
                 </div>
             </div>
         </section>
-
-
-        <section id="services" class="section services">
-            <div class="container-fluid">
-                <div class="row mb-50">
-                    <div class="col-md-12">
-                        <div class="section-title">
-                            <h2 class="mb-0">My Skills</h2>
-                            <p class="text-muted mb-0">My skills and experience with technological concepts.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4 col-lg-4">
-                        <div class="item">
-                            <div class="circle">
-                                <h2>01</h2>
-                            </div>
-                            <div class="content ">
-                                <h5 class="mt-15 mb-10">Competitive Programming</h5>
-                                <p class="mb-0">
-                                    Logical understanding of discrete mathematics along with data structures and
-                                    algorithms to tackle complex problems.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4">
-                        <div class="item">
-                            <div class="circle">
-                                <h2>02</h2>
-                            </div>
-                            <div class="content">
-                                <h5 class="mt-15 mb-10">Distributed Systems</h5>
-                                <p class="mb-0">
-                                    Deeper knowledge and understanding of how to design a large scale distributed
-                                    systems.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4">
-                        <div class="item">
-                            <div class="circle">
-                                <h2>03</h2>
-                            </div>
-                            <div class="content">
-                                <h5 class=" mt-15 mb-10">Software Engineering</h5>
-                                <p class="mb-0">
-                                    Ability to develop APIs with REST and SOAP based webservices, microservices
-                                    and reactive architectural design.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-6">
-                        <div class="item">
-                            <div class="circle">
-                                <h2>04</h2>
-                            </div>
-                            <div class="content">
-                                <h5 class="mt-15 mb-10">Web and Mobile Development</h5>
-                                <p class="mb-0">
-                                    Ability to develop Web client(React js) and Cross platform Mobile
-                                    client(Flutter).
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-6">
-                        <div class="item">
-                            <div class="circle">
-                                <h2>04</h2>
-                            </div>
-                            <div class="content">
-                                <h5 class="mt-15 mb-10">Machine Learning</h5>
-                                <p class="mb-0">
-                                    Understanding of scientific mathematics and machine learning algorithms to work with
-                                    predictive analysis and modeling.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- <div class="col-sm-6 col-lg-6">
-                        <div class="item">
-                            <div class="circle">
-                                <h2>05</h2>
-                            </div>
-                            <div class="content">
-                                <h5 class="mt-15 mb-10">Machine Learning</h5>
-                                <p class="mb-0"> Lorem ipsum dolor sit amet consectetuer adipiscing elit aenean commodo
-                                    ligula eget.</p>
-                            </div>
-                        </div>
-                    </div> -->
-
-                    <!-- <div class="col-sm-6 col-lg-4">
-                        <div class="item">
-                            <div class="circle">
-                                <h2>06</h2>
-                            </div>
-                            <div class="content">
-                                <h5 class="mt-15 mb-10">Machine Learning and Artificial Intelligence</h5>
-                                <p class="mb-0"> Lorem ipsum dolor sit
-                                    amet consectetuer adipiscing elit aenean commodo ligula eget.
-                                </p>
-                            </div>
-                        </div>
-                    </div> -->
-                </div>
-            </div>
-        </section>
-
-
-        <section id="works" class="section works">
-            <div class="container-fluid">
-                <div class="row mb-50">
-                    <div class="col-md-12">
-                        <div class="section-title">
-                            <h2 class="mb-0">Projects</h2>
-                            <p class="text-muted mb-0">A latest creative projects in Programming and Development.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row works-items">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="item">
-                            <div class="image">
-                                <img src="assets/img/works/001.jpg" alt="">
-
-                                <div class="overly">
-                                    <a href="Work/AllProjects.html#complexica" class="view-work2">
-                                        View
-                                        Work</a>
-                                </div>
-                            </div>
-
-                            <div class="details d-flex align-items-center">
-                                <p class="mb-0">Complexica</p>
-                                <a href="https://complexica.web.app" target="_blank" class="ml-auto"><i
-                                        class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="item">
-                            <div class="image">
-                                <img src="assets/img/works/002.png" alt="">
-
-                                <div class="overly">
-                                    <a href="Work/AllProjects.html#iBoard" class="view-work2">
-                                        View
-                                        Work</a>
-                                </div>
-                            </div>
-
-                            <div class="details d-flex align-items-center">
-                                <p class="mb-0">iBoard</p>
-                                <a href="https://iboard-x.web.app/" target="_blank" class="ml-auto"><i
-                                        class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="item">
-                            <div class="image">
-                                <img src="assets/img/works/1.jpg" alt="">
-
-                                <div class="overly">
-                                    <a href="Work/AllProjects.html#quortex" class="view-work2">
-                                        View
-                                        Work</a>
-                                </div>
-                            </div>
-
-                            <div class="details d-flex align-items-center">
-                                <p class="mb-0">Quortex</p>
-                                <a href="https://quortex-app.web.app/signin" target="_blank" class="ml-auto"><i
-                                        class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="item">
-                            <div class="image">
-                                <img src="assets/img/works/2.jpg" alt="">
-                                <div class="overly">
-                                    <a href="Work/AllProjects.html#eams" class="view-work2"> View
-                                        Work</a>
-                                </div>
-                            </div>
-
-                            <div class="details d-flex align-items-center">
-                                <p class="mb-0">EAMS (Employee Attendance Management)</p>
-                                <a href="https://vrushankpatel.github.io/Employee_attendance_management/"
-                                    target="_blank" class="ml-auto">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="item">
-                            <div class="image">
-                                <img src="assets/img/works/3.jpg" alt="">
-                                <div class="overly">
-                                    <a href="Work/AllProjects.html#eduwiz" class="view-work2"> View
-                                        Work</a>
-                                </div>
-                            </div>
-
-                            <div class="details d-flex align-items-center">
-                                <p class="mb-0">Eduwiz</p>
-                                <a href="https://vrushankpatel.github.io/Eduwiz/" target="_blank" class="ml-auto">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="item">
-                            <div class="image">
-                                <img class="d-none d-lg-block d-xl-block" src="assets/img/works/4.jpg" alt="">
-                                <img class="d-block d-lg-none d-xl-none" src="assets/img/works/4_square.jpg" alt="">
-                                <div class="overly">
-                                    <a href="Work/AllProjects.html#neurotyper" class="view-work2"> View Work</a>
-                                </div>
-                            </div>
-
-                            <div class="details d-flex align-items-center">
-                                <p class="mb-0">NeuroTyper</p>
-                                <a href="https://vrushankpatel.github.io/Neurotyper/" target="_blank" class="ml-auto">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="item">
-                            <div class="image">
-                                <img src="assets/img/works/5.jpg" alt="">
-                                <div class="overly">
-                                    <a href="https://github.com/VrushankPatel/" target="_blank" class="view-work2"> View
-                                        More</a>
-                                </div>
-                            </div>
-                            <div class="details d-flex align-items-center">
-                                <p class="mb-0">More</p>
-                                <a href="https://github.com/VrushankPatel/" target="_blank" class="ml-auto">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- <section class="section testimonials">
-            <div class="container-fluid">
-                <div class="row mb-50">
-                    <div class="col-md-12">
-                        <div class="section-title">
-                            <h2 class="mb-0">My Clients</h2>
-                            <p class="text-muted mb-0">What My Clients Say About Me .</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="owl-carousel">
-
-                            <div class="item d-flex align-items-center">
-                                <div class="image">
-                                    <img src="assets/img/clients/1.jpg" alt="">
-                                </div>
-                                <div class="content">
-                                    <span class="icon_quotations_alt2 mb-0 icon"></span>
-                                    <p class="text-muted mb-30 mt-30">In a professional context it often happens that
-                                        private or corporate clients corder a publication to be made.In a professional
-                                        context it often happens that private or corporate clients corder a publication
-                                        to be made.</p>
-
-                                    <p class="author mb-0 ">
-                                        <span class="font-w-700">Amar Smith</span>
-                                        <span class="dot"></span> Product Manager</p>
-                                </div>
-                            </div>
-
-
-                            <div class="item d-flex align-items-center">
-                                <div class="image">
-                                    <img src="assets/img/clients/2.jpg" alt="">
-                                </div>
-                                <div class="content">
-                                    <span class="icon_quotations_alt2 mb-0 icon"></span>
-                                    <p class="text-muted mb-30 mt-30">In a professional context it often happens that
-                                        private or corporate clients corder a publication to be made.In a
-                                        professional context it often happens that private or corporate clients corder a
-                                        publication to be made.</p>
-                                    <p class="author  mb-0 ">
-                                        <span class="font-w-700">Amar Smith</span>
-                                        <span class="dot"></span> Product Manager</p>
-                                </div>
-                            </div>
-
-
-                            <div class="item d-flex align-items-center">
-                                <div class="image">
-                                    <img src="assets/img/clients/3.jpg" alt="">
-                                </div>
-                                <div class="content">
-                                    <span class="icon_quotations_alt2 mb-0 icon"></span>
-                                    <p class="text-muted mb-30 mt-30">In a professional context it often happens that
-                                        private or corporate clients corder a publication to be made.In a
-                                        professional context it often happens that private or corporate clients corder a
-                                        publication to be made.</p>
-                                    <p class="author  mb-0 ">
-                                        <span class="font-w-700">Amar Smith</span>
-                                        <span class="dot"></span> Product Manager
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-
-
-        <section class="section blog" id="blog">
-            <div class="container-fluid">
-                <div class="row mb-50">
-                    <div class="col-md-12">
-                        <div class="section-title">
-                            <h2 class="mb-0">Posts</h2>
-                            <p class="text-muted mb-0">My posts About Technological Advancements, Productivity,
-                                Software Engineering and Artificial
-                                Intelligence.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="item">
-                            <div class="image">
-                                <img src="https://cdn.vidyard.com/thumbnails/10554360/JyJ7-qlpUfx7Jf6yCc64GAleL7o3xSnX.gif"
-                                    alt="">
-                            </div>
-                            <div class="content">
-                                <small class="text-muted">16 Nov, 2021 <span class="dot"></span> #Tecnology, #Database, #NoSQL</small>
-                                <h5 class="title  mb-15 mt-10">
-                                    <a href="https://vrushankpatel5.medium.com/googles-paperphone-758f43345bc4"
-                                        target="_blank">ElasticSearch CRUD Operations</a>
-                                </h5>
-                                <p class=" mb-25" style="text-align: justify;">
-                                    Elasticsearch is a search engine based on the Lucene library. It provides a distributed, multitenant-capable full-text search engine with an HTTP web interface and schema-free JSON documents. This article will get you through the tutorial of all the queries to understand the CRUD operations in Elasticsearch.
-                                </p>
-                                <a href="https://vrushankpatel5.medium.com/elasticsearch-crud-and-basic-queries-6010c4a6a6a3"
-                                    target="_blank" class="btn-custom">
-                                    <span>Read More</span>
-                                    <span class="arrow_right"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6">
-                        <div class="item">
-                            <div class="image">
-                                <img src="https://hdwallpaperim.com/wp-content/uploads/2017/08/25/461265-docker-containers.jpg"
-                                    alt="">
-                            </div>
-                            <div class="content">
-                                <small class="text-muted">16 Nov, 2021
-                                    <span class="dot"></span> #Docker , #Devops</small>
-                                <h5 class="title mb-15 mt-10">
-                                    <a href="https://vrushankpatel5.medium.com/docker-course-86c6e0919855"
-                                        target="_blank">Docker crash course</a>
-                                </h5>
-                                <p style="text-align: justify;" class="mb-25">Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers. In this tutorial, you'll learn how Atomist will help Docker meet the challenge of securing secure software supply chains for development teams.
-                                </p>
-                                <a href="https://vrushankpatel5.medium.com/oracles-autonomous-database-59c80938ec84"
-                                    target="_blank" class="btn-custom">
-                                    <span>Read More</span>
-                                    <span class="arrow_right"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- --- -->
-                    <div class="col-lg-6 col-md-6">
-                        <div class="item">
-                            <div class="image">
-                                <img src="https://cdn-images-1.medium.com/max/1000/1*AiEc2TU5r3j_Kokh9BFlJA.jpeg"
-                                    alt="">
-                            </div>
-                            <div class="content">
-                                <small class="text-muted">06 Feb, 2020 <span class="dot"></span> #Tecnology ,
-                                    #mobile</small>
-                                <h5 class="title  mb-15 mt-10">
-                                    <a href="https://vrushankpatel5.medium.com/googles-paperphone-758f43345bc4"
-                                        target="_blank">Google's
-                                        PaperPhone</a>
-                                </h5>
-                                <p class=" mb-25" style="text-align: justify;">
-                                    An app lets you choose what to include such as favourite contacts, maps and meetings
-                                    and then prints them directly to a sheet of paper. Customisable "paper apps" like
-                                    recipes, phrasebooks and notepads let you get things done or unwind in a more
-                                    focussed way.
-                                </p>
-                                <a href="https://vrushankpatel5.medium.com/googles-paperphone-758f43345bc4"
-                                    target="_blank" class="btn-custom">
-                                    <span>Read More</span>
-                                    <span class="arrow_right"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6">
-                        <div class="item">
-                            <div class="image">
-                                <img src="https://www.zdnet.com/a/hub/i/r/2018/10/30/d1a0f3fc-95b8-4c54-9699-b418b81325bb/resize/1200x900/0302e4210f7cc230a524f927b614323c/oracle-adw-logo.png"
-                                    alt="">
-                            </div>
-                            <div class="content">
-                                <small class="text-muted">03 Feb, 2020
-                                    <span class="dot"></span> #systems , #machinelearning</small>
-                                <h5 class="title mb-15 mt-10">
-                                    <a href="https://vrushankpatel5.medium.com/oracles-autonomous-database-59c80938ec84"
-                                        target="_blank">Oracle's self driving database</a>
-                                </h5>
-                                <p style="text-align: justify;" class="mb-25">The Autonomous database created by Oracle
-                                    is self-driving,
-                                    self-repairing and self-securing.This cloud database uses machine learning
-                                    to eliminate the human labor associated with routine management tasks traditionally
-                                    performed by database
-                                    administrators.
-
-                                </p>
-                                <a href="https://vrushankpatel5.medium.com/oracles-autonomous-database-59c80938ec84"
-                                    target="_blank" class="btn-custom">
-                                    <span>Read More</span>
-                                    <span class="arrow_right"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6">
-                        <div class="item">
-                            <div class="image">
-                                <img src="https://analyticsindiamag.com/wp-content/uploads/2020/01/rectangle_large_type_2_9cf315e3dff194902606ceb95beb7aff.png"
-                                    alt="">
-                            </div>
-                            <div class="content">
-                                <small class="text-muted">03 Feb, 2020
-                                    <span class="dot"></span> #AI , #web
-                                </small>
-                                <h5 class="title mb-15 mt-10">
-                                    <a href="https://vrushankpatel5.medium.com/microsofts-sketch2code-7af8a6dc6a98"
-                                        target="_blank">Sketch2Code</a>
-                                </h5>
-                                <p class=" mb-25" style="text-align: justify;">The awesome people at microsoft’s AI Lab,
-                                    created the Sketch2Code
-                                    where you have to upload the sketch of your desired web page as given in above
-                                    picture, and that’s it, you’ll get the responsible webpage automatically generated.
-
-                                </p>
-                                <a href="https://vrushankpatel5.medium.com/microsofts-sketch2code-7af8a6dc6a98"
-                                    class="btn-custom" target="_blank">
-                                    <span>Read More</span>
-                                    <span class="arrow_right"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6">
-                        <div class="item">
-                            <div class="image">
-                                <img src="https://www.cityam.com/wp-content/uploads/2019/05/optimized-firechat-new-1-57ed666299245-57ed6662ba66a-1280x720.png"
-                                    alt="">
-                            </div>
-                            <div class="content">
-                                <small class="text-muted">18 Jan, 2020
-                                    <span class="dot"></span> #Design , #web
-                                </small>
-                                <h5 class="title mb-15 mt-10">
-                                    <a href="https://vrushankpatel5.medium.com/fire-chat-4c87a156f922"
-                                        target="_blank">Firechat</a>
-                                </h5>
-                                <p style="text-align: justify;" class="mb-25">Fire chat allows establishing
-                                    communication between devices within 200 feet that are also running fire chat.
-                                    It uses multihop technology to connect all devices within range, creating a mesh
-                                    network that works, even when mobile and broadband access fails.
-                                </p>
-                                <a href="https://vrushankpatel5.medium.com/fire-chat-4c87a156f922" class="btn-custom"
-                                    target="_blank">
-                                    <span>Read More</span>
-                                    <span class="arrow_right"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <section class="section contact pb-70" id="contact">
-            <div class="container-fluid">
-                <div class="row mb-50">
-                    <div class="col-md-12">
-                        <div class="section-title">
-                            <h2 class="mb-0">Contact Me</h2>
-                            <p class="text-muted mb-0">Feel Free To Contact Me Any Time </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <form method="post" id="main_contact_form" class="form contact_form ">
-                            <div class="alert alert-success contact_msg " style="display: none" role="alert">
-                                Your message was sent successfully.
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Name"
-                                    required="required">
-                            </div>
-
-                            <div class="form-group">
-                                <input type="email" name="email" id="email" class="form-control" placeholder="Email"
-                                    required="required">
-                            </div>
-
-                            <div class="form-group">
-                                <input type="text" name="subject" id="subject" class="form-control"
-                                    placeholder="Subject" required="required">
-                            </div>
-
-                            <div class="form-group">
-                                <textarea name="message" id="message" cols="30" rows="5" class="form-control"
-                                    placeholder="Message" required="required"></textarea>
-                            </div>
-
-                            <button type="submit" name="submit" class="btn-custom">
-                                <span><i class="fas fa-paper-plane"></i></span>
-                                <span> Send Message</span>
-                            </button>
-
-                        </form>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <h5>Let's talk about everything!</h5>
-                        <p class=" mb-30">
-
-                            I am always excited to do business with like minded people, lets discuss over coffee. Want
-                            to chat? Get in touch by dropping me an Email.
-                        </p>
-                        <div class="contact-info">
-                            <!-- <div class="item mb-20">
-                                <p class="font-w-700 mb-0">Phone: </P>
-                                <p class="mb-0"><i class="fas fa-phone base-color"></i>+113-804-9098</p>
-                            </div> -->
-                            <div class="item mb-20">
-                                <p class="font-w-700 mb-0">Email: </p>
-                                <p class="mb-0"><i class="fas fa-envelope base-color"> </i> vrushankpatel5@gmail.com</p>
-                            </div>
-                            <div class="item mb-20">
-                                <p class=" font-w-700 mb-0">Located at: </p>
-                                <p class="mb-0"><i class="fas fa-map-marker-alt base-color"> </i>Bangalore, India.
-                                </p>
-                            </div>
-                            <div class="item mb-20">
-                                <p class="font-w-700 mb-0">LinkedIn: </p>
-                                <p class="mb-0"> <i class="fab fab fa-linkedin base-color"> </i><a class="linkcapt"
-                                        href="https://www.linkedin.com/in/vrushank-patel-69b682180/"
-                                        target="_blank">Vrushank Patel</a>
-                                </p>
-                            </div>
-                            <div class="item">
-                                <p class="font-w-700 mb-0">Github: </p>
-                                <p class="mb-0"> <i class="fab fab fa-github base-color"> </i><a class="linkcapt"
-                                        href="https://www.github.com/VrushankPatel" target="_blank">Vrushank Patel</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
+        
         <footer class="pt-30 pb-30 bg-light">
             <div class="container-fluid">
                 <div class="row">
@@ -1015,7 +460,7 @@
                     </div>
                 </div>
             </div>
-        </footer>        
+        </footer>
     </div>
 
 
