@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono&family=Ubuntu:wght@300;400;700&display=swap');
+
+a, body
+{
+    background: #1F1F1F;
+    color: rgb(210, 210, 210);
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.highlighted, .title {
+    color: white
+}
+
+/* a
+{
+    color: white;
+} */
+
+.content
+{
+    display: block;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+.profile-pic
+{
+    height: 25%;
+    border-radius: 50%;
+}
+
+.profile-badge
+{
+    height: 10%;
+    border-radius: 25%;
+}
+
+h1
+{
+    font-size: 3em;
+    font-weight: 700;
+}
+
+h2
+{
+    font-size: 2em;
+    font-weight: 300;
+}
+
+p, ul
+{
+    font-family: 'DM Mono', monospace;
+    font-size: 1.2em;
+    line-height: 1.7em;
+}
+
+.social-icons img
+{
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+}
+
+.plain-link
+{
+    text-decoration: none;
+    color: white;
+}
