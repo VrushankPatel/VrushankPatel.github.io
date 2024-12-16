@@ -2,7 +2,8 @@
 
 a, body
 {
-    background: #1F1F1F;
+    /* background: #1F1F1F; */
+    background: #000015;
     color: rgb(210, 210, 210);
     font-family: 'Ubuntu', sans-serif;
 }
@@ -10,11 +11,6 @@ a, body
 .highlighted, .title {
     color: white
 }
-
-/* a
-{
-    color: white;
-} */
 
 .content
 {
