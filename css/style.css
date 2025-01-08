@@ -7,6 +7,7 @@ body {
     margin: 0;
     padding: 0;
     background: #f5f5f5;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .content {
@@ -151,4 +152,85 @@ ul li a:not(.highlighted):hover {
 /* Add specific styling for the "Let's connect" section */
 h2.title:first-of-type {
     margin-bottom: 20px;
+}
+
+/* Add these new styles */
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+}
+
+#darkModeToggle {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+#darkModeToggle:hover {
+    transform: scale(1.1);
+    background-color: #e0e0e0;
+}
+
+#darkModeToggle i {
+    font-size: 20px;
+    color: #666;
+}
+
+/* Dark mode styles */
+.dark-mode {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+}
+
+.dark-mode .content {
+    background-color: #2d2d2d;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode hr {
+    border-color: #444;
+}
+
+.dark-mode a {
+    color: #7cb7ff;
+}
+
+.dark-mode .highlighted {
+    color: #7cb7ff;
+}
+
+.dark-mode #darkModeToggle {
+    background-color: #444;
+}
+
+.dark-mode #darkModeToggle i {
+    color: #fff;
+}
+
+.dark-mode .plain-link {
+    color: #ffffff;
+}
+
+.dark-mode .plain-link:hover {
+    color: #7cb7ff;
+}
+
+/* Add these to your dark mode styles section */
+.dark-mode h2.title,
+.dark-mode h2.title2 {
+    color: #ffffff;
+    border-bottom-color: #7cb7ff;
+}
+
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3 {
+    color: #ffffff;
 }
