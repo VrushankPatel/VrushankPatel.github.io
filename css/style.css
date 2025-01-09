@@ -495,3 +495,66 @@ h2.title:first-of-type {
 .view-more:hover {
     text-decoration: underline;
 }
+
+/* Certification buttons */
+.certification-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.cert-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border: 1px solid #dee2e6;
+    border-radius: 25px;
+    color: #495057;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.cert-button i {
+    font-size: 1em;
+    color: #3498db;
+}
+
+.cert-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #e9ecef, #dee2e6);
+    border-color: #ced4da;
+}
+
+/* Dark mode styles for certification buttons */
+.dark-mode .cert-button {
+    background: linear-gradient(135deg, #2d3436, #2d3436);
+    border-color: #4a4a4a;
+    color: #ffffff;
+}
+
+.dark-mode .cert-button:hover {
+    background: linear-gradient(135deg, #353b48, #2d3436);
+    border-color: #7cb7ff;
+}
+
+.dark-mode .cert-button i {
+    color: #7cb7ff;
+}
+
+/* Responsive styles for certification buttons */
+@media (max-width: 600px) {
+    .cert-button {
+        padding: 6px 12px;
+        font-size: 0.8em;
+    }
+    
+    .certification-container {
+        gap: 8px;
+    }
+}
