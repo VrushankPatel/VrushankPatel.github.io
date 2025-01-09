@@ -472,3 +472,26 @@ h2.title:first-of-type {
 .dark-mode .modal-content::-webkit-scrollbar-thumb:hover {
     background: #888;
 }
+
+.experience-summary {
+    margin-bottom: 2rem;
+}
+
+.experience-summary .experience-item {
+    margin-bottom: 1.5rem;
+}
+
+.view-more {
+    font-size: 0.8em;
+    color: #666;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.dark-mode .view-more {
+    color: #aaa;
+}
+
+.view-more:hover {
+    text-decoration: underline;
+}

@@ -12,7 +12,7 @@
 <body>
     <div class="dark-mode-toggle">
         <button id="darkModeToggle" title="Toggle dark mode">
-            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun"></i>
         </button>
     </div>
 
@@ -52,7 +52,7 @@
             <a title="Resume" class="plain-link" target="_blank" href="/Resume/Vrushank_Resume.pdf">
                 <i class="fa fa-file-pdf"></i>
             </a>
-            <a title="Experience" id="experienceBtn" class="plain-link" target="_self" href="#">
+            <a title="Experience" id="experienceBtn" class="plain-link" onclick="openExperienceModal(event)" href="#">
                 <i class="fa fa-briefcase"></i>
             </a>
         </h2>
@@ -132,6 +132,35 @@
                 </div>
             </div>
         </div>
+        
+        <h2 class="title">Experience Summary <a href="#" onclick="openExperienceModal(event)" class="view-more">(View Details)</a></h2>
+        
+        <div class="experience-summary">
+            <div class="experience-item">
+                <h3>NASDAQ <span class="date">Nov 2022 – PRESENT</span></h3>
+                <h4>Senior Software Developer <span class="location">Bangalore - IN</span></h4>
+                <div class="role-details">
+                    <p><strong>Multi Matching Engine (MME)</strong> - Contributing to development and maintenance of a trading solution enabling automatic trade execution by matching orders across diverse financial instruments.</p>
+                    <ul>
+                        <li>Working with Java-Spring ecosystem, Docker, and Kubernetes for high-performance trade matching</li>
+                        <li>Maintaining 90%+ code coverage and improving system security</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <h3>Capsystematic Technologies Pvt Ltd. <span class="date">Dec 2019 – Nov 2022</span></h3>
+                <h4>Software Developer <span class="location">Bangalore - IN</span></h4>
+                <div class="role-details">
+                    <p>Developed components for capital markets software products using Java, Spring Boot, Python Flask, and various other technologies.</p>
+                    <ul>
+                        <li>Led development of SOAP/REST services for message delivery in Zeus-GPI</li>
+                        <li>Modernized legacy card management system using Spring Boot</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         <h2 class="title">Work highlights </h2>
 
         <ul>
@@ -230,29 +259,38 @@
     <script>
         const darkModeToggle = document.getElementById('darkModeToggle');
         const body = document.body;
+        const darkModeIcon = darkModeToggle.querySelector('i');
+        
+        // Function to update icon based on mode
+        function updateDarkModeIcon(isDarkMode) {
+            darkModeIcon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
+        }
         
         // Check for saved dark mode preference
         if (localStorage.getItem('darkMode') === 'enabled') {
             body.classList.add('dark-mode');
+            updateDarkModeIcon(true);
+        } else {
+            updateDarkModeIcon(false);
         }
         
         darkModeToggle.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            
+            // Update icon
+            updateDarkModeIcon(isDarkMode);
             
             // Save preference
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                localStorage.setItem('darkMode', 'disabled');
-            }
+            localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
         });
 
         // Modal functionality
         const modal = document.getElementById('experienceModal');
-        const btn = document.getElementById('experienceBtn');
         const closeBtn = document.querySelector('.close-modal');
 
-        btn.onclick = function() {
+        function openExperienceModal(event) {
+            event.preventDefault(); // Prevent default anchor behavior
             modal.style.display = 'block';
             setTimeout(() => {
                 modal.classList.add('show');
