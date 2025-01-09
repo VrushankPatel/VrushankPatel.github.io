@@ -57,24 +57,25 @@ h2.title {
 h2.title2 {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
     padding-bottom: 5px;
     margin-top: 30px;
     clear: both;
+    flex-wrap: wrap;
 }
 
 .plain-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 45px;
-    height: 45px;
+    width: 36px;
+    height: 36px;
     color: #3498db;
     text-decoration: none;
-    margin: 0 8px;
-    font-size: 20px;
+    margin: 0 5px;
+    font-size: 16px;
     border: 2px solid #3498db;
-    border-radius: 25px;
+    border-radius: 20px;
     transition: all 0.3s ease;
     background: transparent;
     box-shadow: 0 4px 15px rgba(52, 152, 219, 0.1);
@@ -132,8 +133,19 @@ hr {
     }
 
     .plain-link {
-        font-size: 20px;
-        margin: 0 8px;
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
+    .experience-button {
+        padding: 6px 16px;
+        font-size: 13px;
+        height: 32px;
+    }
+
+    h2.title2 {
+        gap: 10px;
     }
 }
 
@@ -323,18 +335,19 @@ h2.title:first-of-type {
 .experience-button {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 12px 24px;
-    font-size: 16px;
+    gap: 8px;
+    padding: 8px 20px;
+    font-size: 14px;
     font-weight: 500;
     color: #fff;
     background: linear-gradient(135deg, #3498db, #2980b9);
     border: none;
-    border-radius: 25px;
+    border-radius: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(52, 152, 219, 0.2);
-    margin: 20px 0;
+    margin: 0;
+    height: 36px;
 }
 
 .experience-button:hover {
@@ -343,7 +356,7 @@ h2.title:first-of-type {
 }
 
 .experience-button i {
-    font-size: 18px;
+    font-size: 14px;
 }
 
 /* Modal Styles */
