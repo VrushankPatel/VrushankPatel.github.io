@@ -234,3 +234,211 @@ h2.title:first-of-type {
 .dark-mode h3 {
     color: #ffffff;
 }
+
+/* Experience section styles */
+.experience-item {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.experience-item:last-child {
+    border-bottom: none;
+}
+
+.experience-item h3 {
+    color: #2c3e50;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.experience-item h4 {
+    color: #34495e;
+    margin-top: 0;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: normal;
+}
+
+.date {
+    font-size: 0.9em;
+    color: #666;
+    font-weight: normal;
+}
+
+.location {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.role-details {
+    margin-left: 0;
+}
+
+.role-details ul {
+    margin-top: 10px;
+}
+
+.role-details li {
+    margin-bottom: 8px;
+}
+
+/* Dark mode additions for experience section */
+.dark-mode .experience-item {
+    border-bottom-color: #444;
+}
+
+.dark-mode .experience-item h3,
+.dark-mode .experience-item h4 {
+    color: #ffffff;
+}
+
+.dark-mode .date,
+.dark-mode .location {
+    color: #aaa;
+}
+
+/* Experience Button */
+.experience-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.2);
+    margin: 20px 0;
+}
+
+.experience-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+}
+
+.experience-button i {
+    font-size: 18px;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    opacity: 1;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    margin: 50px auto;
+    padding: 0;
+    width: 90%;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    transform: translateY(-50px);
+    transition: transform 0.3s ease;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+}
+
+.modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    border-radius: 10px 10px 0 0;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.close-modal {
+    font-size: 28px;
+    font-weight: bold;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: #333;
+}
+
+/* Dark mode styles for modal */
+.dark-mode .modal-content {
+    background-color: #2d2d2d;
+}
+
+.dark-mode .modal-header {
+    border-bottom-color: #444;
+    background-color: #2d2d2d;
+}
+
+.dark-mode .close-modal {
+    color: #fff;
+}
+
+.dark-mode .close-modal:hover {
+    color: #7cb7ff;
+}
+
+/* Make the modal scrollbar look better */
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.dark-mode .modal-content::-webkit-scrollbar-track {
+    background: #333;
+}
+
+.dark-mode .modal-content::-webkit-scrollbar-thumb {
+    background: #666;
+}
+
+.dark-mode .modal-content::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
