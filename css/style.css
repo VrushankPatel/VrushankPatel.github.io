@@ -55,23 +55,37 @@ h2.title {
 }
 
 h2.title2 {
-    /* border-bottom: 2px solid #3498db; */
+    display: flex;
+    align-items: center;
+    gap: 10px;
     padding-bottom: 5px;
-    display: block;
     margin-top: 30px;
     clear: both;
 }
 
 .plain-link {
-    color: #2c3e50;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    color: #3498db;
     text-decoration: none;
-    margin: 0 10px;
-    font-size: 24px;
-    transition: color 0.3s ease;
+    margin: 0 8px;
+    font-size: 20px;
+    border: 2px solid #3498db;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    background: transparent;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.1);
 }
 
 .plain-link:hover {
-    color: #3498db;
+    color: #fff;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
 }
 
 ul {
@@ -215,11 +229,14 @@ h2.title:first-of-type {
 }
 
 .dark-mode .plain-link {
-    color: #ffffff;
+    color: #7cb7ff;
+    border-color: #7cb7ff;
 }
 
 .dark-mode .plain-link:hover {
-    color: #7cb7ff;
+    color: #fff;
+    background: linear-gradient(135deg, #7cb7ff, #3498db);
+    border-color: transparent;
 }
 
 /* Add these to your dark mode styles section */
