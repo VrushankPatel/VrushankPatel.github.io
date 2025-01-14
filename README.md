@@ -19,7 +19,7 @@
 
 - 📫 How to reach me **vrushankpatel5@gmail.com**
 
-- 📄 Know about my experiences [https://vrushankpatel.github.io/Resume/Vrushank_Resume.pdf](https://vrushankpatel.github.io/Resume/Vrushank_Resume.pdf)
+- 📄 Know about my experiences [https://vrushankpatel.github.io/resume.html](https://vrushankpatel.github.io/resume.html)
 
 ### Blogs posts
 <!-- BLOG-POST-LIST:START -->
