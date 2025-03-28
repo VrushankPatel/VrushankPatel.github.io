@@ -4,9 +4,10 @@
     <title>Vrushank Patel</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="manifest" href="/manifest/site.webmanifest" crossorigin="use-credentials" />
-    <link href='https://fonts.googleapis.com/css?family=Exo' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 
 <body>
@@ -49,7 +50,7 @@
             <a title="Github" class="plain-link" target="_blank" href="https://github.com/VrushankPatel">
                 <i class="fab fa-github"></i>
             </a>
-            <a title="Resume" class="plain-link" target="_blank" href="/resume.html">
+            <a title="Resume" class="plain-link" target="_blank" href="/Resume/Vrushank_Resume.pdf">
                 <i class="fa fa-file-pdf"></i>
             </a>
             <a title="Experience" id="experienceBtn" class="plain-link" onclick="openExperienceModal(event)" href="#">
@@ -64,7 +65,7 @@
         <div id="experienceModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2>Experience (4+ years)</h2>
+                    <h2>Experience (5+ years)</h2>
                     <span class="close-modal">&times;</span>
                 </div>
                 <div class="modal-body">
@@ -72,87 +73,52 @@
                         <h3>NASDAQ <span class="date">Nov 2022 – PRESENT</span></h3>
                         <h4>Senior Software Developer <span class="location">Bangalore - IN</span></h4>
                         <div class="role-details">
-                            <p><strong>Multi Matching Engine (MME)</strong> - Contributed to the development,
-                                maintenance, and enhancement of a
-                                trading solution enabling automatic trade execution by matching orders across diverse
-                                financial
-                                instruments, including forex, equity, and derivatives.</p>
+                            <p><strong>High Performance Trading Systems:</strong> Developed and optimized for the components of the Multi Matching Engine (MME - a high-performance trading engine) using Java, Spring framework, and reactive patterns, to enable automatic trade execution for 10M+ daily transactions across forex, equities, and crypto markets.</p>
                             <ul>
-                                <li>Leveraged the Java-Spring ecosystem, Docker, and Kubernetes to ensure seamless trade
-                                    matching
-                                    across multiple assets with a focus on performance and reliability.</li>
-                                <li>Extended core product functionalities to deliver customer-specific solutions,
-                                    addressing unique
-                                    requirements and enhancing product adaptability.</li>
-                                <li>Conducted requirements analysis, coding, and unit testing with consistent 90%+ code
-                                    coverage.
-                                    Designed checkstyles and established coding conventions to ensure high-quality code
-                                    standards.</li>
-                                <li>Improved the Sonatype threat score for dependencies from 9 to 1.5 through
-                                    vulnerability remediation
-                                    and version compatibility analysis, enhancing supply chain security.</li>
-                                <li>Resolved compatibility issues in unit testing frameworks, ensuring functionality of
-                                    over 2,500 test cases
-                                    and significantly increasing overall code coverage.</li>
-                                <li>Streamlined workflows by administering tools like TaskTop integration, repository
-                                    access management,
-                                    and CI/CD pipeline automation for seamless builds and deployments.</li>
+                                <li><strong>Cloud-Native Deployment:</strong> Containerized services with Docker and orchestrated deployments on Kubernetes/Amazon EKS, reducing infrastructure costs and improving system uptime.</li>
+                                <li><strong>CI/CD Automation:</strong> Contributed to migration from TeamCity and wrote GitLab CI/CD pipelines for artifact publishing, vulnerability scanning (Prisma, SonarQube, Sonatype), and deployment, reducing build time.</li>
+                                <li><strong>Infrastructure-as-Code:</strong> Customized the Operations framework called MOE (MME Operating Environments) for customer-specific Amazon EKS deployments, designing partitioned Helm layouts that significantly reduced deployment setup time for LATAM client onboarding.</li>
+                                <li><strong>Customer Adaptations:</strong> Delivered 15+ adaptations and customizations (CRs) for 3+ customers across LATAM, US, and EU to deliver tailored solutions addressing unique requirements, including leading onsite acceptance testing from the development side in Colombia for an equity trading platform handling $500M+ daily volume.</li>
+                                <li><strong>Security & Testing:</strong>
+                                    <ul>
+                                        <li>Patched 50+ vulnerabilities in dependencies, reducing Sonatype threat scores from 9 → 1.5, enhancing supply chain security.</li>
+                                        <li>Identified and resolved compatibility issues in unit testing frameworks that revamped 2,500+ JUnit/Mockito test cases, achieving 90%+ code coverage.</li>
+                                        <li>Designed checkstyles and established coding conventions to ensure high-quality code standards.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>AI-Driven Efficiency:</strong> Utilized GitHub Copilot to draft technical documentation (Javadocs, Confluence pages) and boilerplate code (DTOs, repetitive logic), and generated 350+ unit tests with Diffblue Cover, increasing code coverage significantly and enhancing code reliability.</li>
+                                <li><strong>Streamline Workflows:</strong> Administered tools like TaskTop integration, repository access management, and CI/CD pipeline automation for seamless builds and deployments.</li>
                             </ul>
                         </div>
                     </div>
-
+        
                     <div class="experience-item">
                         <h3>Capsystematic Technologies Pvt Ltd. <span class="date">Dec 2019 – Nov 2022</span></h3>
                         <h4>Software Developer <span class="location">Bangalore - IN</span></h4>
                         <div class="role-details">
-                            <p>Developed components for capital markets software products. Responsible for analyzing,
-                                programming, unit testing, and documenting the features. Mostly worked on Java, Spring
-                                Boot, Python
-                                Flask, Informix, Docker, Apache Camel, Apache CXF, Orika, and Mapstruct.</p>
+                            <p>Engineered and modernized capital markets and payment software solutions for financial institutions using Java, Spring Boot, Python Flask, Docker, Apache Camel, CXF, Informix, Orika, and MapStruct.</p>
                             <ul>
-                                <li><strong>Zeus-GPI (General process interface)</strong> - Developed critical SOAP and
-                                    REST services to facilitate message
-                                    delivery (e.g., Swift MT/MX) between diverse endpoints like databases, message
-                                    queues, HTTP, SOAP, and
-                                    SMB filesystems. Delivered an enterprise service bus (ESB)-based solution to ensure
-                                    seamless integration
-                                    and messaging across systems.</li>
-                                <li><strong>CMS (Card Management System)</strong> - Migrated legacy Pro*C code (circa
-                                    1993) to a modern Java-based
-                                    architecture using Spring Boot and Spring Cloud. Developed REST services for
-                                    corporate cards and
-                                    payments, enabling back-office functionality for acquirers and issuers, serving
-                                    banks and payment service
-                                    providers.</li>
-                                <li><strong>Capsuite</strong> - Designed and implemented an automation tool that
-                                    generates code for entities and mappings
-                                    based on SQL procedures and Swift MT/MX message definitions, significantly improving
-                                    developer
-                                    efficiency.</li>
+                                <li><strong>Zeus-GPI (General Process Interface for ISO 20022):</strong> Developed SOAP and REST APIs to route financial messages (Swift MT/MX, ISO 20022) between databases, message queues, and other endpoints, enabling seamless integration for 5+ investment banking customers.</li>
+                                <li><strong>CMS (Card Management System):</strong> Migrated legacy Pro*C code to a modern Java-based architecture with Spring Boot and Spring Cloud. Developed REST APIs for corporate card payments, serving 5+ banks and payment processors.</li>
+                                <li><strong>CapSuite:</strong> Designed an automation tool to generate code for entities and mappings based on SQL procedures and Swift MT/MX definitions, improving developer efficiency.</li>
                             </ul>
                         </div>
                     </div>
-
+        
                     <div class="experience-item">
                         <h3>Capsystematic Technologies Pvt Ltd. <span class="date">Sept 2019 – Dec 2019</span></h3>
                         <h4>SDE Intern <span class="location">Bangalore - IN</span></h4>
                         <div class="role-details">
                             <ul>
-                                <li>Received training on General Process Interface (GPI) and investment banking
-                                    fundamentals, gaining
-                                    exposure to the financial services industry.</li>
-                                <li>Developed Apache Camel-based route builders for GPI, facilitating seamless message
-                                    routing between
-                                    multiple endpoints.</li>
-                                <li>Employee attendance management system: Designed Employee attendance management
-                                    system, using
-                                    Java, JDBC, and MySQL.</li>
+                                <li>Developed Apache Camel-based message routing and gained exposure to investment banking processes.</li>
+                                <li>Built an Employee Attendance Management System using Java, JDBC, and MySQL.</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
 
         <h2 class="title">Experience Summary <a href="#" onclick="openExperienceModal(event)" class="view-more">(View
                 Details)</a></h2>
@@ -184,10 +150,10 @@
                     A lightning fast and automatic orders matching and trade execution engine.</li>
                 <li><a class="highlighted" target="_blank" href="https://www.capsys.hu/Zeus_GPI">Zeus-GPI</a>:
                     Middleware for seamless
-                    message brokering (Swift MX)</li>
+                    message brokering (Swift MX, ISO 20022)</li>
                 <li><a class="highlighted" target="_blank"
-                        href="https://capsys-europe.com/Card_Management_System">CMS</a>: Modernizing card
-                    management systems</li>
+                        href="https://capsys-europe.com/Card_Management_System">CMS</a>: Modernizing of the legacy card
+                    management systems from ACI</li>
             </ul>
             <h3>Personal Projects - I've built these projects from scratch</h3>
             <ul>
