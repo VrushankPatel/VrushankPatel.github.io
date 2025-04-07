@@ -569,3 +569,43 @@ h2.title:first-of-type {
 strong {
     font-weight: 600;
 }
+
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    margin: 0 5px;
+    text-decoration: none;
+    color: inherit;
+    background: transparent;
+    overflow: hidden;
+    width: 36px;
+    font-size: 0.9em;
+}
+
+.social-link:hover {
+    background: rgba(0, 0, 0, 0.1);
+    font-size: inherit;
+    width: auto;
+    transition: width 0.3s ease, font-size 0.3s ease;
+}
+
+.social-link:hover .link-text {
+    display: inline-block;
+}
+
+.dark-mode .social-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+.social-link i {
+    font-size: 1.2em;
+}
+
+.social-link .link-text {
+    display: none;
+    margin-left: 8px;
+    white-space: nowrap;
+}

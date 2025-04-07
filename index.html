@@ -23,122 +23,99 @@
         <h1>Vrushank Patel <img class="profile-badge" src="img/sa-cspo-600.png" alt="Headshot of Vrushank Patel" /></h1>
         <h2>Senior Software Developer | NASDAQ</h2>
         <hr />
-        <p>
-            Hi! I'm a passionate software developer with over 5 years of experience in designing and building robust
-            trading and capital market solutions. I specialize in leveraging technologies like Java, Spring Boot,
-            Docker, and Kubernetes to deliver scalable and high-performance systems.
-        </p>
-        <p>
-            Currently at NASDAQ, I'm contributing to the Multi-Matching Engine which enables seamless automatic orders
-            matching and trade execution for trading forex, equities, and derivatives. I thrive on delivering solutions
-            that meet customer-specific needs while maintaining code quality and system reliability.
+        <p style="text-align: justify;">
+            Hi! I'm a passionate Software developer with 5+ years of experience, specialized in high performance trading systems, capital markets, and payment
+            platforms. Skilled in Java, Python, Apache Kafka, Reactive programming, and cloud-native technologies. Certified Scrum Product
+            Owner (CSPO), focusing on agile development and modernization.
         </p>
         <p>
         <h2 class="title2">
             Let's connect -
-            <a title="LinkedIn" class="plain-link" target="_blank"
-                href="https://www.linkedin.com/in/vrushank-patel-69b682180/">
-                <i class="fab fa-linkedin"></i>
-            </a>
-            <a title="CodersRank" class="plain-link" target="_blank"
-                href="https://profile.codersrank.io/user/vrushankpatel">
-                <i class="fa fa-code"></i>
-            </a>
-            <a title="Mail" class="plain-link" target="_blank" href="mailto:vrushankpatel5@gmail.com">
-                <i class="fa fa-envelope"></i>
-            </a>
-            <a title="Github" class="plain-link" target="_blank" href="https://github.com/VrushankPatel">
-                <i class="fab fa-github"></i>
-            </a>
-            <a title="Resume" class="plain-link" target="_blank" href="/Resume/Vrushank_Resume.pdf">
-                <i class="fa fa-file-pdf"></i>
-            </a>
-            <a title="Experience" id="experienceBtn" class="plain-link" onclick="openExperienceModal(event)" href="#">
-                <i class="fa fa-briefcase"></i>
-            </a>
+            <div class="social-links">
+                <a title="LinkedIn" class="social-button" target="_blank" href="https://www.linkedin.com/in/vrushank-patel-69b682180/">
+                    <i class="fab fa-linkedin"></i>
+                    <span class="social-label">LinkedIn</span>
+                </a>
+                <a title="CodersRank" class="social-button" target="_blank" href="https://profile.codersrank.io/user/vrushankpatel">
+                    <i class="fa fa-code"></i>
+                    <span class="social-label">CodersRank</span>
+                </a>
+                <a title="Mail" class="social-button" target="_blank" href="mailto:vrushankpatel5@gmail.com">
+                    <i class="fa fa-envelope"></i>
+                    <span class="social-label">Email</span>
+                </a>
+                <a title="Github" class="social-button" target="_blank" href="https://github.com/VrushankPatel">
+                    <i class="fab fa-github"></i>
+                    <span class="social-label">GitHub</span>
+                </a>
+                <a title="Resume" class="social-button" target="_blank" href="/Resume/Vrushank_Resume.pdf">
+                    <i class="fa fa-file-pdf"></i>
+                    <span class="social-label">Resume</span>
+                </a>
+            </div>
         </h2>
-        <!-- <button id="experienceBtn" class="experience-button">
-            <i class="fas fa-briefcase"></i>
-            Experience
-        </button> -->
 
-        <div id="experienceModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Experience (5+ years)</h2>
-                    <span class="close-modal">&times;</span>
-                </div>
-                <div class="modal-body">
-                    <div class="experience-item">
-                        <h3>NASDAQ <span class="date">Nov 2022 – PRESENT</span></h3>
-                        <h4>Senior Software Developer <span class="location">Bangalore - IN</span></h4>
-                        <div class="role-details">
-                            <p><strong>High Performance Trading Systems:</strong> Developed and optimized for the components of the Multi Matching Engine (MME - a high-performance trading engine) using Java, Spring framework, and reactive patterns, to enable automatic trade execution for 10M+ daily transactions across forex, equities, and crypto markets.</p>
-                            <ul>
-                                <li><strong>Cloud-Native Deployment:</strong> Containerized services with Docker and orchestrated deployments on Kubernetes/Amazon EKS, reducing infrastructure costs and improving system uptime.</li>
-                                <li><strong>CI/CD Automation:</strong> Contributed to migration from TeamCity and wrote GitLab CI/CD pipelines for artifact publishing, vulnerability scanning (Prisma, SonarQube, Sonatype), and deployment, reducing build time.</li>
-                                <li><strong>Infrastructure-as-Code:</strong> Customized the Operations framework called MOE (MME Operating Environments) for customer-specific Amazon EKS deployments, designing partitioned Helm layouts that significantly reduced deployment setup time for LATAM client onboarding.</li>
-                                <li><strong>Customer Adaptations:</strong> Delivered 15+ adaptations and customizations (CRs) for 3+ customers across LATAM, US, and EU to deliver tailored solutions addressing unique requirements, including leading onsite acceptance testing from the development side in Colombia for an equity trading platform handling $500M+ daily volume.</li>
-                                <li><strong>Security & Testing:</strong>
-                                    <ul>
-                                        <li>Patched 50+ vulnerabilities in dependencies, reducing Sonatype threat scores from 9 → 1.5, enhancing supply chain security.</li>
-                                        <li>Identified and resolved compatibility issues in unit testing frameworks that revamped 2,500+ JUnit/Mockito test cases, achieving 90%+ code coverage.</li>
-                                        <li>Designed checkstyles and established coding conventions to ensure high-quality code standards.</li>
-                                    </ul>
-                                </li>
-                                <li><strong>AI-Driven Efficiency:</strong> Utilized GitHub Copilot to draft technical documentation (Javadocs, Confluence pages) and boilerplate code (DTOs, repetitive logic), and generated 350+ unit tests with Diffblue Cover, increasing code coverage significantly and enhancing code reliability.</li>
-                                <li><strong>Streamline Workflows:</strong> Administered tools like TaskTop integration, repository access management, and CI/CD pipeline automation for seamless builds and deployments.</li>
-                            </ul>
-                        </div>
-                    </div>
-        
-                    <div class="experience-item">
-                        <h3>Capsystematic Technologies Pvt Ltd. <span class="date">Dec 2019 – Nov 2022</span></h3>
-                        <h4>Software Developer <span class="location">Bangalore - IN</span></h4>
-                        <div class="role-details">
-                            <p>Engineered and modernized capital markets and payment software solutions for financial institutions using Java, Spring Boot, Python Flask, Docker, Apache Camel, CXF, Informix, Orika, and MapStruct.</p>
-                            <ul>
-                                <li><strong>Zeus-GPI (General Process Interface for ISO 20022):</strong> Developed SOAP and REST APIs to route financial messages (Swift MT/MX, ISO 20022) between databases, message queues, and other endpoints, enabling seamless integration for 5+ investment banking customers.</li>
-                                <li><strong>CMS (Card Management System):</strong> Migrated legacy Pro*C code to a modern Java-based architecture with Spring Boot and Spring Cloud. Developed REST APIs for corporate card payments, serving 5+ banks and payment processors.</li>
-                                <li><strong>CapSuite:</strong> Designed an automation tool to generate code for entities and mappings based on SQL procedures and Swift MT/MX definitions, improving developer efficiency.</li>
-                            </ul>
-                        </div>
-                    </div>
-        
-                    <div class="experience-item">
-                        <h3>Capsystematic Technologies Pvt Ltd. <span class="date">Sept 2019 – Dec 2019</span></h3>
-                        <h4>SDE Intern <span class="location">Bangalore - IN</span></h4>
-                        <div class="role-details">
-                            <ul>
-                                <li>Developed Apache Camel-based message routing and gained exposure to investment banking processes.</li>
-                                <li>Built an Employee Attendance Management System using Java, JDBC, and MySQL.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+        <style>
+            .social-links {
+                display: inline-flex;
+                gap: 10px;
+                margin-left: 10px;
+            }
 
-        <h2 class="title">Experience Summary <a href="#" onclick="openExperienceModal(event)" class="view-more">(View
-                Details)</a></h2>
+            .social-button {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: var(--button-bg, #f0f0f0);
+                color: var(--text-color, #333);
+                font-size: 20px;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                overflow: hidden;
+            }
 
-        <div class="experience-summary">
-            <div class="experience-item">
-                <h3>NASDAQ <span class="date">Nov 2022 – PRESENT</span></h3>
-                <h4>Senior Software Developer <span class="location">Bangalore - IN</span></h4>
-            </div>
+            .social-button:hover {
+                width: auto;
+                padding: 0 15px;
+                border-radius: 20px;
+            }
 
-            <div class="experience-item">
-                <h3>Capsystematic Technologies Pvt Ltd. <span class="date">Dec 2019 – Nov 2022</span></h3>
-                <h4>Software Developer <span class="location">Bangalore - IN</span></h4>
-            </div>
+            .social-label {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                white-space: nowrap;
+                font-size: 14px;
+                opacity: 0;
+                transition: all 0.3s ease;
+                pointer-events: none;
+                margin-left: 20px;
+            }
 
-            <div class="experience-item">
-                <h3>Capsystematic Technologies Pvt Ltd. <span class="date">Sept 2019 – Dec 2019</span></h3>
-                <h4>Software Developer intern<span class="location">Bangalore - IN</span></h4>
-            </div>
-        </div>
+            .social-button:hover .social-label {
+                opacity: 1;
+                transform: translateX(0);
+                position: relative;
+                left: 0;
+            }
+
+            /* Dark mode styles */
+            .dark-mode .social-button {
+                background: var(--button-bg, #2d2d2d);
+                color: var(--text-color, #ffffff);
+            }
+
+            /* Specific colors for each button */
+            .social-button:nth-child(1):hover { background: #0077b5; color: white; } /* LinkedIn */
+            .social-button:nth-child(2):hover { background: #2d333b; color: white; } /* CodersRank */
+            .social-button:nth-child(3):hover { background: #d14836; color: white; } /* Email */
+            .social-button:nth-child(4):hover { background: #333; color: white; } /* GitHub */
+            .social-button:nth-child(5):hover { background: #ff0000; color: white; } /* Resume */
+        </style>
 
         <h2 class="title">Work highlights </h2>
 
