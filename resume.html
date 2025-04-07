@@ -52,10 +52,8 @@
         }
         
         /* Theme toggle button */
-        .theme-toggle {
+        .theme-toggle, .download-button {
             position: fixed;
-            top: 15px;
-            left: 15px;
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -70,76 +68,103 @@
             transition: all 0.3s ease;
         }
         
-        .theme-toggle:hover {
+        .theme-toggle {
+            top: 15px;
+            left: 15px;
+        }
+        
+        .download-button {
+            top: 15px;
+            right: 15px;
+        }
+        
+        .theme-toggle:hover, .download-button:hover {
             transform: scale(1.1);
         }
         
-        .theme-toggle i {
+        .theme-toggle i, .download-button i {
             font-size: 18px;
             color: var(--text-color);
         }
         
         /* Print-specific styles */
         @media print {
-            .theme-toggle {
+            .theme-toggle, .download-button {
                 display: none !important;
             }
             
             body {
-                margin: 0;
-                padding: 10px;
-                max-width: 100%;
-                border: none;
-                box-shadow: none;
-                font-size: 10px;
-                line-height: 1.8;
+                margin: 0 !important;
+                padding: 15px 15px !important;
+                max-width: 100% !important;
+                border: none !important;
+                box-shadow: none !important;
+                font-size: 10px !important;
+                line-height: 1.8 !important;
+                color: #000 !important; /* Force black text */
+                background-color: #fff !important; /* Force white background */
+            }
+            
+            /* Force all text elements to use black color regardless of theme */
+            h1, h2, h3, p, li, div, span, .subtitle, .company-name, .date-location, .position, .skill-title, .skill-category, .section-title {
+                color: #000 !important;
+            }
+            
+            /* Force all backgrounds to be white */
+            div, section, header, footer {
+                background-color: #fff !important;
+            }
+            
+            /* Ensure borders are visible */
+            .section-title {
+                border-bottom: 1px solid #000 !important;
             }
             
             @page {
-                margin: 0.5cm;
+                margin: 0.3cm;
                 size: A4;
             }
             
             h1 {
-                font-size: 18px !important;
-                margin-bottom: 2px !important;
+                font-size: 25px !important;
+                
             }
             
             .subtitle {
                 margin-bottom: 2px !important;
-                font-size: 11px !important;
+                font-size: 17px !important;
             }
             
             .contact-info {
-                font-size: 10px !important;
+                font-size: 15px !important;
                 margin-bottom: 5px !important;
             }
             
             .section-title {
-                font-size: 12px !important;
+                font-size: 14px !important;
                 margin-bottom: 4px !important;
                 padding-bottom: 2px !important;
             }
             
             .experience-item, .skill-category {
-                margin-bottom: 4px !important;
+                margin-bottom: 0px !important;
             }
             
             .company-header {
-                margin-bottom: 2px !important;
+                margin-bottom: 0px !important;
             }
             
             .company-name {
-                font-size: 11px !important;
+                font-size: 14px !important;
             }
             
             .date-location {
-                font-size: 10px !important;
+                font-size: 14px !important;
             }
             
             .position {
-                margin-bottom: 2px !important;
-                font-size: 11px !important;
+                margin-bottom: 0px !important;
+                font-size: 13px !important;
             }
             
             ul {
@@ -149,16 +174,16 @@
             
             li {
                 margin-bottom: 1px !important;
-                font-size: 10px !important;
-                line-height: 1.2 !important;
+                font-size: 13px !important;
+                line-height: 1.35 !important;
             }
             
             .header {
-                margin-bottom: 8px !important;
+                margin-bottom: 4px !important;
             }
             
             .section {
-                margin-bottom: 8px !important;
+                margin-bottom: 4px !important;
             }
             
             .skills-grid {
@@ -167,7 +192,7 @@
             
             .skill-category {
                 font-size: 10px !important;
-                margin-bottom: 5px !important;
+                margin-bottom: 3px !important;
                 display: flex !important;
             }
             
@@ -178,7 +203,7 @@
             }
             
             .projects a {
-                font-size: 10px !important;
+                font-size: 12px !important;
                 margin-right: 7px !important;
             }
         }
@@ -295,6 +320,9 @@
     <div class="theme-toggle" id="theme-toggle">
         <i class="fas fa-moon"></i>
     </div>
+    <a href="/Resume/Vrushank_Resume.pdf" class="download-button" id="download-button" download>
+        <i class="fas fa-download"></i>
+    </a>
     <div class="header">
         <h1>Vrushank Patel</h1>
         <div class="subtitle">Senior Software Developer</div>
