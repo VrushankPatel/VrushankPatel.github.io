@@ -73,6 +73,19 @@
         .project-description {
             margin-bottom: 20px;
             line-height: 1.6;
+            text-align: justify;
+        }
+
+        .project-description p {
+            text-align: justify;
+        }
+
+        .project-description ul {
+            text-align: justify;
+        }
+
+        .project-description li {
+            text-align: justify;
         }
 
         .project-image {
@@ -140,6 +153,10 @@
             top: -20px;
             visibility: hidden;
         }
+
+        .content p {
+            text-align: justify;
+        }
     </style>
 </head>
 
@@ -163,6 +180,91 @@
             Here's a showcase of projects I've built from scratch. Each project represents my passion for creating
             innovative solutions and my commitment to continuous learning in software development.
         </p>
+
+        <!-- APEX Project -->
+        <span id="APEX" class="project-anchor"></span>
+        <div class="project-card">
+            <div class="project-header">
+                <h2 class="project-title">APEX</h2>
+                <div class="project-links">
+                    <a href="https://apex-docs.readthedocs.io/en/latest/" target="_blank" class="project-link">
+                        <i class="fas fa-book"></i> Documentation
+                    </a>
+                    <a href="https://github.com/VrushankPatel/apex" target="_blank" class="project-link">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+            <div class="project-description">
+                <p>
+                    APEX is a sophisticated Go-based system for detecting arbitrage opportunities across cryptocurrency exchanges in real-time. It provides a comprehensive solution for monitoring price differences and identifying profitable trading opportunities across multiple exchanges.
+                </p>
+                <p>
+                    Key features include:
+                </p>
+                <ul>
+                    <li>Multi-Exchange Support (Binance, Kraken, Coinbase)</li>
+                    <li>Real-Time Detection of arbitrage opportunities</li>
+                    <li>Configurable profit thresholds and filters</li>
+                    <li>Interactive Web Interface with real-time updates</li>
+                    <li>Historical Analysis and performance tracking</li>
+                    <li>Simulation Mode for testing without real trades</li>
+                </ul>
+                <p>
+                    The system uses WebSocket APIs to receive real-time market data and implements sophisticated algorithms to calculate potential profits, accounting for exchange fees, network costs, and slippage. It features a modular architecture with separate components for data collection, arbitrage detection, and web interface.
+                </p>
+            </div>
+            <div class="tech-tags">
+                <span class="tech-tag">Go</span>
+                <span class="tech-tag">WebSocket</span>
+                <span class="tech-tag">Cryptocurrency</span>
+                <span class="tech-tag">Real-time Analysis</span>
+                <span class="tech-tag">Web Interface</span>
+            </div>
+        </div>
+
+        <!-- Bluelink Project -->
+        <span id="Bluelink" class="project-anchor"></span>
+        <div class="project-card">
+            <div class="project-header">
+                <h2 class="project-title">Bluelink</h2>
+                <div class="project-links">
+                    <a href="https://bluelink.readthedocs.io/" target="_blank" class="project-link">
+                        <i class="fas fa-book"></i> Documentation
+                    </a>
+                    <a href="https://github.com/VrushankPatel/bluelink" target="_blank" class="project-link">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+            <div class="project-description">
+                <p>
+                    Bluelink is a secure terminal-based chat application built with Go and Firebase Realtime Database. It provides a clean, intuitive terminal interface for real-time communication across different platforms.
+                </p>
+                <p>
+                    Key features include:
+                </p>
+                <ul>
+                    <li>Create or join chat rooms via terminal</li>
+                    <li>Secure communication with Firebase backend</li>
+                    <li>Colored usernames for easy identification</li>
+                    <li>Real-time participant tracking and typing indicators</li>
+                    <li>Cross-platform compatibility (Windows, macOS, Linux)</li>
+                    <li>Persistent user profiles and activity status tracking</li>
+                    <li>Command-based interface for easy navigation</li>
+                </ul>
+                <p>
+                    The application uses a modular architecture with separate modules for configuration, Firebase integration, and terminal UI implementation using Bubble Tea. It implements real-time updates through a polling mechanism while maintaining compatibility with the Firebase Go Admin SDK.
+                </p>
+            </div>
+            <div class="tech-tags">
+                <span class="tech-tag">Go</span>
+                <span class="tech-tag">Firebase</span>
+                <span class="tech-tag">Terminal UI</span>
+                <span class="tech-tag">Real-time Communication</span>
+                <span class="tech-tag">Cross-platform</span>
+            </div>
+        </div>
 
         <!-- Marketron Project -->
         <span id="Marketron" class="project-anchor"></span>
