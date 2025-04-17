@@ -1,314 +1,112 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style data-vite-theme="" data-inject-first="">:root {
+    --background: 0 0% 100%;
+--foreground: 20 14.3% 4.1%;
+--muted: 60 4.8% 95.9%;
+--muted-foreground: 25 5.3% 44.7%;
+--popover: 0 0% 100%;
+--popover-foreground: 20 14.3% 4.1%;
+--card: 0 0% 100%;
+--card-foreground: 20 14.3% 4.1%;
+--border: 20 5.9% 90%;
+--input: 20 5.9% 90%;
+--primary: 213 94% 38%;
+--primary-foreground: 216 65% 98%;
+--secondary: 60 4.8% 95.9%;
+--secondary-foreground: 24 9.8% 10%;
+--accent: 60 4.8% 95.9%;
+--accent-foreground: 24 9.8% 10%;
+--destructive: 0 84.2% 60.2%;
+--destructive-foreground: 60 9.1% 97.8%;
+--ring: 20 14.3% 4.1%;
+--radius: 0.5rem;
+}
 
-<head>
-    <title>Vrushank Patel</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="manifest" href="/manifest/site.webmanifest" crossorigin="use-credentials" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+@media (prefers-color-scheme: dark) {
+  :root {
+      --background: 240 10% 3.9%;
+--foreground: 0 0% 98%;
+--muted: 240 3.7% 15.9%;
+--muted-foreground: 240 5% 64.9%;
+--popover: 240 10% 3.9%;
+--popover-foreground: 0 0% 98%;
+--card: 240 10% 3.9%;
+--card-foreground: 0 0% 98%;
+--border: 240 3.7% 15.9%;
+--input: 240 3.7% 15.9%;
+--primary: 213 94% 38%;
+--primary-foreground: 216 65% 98%;
+--secondary: 240 3.7% 15.9%;
+--secondary-foreground: 0 0% 98%;
+--accent: 240 3.7% 15.9%;
+--accent-foreground: 0 0% 98%;
+--destructive: 0 62.8% 30.6%;
+--destructive-foreground: 0 0% 98%;
+--ring: 240 4.9% 83.9%;
+--radius: 0.5rem;
+  }
+}
+.light {
+    --background: 0 0% 100%;
+--foreground: 20 14.3% 4.1%;
+--muted: 60 4.8% 95.9%;
+--muted-foreground: 25 5.3% 44.7%;
+--popover: 0 0% 100%;
+--popover-foreground: 20 14.3% 4.1%;
+--card: 0 0% 100%;
+--card-foreground: 20 14.3% 4.1%;
+--border: 20 5.9% 90%;
+--input: 20 5.9% 90%;
+--primary: 213 94% 38%;
+--primary-foreground: 216 65% 98%;
+--secondary: 60 4.8% 95.9%;
+--secondary-foreground: 24 9.8% 10%;
+--accent: 60 4.8% 95.9%;
+--accent-foreground: 24 9.8% 10%;
+--destructive: 0 84.2% 60.2%;
+--destructive-foreground: 60 9.1% 97.8%;
+--ring: 20 14.3% 4.1%;
+--radius: 0.5rem;
+}
+.dark {
+    --background: 240 10% 3.9%;
+--foreground: 0 0% 98%;
+--muted: 240 3.7% 15.9%;
+--muted-foreground: 240 5% 64.9%;
+--popover: 240 10% 3.9%;
+--popover-foreground: 0 0% 98%;
+--card: 240 10% 3.9%;
+--card-foreground: 0 0% 98%;
+--border: 240 3.7% 15.9%;
+--input: 240 3.7% 15.9%;
+--primary: 213 94% 38%;
+--primary-foreground: 216 65% 98%;
+--secondary: 240 3.7% 15.9%;
+--secondary-foreground: 0 0% 98%;
+--accent: 240 3.7% 15.9%;
+--accent-foreground: 0 0% 98%;
+--destructive: 0 62.8% 30.6%;
+--destructive-foreground: 0 0% 98%;
+--ring: 240 4.9% 83.9%;
+--radius: 0.5rem;
+}</style>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>Vrushank Patel | Senior Software Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-</head>
-
-<body>
-    <div class="dark-mode-toggle">
-        <button id="darkModeToggle" title="Toggle dark mode">
-            <i class="fas fa-sun"></i>
-        </button>
-    </div>
-
-    <div class="content">
-        <img class="profile-pic" src="img/profile-pic.jpg" alt="Headshot of Vrushank Patel" />
-
-        <h1>Vrushank Patel <img class="profile-badge" src="img/sa-cspo-600.png" alt="Headshot of Vrushank Patel" /></h1>
-        <h2>Senior Software Developer | NASDAQ</h2>
-        <hr />
-        <p style="text-align: justify;">
-            Hi! I'm a passionate Software developer with 5+ years of experience, specialized in high performance trading systems, capital markets, and payment
-            platforms. Skilled in Java, Python, Apache Kafka, Reactive programming, and cloud-native technologies. Certified Scrum Product
-            Owner (CSPO), focusing on agile development and modernization.
-        </p>
-        <p>
-        <h2 class="title2">
-            Let's connect -
-            <div class="social-links">
-                <a title="LinkedIn" class="social-button" target="_blank" href="https://www.linkedin.com/in/vrushank-patel-69b682180/">
-                    <i class="fab fa-linkedin"></i>
-                    <span class="social-label">LinkedIn</span>
-                </a>
-                <a title="CodersRank" class="social-button" target="_blank" href="https://profile.codersrank.io/user/vrushankpatel">
-                    <i class="fa fa-code"></i>
-                    <span class="social-label">CodersRank</span>
-                </a>
-                <a title="Mail" class="social-button" target="_blank" href="mailto:vrushankpatel5@gmail.com">
-                    <i class="fa fa-envelope"></i>
-                    <span class="social-label">Email</span>
-                </a>
-                <a title="Github" class="social-button" target="_blank" href="https://github.com/VrushankPatel">
-                    <i class="fab fa-github"></i>
-                    <span class="social-label">GitHub</span>
-                </a>
-                <a title="Resume" class="social-button" target="_blank" href="/resume.html">
-                    <i class="fa fa-file-pdf"></i>
-                    <span class="social-label">Resume</span>
-                </a>
-            </div>
-        </h2>
-
-        <style>
-            .social-links {
-                display: inline-flex;
-                gap: 10px;
-                margin-left: 10px;
-            }
-
-            .social-button {
-                position: relative;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                background: var(--button-bg, #f0f0f0);
-                color: var(--text-color, #333);
-                font-size: 20px;
-                text-decoration: none;
-                transition: all 0.3s ease;
-                overflow: hidden;
-            }
-
-            .social-button:hover {
-                width: auto;
-                padding: 0 15px;
-                border-radius: 20px;
-            }
-
-            .social-label {
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-                white-space: nowrap;
-                font-size: 14px;
-                opacity: 0;
-                transition: all 0.3s ease;
-                pointer-events: none;
-                margin-left: 20px;
-            }
-
-            .social-button:hover .social-label {
-                opacity: 1;
-                transform: translateX(0);
-                position: relative;
-                left: 0;
-            }
-
-            /* Dark mode styles */
-            .dark-mode .social-button {
-                background: var(--button-bg, #2d2d2d);
-                color: var(--text-color, #ffffff);
-            }
-
-            /* Specific colors for each button */
-            .social-button:nth-child(1):hover { background: #0077b5; color: white; } /* LinkedIn */
-            .social-button:nth-child(2):hover { background: #2d333b; color: white; } /* CodersRank */
-            .social-button:nth-child(3):hover { background: #d14836; color: white; } /* Email */
-            .social-button:nth-child(4):hover { background: #333; color: white; } /* GitHub */
-            .social-button:nth-child(5):hover { background: #ff0000; color: white; } /* Resume */
-        </style>
-
-        <h2 class="title">Work highlights </h2>
-
-        <ul>
-            <h3>Professional Contributions - Throughout my career, I've contributed to</h3>
-            <ul>
-                <li><a class="highlighted" target="_blank"
-                        href="https://www.nasdaq.com/solutions/fintech/marketplace-technology/exchange-matching">MME</a>:
-                    A lightning fast and automatic orders matching and trade execution engine.</li>
-                <li><a class="highlighted" target="_blank" href="https://www.capsys.hu/Zeus_GPI">Zeus-GPI</a>:
-                    Middleware for seamless
-                    message brokering (Swift MX, ISO 20022)</li>
-                <li><a class="highlighted" target="_blank"
-                        href="https://capsys-europe.com/Card_Management_System">CMS</a>: Modernizing of the legacy card
-                    management systems from ACI</li>
-            </ul>
-            <h3 style="display: flex; align-items: center; flex-wrap: nowrap;">
-                <span>Personal Projects - I've built these projects from scratch</span>
-                <a href="projects.html" class="social-button" title="View All Projects" style="margin-left: 10px; min-width: auto; width: auto; padding: 0 10px; border-radius: 20px;">
-                    <i class="fas fa-project-diagram" style="margin-right: 5px;"></i>
-                    <span class="social-label" style="opacity: 1; position: static; transform: none; margin-left: 0;">View All Projects</span>
-                </a>
-            </h3>
-            <ul>
-                <li><a class="highlighted"
-                        href="projects.html#APEX">APEX</a>: A sophisticated system for detecting arbitrage opportunities across cryptocurrency exchanges in real-time.
-                </li>
-                <li><a class="highlighted"
-                        href="projects.html#Bluelink">Bluelink</a>: A super secure and anonymous terminal-based chat application with real-time communication and cross-platform support.
-                </li>
-                <li>
-                    <a class="highlighted" 
-                       href="projects.html#Marketron">
-                       Marketron
-                    </a>: A trading simulator designed to onboard non-trading individuals by providing hands-on experience with trading concepts and tools.
-                </li>                
-                <li><a class="highlighted" href="projects.html#iBoard">iBoard: </a>A collaborative editor with encryption, live reload, and support for text, code, and images.
-                </li>
-                <li><a class="highlighted" href="projects.html#Maxine">Maxine</a>: A universal
-                    and pluggable
-                    Service registry and discovery
-                </li>
-                <li><a class="highlighted"
-                        href="projects.html#Complexica">Complexica</a>: An
-                    application that transforms black-and-white images into fully colored versions, restoring vibrancy
-                    and detail.</li>
-            </ul>
-
-        </ul>
-        </p>
-        <p>
-        <h2 class="title">Certifications </h2>
-        <div class="certification-container">
-            <a class="cert-button" target="_blank" href="https://bcert.me/sefawhitn">
-                <i class="fas fa-tasks"></i>
-                Scrum Alliance CSPO
-            </a>
-            <a class="cert-button" target="_blank" href="https://courses.cognitiveclass.ai/certificates/e73685d94f344d92b329712d7dceac5c">
-                <i class="fa-brands fa-btc"></i>
-                IBM Blockchain Essentials
-            </a>
-            <a class="cert-button" target="_blank" href="https://drive.google.com/file/d/1rgkx3sx-quvh7SUVxVdWT5iELAWM5b4y/view?usp=sharing">
-                <i class="fas fa-cloud"></i>
-                Nutanix Hybrid Cloud
-            </a>
-            <a class="cert-button" target="_blank" href="https://drive.google.com/file/d/1-ory7-vSeIpgnFXzP_oDQGzHQf8yJiV5/view?usp=sharing">
-                <i class="fab fa-aws"></i>
-                AWS Data Analytics
-            </a>
-            <a class="cert-button" target="_blank" href="https://graduation.udacity.com/confirm/EL966DFN">
-                <i class="fas fa-robot"></i>
-                Deep Learning Nanodegree
-            </a>
-            <a class="cert-button" target="_blank" href="https://drive.google.com/file/d/1r7c2GWMveQTFBI2w0Vbt-LC2LRHth3o6/view?usp=sharing">
-                <i class="fas fa-microchip"></i>
-                Intel AI Edge
-            </a>
-            <a class="cert-button" target="_blank" href="https://drive.google.com/file/d/1TzKFISnjLmGeKfQdo9sHVjuA41PDmwNk/view?usp=sharing">
-                <i class="fas fa-database"></i>
-                DataCamp SQL
-            </a>
-            <a class="cert-button" target="_blank" href="https://www.coursera.org/account/accomplishments/certificate/2BDBFSVA8APC">
-                <i class="fab fa-python"></i>
-                IBM Python for Data Science
-            </a>
-            <a class="cert-button" target="_blank" href="https://www.coursera.org/account/accomplishments/certificate/3W39XJXXPUAU">
-                <i class="fa-solid fa-robot"></i>
-                TensorFlow for AI & ML
-            </a>
-            <a class="cert-button" target="_blank" href="https://www.coursera.org/account/accomplishments/certificate/LFNDAJM8HFX8">
-                <i class="fab fa-python"></i>
-                Google Python course
-            </a>
-            <a class="cert-button" target="_blank" href="https://www.coursera.org/account/accomplishments/verify/K2VUGGS4ZWHM">
-                <i class="fab fa-github"></i>
-                Git and Github
-            </a>
-            <a class="cert-button" target="_blank" href="https://www.coursera.org/account/accomplishments/verify/KUJVUPTB67UR">
-                <i class="fab fa-google"></i>
-                Google Cloud Microservices
-            </a>
-            <a class="cert-button" target="_blank" href="https://drive.google.com/file/d/1kNh0TOzAZx0rd3PL3nJ5D1IC5tg4m62F/view?usp=sharing">
-                <i class="fas fa-code"></i>
-                Stanford Algorithms
-            </a>
-            <a class="cert-button" target="_blank" href="https://drive.google.com/file/d/19zTsztr_VBHBElJDpLrMU5wMafMCb5gR/view?usp=sharing">
-                <i class="fas fa-database"></i>
-                MongoDB University
-            </a>
-        </div>
-        </p>
-        <hr />
-        <center>
-
-            <h1 style="display: inline-flex; align-items: center; gap: 15px;">
-                <i class="fab fa-java"></i>
-                <i class="fab fa-python"></i>
-                <i class="fa fa-flask"></i>
-                <i class="fab fa-aws"></i>
-                <i class="fa fa-cube"></i>
-                <i class="fab fa-git-square"></i>
-                <i class="fa fa-code-branch"></i>
-                <i class="fas fa-database"></i>
-                <i class="fab fa-docker"></i>
-                <i class="fab fa-jira"></i>
-                <i class="fas fa-robot"></i>
-                <i class="fab fa-linux" aria-hidden="true"></i>
-            </h1>
-        </center>
-    </div>
-
-    <script>
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const body = document.body;
-        const darkModeIcon = darkModeToggle.querySelector('i');
-
-        // Function to update icon based on mode
-        function updateDarkModeIcon(isDarkMode) {
-            darkModeIcon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
-        }
-
-        // Check for saved dark mode preference
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            body.classList.add('dark-mode');
-            updateDarkModeIcon(true);
-        } else {
-            updateDarkModeIcon(false);
-        }
-
-        darkModeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            const isDarkMode = body.classList.contains('dark-mode');
-
-            // Update icon
-            updateDarkModeIcon(isDarkMode);
-
-            // Save preference
-            localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
-        });
-
-        // Modal functionality
-        const modal = document.getElementById('experienceModal');
-        const closeBtn = document.querySelector('.close-modal');
-
-        function openExperienceModal(event) {
-            event.preventDefault(); // Prevent default anchor behavior
-            modal.style.display = 'block';
-            setTimeout(() => {
-                modal.classList.add('show');
-            }, 10);
-            document.body.style.overflow = 'hidden';
-        }
-
-        closeBtn.onclick = function () {
-            modal.classList.remove('show');
-            setTimeout(() => {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }, 300);
-        }
-
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.classList.remove('show');
-                setTimeout(() => {
-                    modal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }, 300);
-            }
-        }
-    </script>
-</body>
-
-
-
+    <meta name="description" content="Portfolio of Vrushank Patel, Senior Software Developer at NASDAQ with expertise in high performance trading systems, capital markets, and payment platforms." />
+    <script type="module" crossorigin src="/assets/index-l66PzIU_.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-YVBzt-wu.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
+    <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
+  </body>
 </html>
