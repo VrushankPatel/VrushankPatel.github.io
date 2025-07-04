@@ -7,8 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         :root {
-            --bg-color: #ffffff;
+            --bg-color: #ededed;
             --text-color: #2d3748;
             --border-color: #cbd5e0;
             --shadow-color: rgba(0,0,0,0.1);
@@ -20,8 +23,8 @@
         }
         
         [data-theme="dark"] {
-            --bg-color: #1a1a1a;
-            --text-color: #e2e8f0;
+            --bg-color: #212120;
+            --text-color: #bfbfbf;
             --border-color: #4a5568;
             --shadow-color: rgba(0,0,0,0.3);
             --heading-color: #f7fafc;
@@ -345,9 +348,9 @@
             </div>
             <div class="position">Senior Software Developer</div>
             <ul>
-                <li><strong>High Performance Trading Systems:</strong> Developed and optimized customer tailored solutions for the Multi Matching Engine (MME) - a lightning fast orders matching and execution engine) using Java, Spring framework, and reactive patterns, to enable automatic trade execution for 10M+ daily transactions across forex, equities, and crypto markets.</li>
-                <li><strong>Cloud-Native Deployment:</strong> Containerized services with Docker and orchestrated deployments on Amazon EKS, reducing infrastructure costs and improving system uptime.</li>
-                <li><strong>CI/CD Automation:</strong> Contributed to migration from Teamcity and wrote GitLab CI/CD pipelines for artifact publishing, vulnerability scanning (Prisma, SonarQube, Sonatype), and deployment, reducing build time.</li>
+                <li><strong>High Performance Trading Systems:</strong> Developed and optimized customer tailored solutions for the Multi Matching Engine (MME) - a high-speed order matching and execution system, using Java, Spring framework, and reactive patterns. Enabled automatic trade execution for 10M+ daily transactions across forex, equities, and crypto markets.</li>
+                <li><strong>Cloud-Native Deployment:</strong> Containerized services with Docker and orchestrated deployments on Amazon EKS, improving system uptime and reducing infrastructure costs through better resource utilization.</li>
+                <li><strong>CI/CD Automation:</strong> Contributed to CI/CD migration for core products from TeamCity to GitLab by writing pipelines for artifact publishing, vulnerability scanning (Prisma, SonarQube, Sonatype), and deployment. Independently led and designed CI/CD pipelines for customer-specific repositories, improving automation and reducing deployment time.</li>
                 <li><strong>Infrastructure-as-Code:</strong> Customized the Operations framework called MOE (MME Operating Environments) to streamline Amazon EKS and EKS Anywhere deployments, designing partitioned Helm layouts resulting in a significant reduction in deployment setup time for a LATAM customer.</li>
                 <li><strong>Customer Adaptations:</strong> Delivered 15+ product adaptations and customizations for 3+ customers across LATAM, US and EU to deliver tailored solutions addressing unique requirements, including leading onsite acceptance testing from dev side in Colombia for a equity trading platform handling $500M+ daily volume.</li>
                 <li><strong>Security & Testing:</strong>
@@ -371,13 +374,10 @@
             </div>
             <div class="position">Software Developer</div>
             <ul>
-                <li><strong>Core Development:</strong> Engineered and modernized capital markets and payment software for banks and financial institutions by leveraging a comprehensive technology stack—Java, Spring Boot, Python Flask, Docker, Apache Camel, CXF, Informix, Orika, and MapStruct—to deliver scalable, secure, and high-performance solutions.</li>
-                <li><strong>Zeus-GPI (General process interface):</strong> A business integration middleware to connect front office with core system, typically processes ISO 20022 message by SOAP and REST APIs and services for seamless integration across different channels.</li>
-                <li>Developed SOAP and REST APIs using Java, Spring Boot, and Apache Camel to route Interbank financial telecommunication (e.g., Swift MT/MX, ISO 20022) between diverse endpoints like databases, message queues, HTTP, SOAP, and SMB filesystems that enabled seamless integration for investment banking customers to significantly reduce message delivery latency.</li>
-                <li><strong>CMS (Card Management System):</strong> A payment technology built on the BASE24 engine to acquire, authenticate, route, switch, and authorize credit, debit, and forex transactions.</li>
-                <li>Migrated legacy Pro*C (circa 1993) code to a modern Java-based architecture using Spring Boot, JPA and Security, improving scalability and maintainability.</li>
-                <li>Developed RESTful APIs enabling transaction reconciliation, settlement, dispute management, and corporate card services for acquirers and issuers.</li>
-                <li><strong>CapSuite:</strong> Designed and implemented an automation tool that generates code for entities and mappings based on SQL procedures and Swift MT/MX message definitions, significantly improving developer efficiency.</li>
+                <li><strong> Capital Markets & Payments Development:</strong>: Modernized software systems for banks and financial institutions using Java, Spring Boot, Docker, Apache Camel, Informix, Orika, and MapStruct to deliver secure, scalable, and high-performance applications.</li>
+                <li><strong>Zeus-GPI (General process interface):</strong> Designed and implemented Apache Camel RouteBuilders to process and route SWIFT MT/MX and ISO 20022 messages across various endpoints (DB, filesystem, HTTP, SOAP, MQ). Enabled seamless integration between front-office and core banking systems, significantly reducing message delivery latency.</li>
+                <li><strong>CMS (Card Management System):</strong> Migrated legacy Pro*C (1993) codebase to a modular Java-based architecture using Spring Boot, JPA, and Spring Security. Delivered RESTful APIs for transaction reconciliation, settlement, dispute management, and corporate card features, enhancing maintainability and scalability for issuer/acquirer systems.</li>
+                <li><strong>CapSuite:</strong> Built an internal automation tool using python and FastAPI to generate Java entities and mappings from SQL procedures and SWIFT message definitions (MT/MX). Improved developer productivity and reduced manual efforts and errors while mapping the fields during developments.</li>
             </ul>
         </div>
         
@@ -388,7 +388,8 @@
             </div>
             <div class="position">SDE Intern</div>
             <ul>
-                <li>Developed Apache Camel message routes, gained investment banking exposure.</li>
+                <li>Built foundational knowledge of Apache Camel by studying existing routes and developing tests to enhance coverage and reliability.</li>
+                <li>Implemented new Camel routes for a customer project under mentorship, contributing to middleware workflows for SWIFT/ISO 20022 message processing.</li>
             </ul>
         </div>
     </div>
