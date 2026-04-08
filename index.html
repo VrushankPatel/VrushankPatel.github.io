@@ -1,44 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vrushank Patel - Senior Software Developer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         html {
-            scroll-behavior: smooth;`
+            scroll-behavior: smooth;
+            `
         }
+
         :root {
-            --bg-color: #ededed;
-            --text-color: #2d3748;
-            --border-color: #cbd5e0;
-            --shadow-color: rgba(0,0,0,0.1);
-            --heading-color: #1a202c;
-            --subtitle-color: #4a5568;
-            --date-color: #718096;
-            --link-color: #2b6cb0;
-            --section-border: #e2e8f0;
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --border-color: #d1d5db;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --heading-color: #000000;
+            --subtitle-color: #000000;
+            --date-color: #000000;
+            --link-color: #000000;
+            --section-border: #d1d5db;
         }
-        
-        [data-theme="dark"] {
-            --bg-color: #212120;
-            --text-color: #bfbfbf;
-            --border-color: #4a5568;
-            --shadow-color: rgba(0,0,0,0.3);
-            --heading-color: #f7fafc;
-            --subtitle-color: #cbd5e0;
-            --date-color: #a0aec0;
-            --link-color: #63b3ed;
-            --section-border: #4a5568;
-        }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
 
         body {
@@ -53,9 +43,8 @@
             background-color: var(--bg-color);
             transition: all 0.3s ease;
         }
-        
-        /* Theme toggle button */
-        .theme-toggle, .download-button {
+
+        .download-button {
             position: fixed;
             width: 40px;
             height: 40px;
@@ -69,142 +58,158 @@
             z-index: 1000;
             box-shadow: 0 2px 5px var(--shadow-color);
             transition: all 0.3s ease;
-        }
-        
-        .theme-toggle {
-            top: 15px;
-            left: 15px;
-        }
-        
-        .download-button {
             top: 15px;
             right: 15px;
         }
-        
-        .theme-toggle:hover, .download-button:hover {
+
+        .download-button:hover {
             transform: scale(1.1);
         }
-        
-        .theme-toggle i, .download-button i {
+
+        .download-button i {
             font-size: 18px;
             color: var(--text-color);
         }
-        
+
         /* Print-specific styles */
         @media print {
-            .theme-toggle, .download-button {
+
+            .download-button {
                 display: none !important;
             }
-            
+
             body {
-                margin: 0 !important;
+                margin: 30 !important;
                 padding: 15px 15px !important;
-                max-width: 100% !important;
+                max-width: 95% !important;
                 border: none !important;
                 box-shadow: none !important;
                 font-size: 12px !important;
-                line-height: 1.5 !important;
-                color: #000 !important; /* Force black text */
-                background-color: #fff !important; /* Force white background */
+                line-height: 1.4 !important;
+                color: #000 !important;
+                /* Force black text */
+                background-color: #fff !important;
+                /* Force white background */
             }
-            
+
             /* Force all text elements to use black color regardless of theme */
-            h1, h2, h3, p, li, div, span, .subtitle, .company-name, .date-location, .position, .skill-title, .skill-category, .section-title {
+            h1,
+            h2,
+            h3,
+            p,
+            li,
+            div,
+            span,
+            .subtitle,
+            .company-name,
+            .date-location,
+            .position,
+            .skill-title,
+            .skill-category,
+            .section-title {
                 color: #000 !important;
             }
-            
+
+            .date-location {
+                font-weight: 700 !important;
+            }
+
             /* Force all backgrounds to be white */
-            div, section, header, footer {
+            div,
+            section,
+            header,
+            footer {
                 background-color: #fff !important;
             }
-            
+
             /* Ensure borders are visible */
             .section-title {
                 border-bottom: 1px solid #000 !important;
             }
-            
+
             @page {
                 margin: 0.3cm;
-                size: 210mm 330mm;
+                size: 185mm 316mm;
             }
-            
+
             h1 {
                 font-size: 25px !important;
-                
+
             }
-            
+
             .subtitle {
                 margin-bottom: 2px !important;
                 font-size: 17px !important;
             }
-            
+
             .contact-info {
                 font-size: 15px !important;
                 margin-bottom: 5px !important;
             }
-            
+
             .section-title {
                 font-size: 14px !important;
                 margin-bottom: 4px !important;
                 padding-bottom: 2px !important;
             }
-            
-            .experience-item, .skill-category {
+
+            .experience-item,
+            .skill-category {
                 margin-bottom: 0px !important;
             }
-            
+
             .company-header {
                 margin-bottom: 0px !important;
             }
-            
+
             .company-name {
                 font-size: 14px !important;
             }
-            
+
             .date-location {
-                font-size: 14px !important;
-            }
-            
-            .position {
-                margin-bottom: 0px !important;
                 font-size: 13px !important;
             }
-            
+
+            .position {
+                margin-bottom: 0px !important;
+                font-size: 14px !important;
+            }
+
             ul {
                 margin-bottom: 3px !important;
                 padding-left: 15px !important;
             }
-            
+
             li {
                 margin-bottom: 1px !important;
-                font-size: 13px !important;
+                font-size: 13.5px !important;
                 line-height: 1.35 !important;
             }
-            
+
             .header {
                 margin-bottom: 4px !important;
             }
-            
+
             .section {
                 margin-bottom: 4px !important;
             }
-            
+
             .skills-grid {
                 display: block !important;
             }
-            
+
             .skill-category {
                 font-size: 13px !important;
                 margin-bottom: 3px !important;
                 display: flex !important;
             }
-            
+
             .skill-title {
                 margin-right: 5px !important;
                 min-width: 180px !important;
                 font-size: 13px !important;
             }
-            
+
             .projects a {
                 font-size: 12px !important;
                 margin-right: 7px !important;
@@ -274,6 +279,7 @@
         .date-location {
             color: var(--date-color);
             font-size: 12px;
+            font-weight: 700;
         }
 
         .position {
@@ -288,7 +294,7 @@
 
         li {
             margin-bottom: 2px;
-            font-size: 13px;
+            font-size: 13.5px;
             text-align: justify;
         }
 
@@ -319,28 +325,24 @@
         }
     </style>
 </head>
+
 <body>
-    <div class="theme-toggle" id="theme-toggle">
-        <i class="fas fa-moon"></i>
-    </div>
     <a href="/Vrushank_Resume.pdf" class="download-button" id="download-button" download>
         <i class="fas fa-download"></i>
     </a>
     <div class="header">
         <h1>Vrushank Patel</h1>
-        <div class="subtitle">Senior Software Developer</div>
         <div class="contact-info">
-            +91 9601501725 | <a href="mailto:vrushankpatel5@gmail.com">vrushankpatel5@gmail.com</a> | 
-            <a href="https://github.com">Github</a> | 
-            <a href="https://linkedin.com">LinkedIn</a> | 
-            <a href="https://codersrank.io">CodersRank</a> | 
-            Bangalore, IN
+            +91 9601501725 | <a href="mailto:vrushankpatel5@gmail.com">vrushankpatel5@gmail.com</a> |
+            <a href="https://github.com">Github</a> |
+            <a href="https://linkedin.com">LinkedIn</a> |
+            <a href="https://codersrank.io">CodersRank</a> 
         </div>
     </div>
 
     <div class="section">
         <div class="section-title">Experience (5+ years)</div>
-        
+
         <div class="experience-item">
             <div class="company-header">
                 <div class="company-name">NASDAQ</div>
@@ -348,22 +350,33 @@
             </div>
             <div class="position">Senior Software Developer</div>
             <ul>
-                <li><strong>Eqlipse Trading:</strong> Developed and optimized solutions for Multi Matching Engine, a high-speed order matching and execution system, using Java and Spring Framework. Delivered 15+ customizations for 3+ customers (Forex, Equities, and Crypto) across LATAM, US, and EU, including onsite acceptance testing in Colombia for an equity trading platform handling $500M+ daily volume.</li>
-                <li><strong>Cloud-Native Deployment:</strong> Containerized services with Docker/Podman and orchestrated deployments on Amazon EKS, improving system uptime and reducing infrastructure costs through better resource utilization.</li>
-                <li><strong>Infrastructure-as-Code:</strong> Built and Customized a framework acting as a kubernetes operator to streamline Amazon EKS and EKS-A deployments, designing partitioned Helm layouts resulting in a significant reduction in deployment setup time for a LATAM customer.</li>
-                <li><strong>CI/CD Automation:</strong> Contributed to CI/CD migration from TeamCity to GitLab by writing pipelines to build and test code, publish artifacts, vulnerability scans (Prisma, SonarQube, Sonatype) and code signing.</li>
-                <li><strong>Security & Testing:</strong>
-                    <ul>
-                        <li>Patched 50+ vulnerabilities in dependencies, reducing Sonatype threat score from 9→1.5, enhancing supply chain security.</li>
-                        <li>Identified and resolved compatibility issues in unit testing frameworks that revamped 2500+ JUnit/Mockito test cases, achieving 90%+ code coverage.</li>
-                    </ul>
-                </li>
-                <li><strong>AI-Driven Development & Workflow Automation:</strong> Leveraged GitHub Copilot for generating boilerplate code (DTOs, repetitive logic) and drafting technical documentation (Javadocs, Confluence). Led a proof of concept using Diffblue to auto-generate unit tests, improving coverage and reliability.</li>
+                <li>Developed and optimized solutions for a high-speed order matching and execution system using Java
+                    and Spring Framework. Delivered customer-tailored enhancements for Forex, Equities, and Crypto
+                    across LATAM, US, and EU, including onsite acceptance testing in Colombia for an equity trading
+                    platform handling 500M plus daily volume.</li>
+                <li>Containerized and orchestrated deployments on Amazon EKS, improving system uptime and reducing
+                    infrastructure cost through better resource utilization.</li>
+                <li>Developed and customized a framework acting as a Kubernetes operator to streamline Amazon EKS and
+                    EKS A deployments, designing partitioned Helm layouts that significantly reduced deployment setup
+                    time for a LATAM customer.</li>
+                <li>Internal tools I built/am building from scratch for the productivity of the team:</li>
+                <ul>
+                    <li>KDebug, a debugging utility for Kubernetes-hosted matching engine pods, automates debugger port
+                        discovery, local port forwarding, and reattachment handling to simplify remote debugging in
+                        non-local environments.</li>
+                    <li>Layout Visualizer, a pipeline-integrated visualization tool that converts deployment layout YAML
+                        files into readable graphical views, helping teams review pod counts, replication setup, and
+                        configuration changes from release artifacts stored in Artifactory.</li>
+                    <li>Built a Terraform plan visualization tool for the ops team with expandable and collapsible views
+                        to inspect planned infrastructure changes and configuration details more easily.</li>
+                    <li>Currently building an MCP server that enables users to deploy/destroy/operate the system through
+                        Copilot with controlled internal usage.</li>
+                </ul>
             </ul>
         </div>
 
         <!-- Add other experience items similarly -->
-        
+
         <div class="experience-item">
             <div class="company-header">
                 <div class="company-name">Capsystematic Technologies Pvt Ltd.</div>
@@ -371,13 +384,14 @@
             </div>
             <div class="position">Software Developer</div>
             <ul>
-                <li><strong> Capital Markets & Payments Development:</strong>: Modernized software systems for banks and financial institutions using Java, Spring Boot, Docker, Apache Camel, Informix, Orika, and MapStruct to deliver secure, scalable, and high-performance applications.</li>
-                <li><strong>Zeus-GPI (General process interface):</strong> Designed and implemented Apache Camel RouteBuilders to process and route SWIFT MT/MX and ISO 20022 messages across various endpoints (DB, filesystem, HTTP, SOAP, MQ). Enabled seamless integration between front-office and core banking systems, significantly reducing message delivery latency.</li>
-                <li><strong>CMS (Card Management System):</strong> Migrated legacy Pro*C (1993) codebase to a modular Java-based architecture using Spring Boot, JPA, and Spring Security. Delivered RESTful APIs for transaction reconciliation, settlement, dispute management, and corporate card features, enhancing maintainability and scalability for issuer/acquirer systems.</li>
-                <li><strong>CapSuite:</strong> Built an internal automation tool using python and FastAPI to generate Java entities and mappings from SQL procedures and SWIFT message definitions (MT/MX). Improved developer productivity and reduced manual efforts and errors while mapping the fields during developments.</li>
+                <li>Developed and modernized backend systems for banking and financial clients using Java, Spring Boot, Apache Camel, and Docker, delivering secure and scalable applications.</li>
+                <li>Designed and implemented Apache Camel routes to process and route SWIFT MT and ISO 20022 messages across DB, filesystem, HTTP, SOAP, and MQ endpoints, improving integration between front office and core banking systems and reducing message latency.</li>
+                <li>Migrated a legacy Pro C based system to a modular Java architecture using Spring Boot, JPA, and Spring Security, and built REST APIs for reconciliation, settlement, dispute management, and corporate card operations.</li>
+                <li>Built an internal automation tool using Python and FastAPI to generate Java entities and mappings from SQL procedures and SWIFT message definitions, improving developer productivity and reducing manual mapping errors.</li>
+
             </ul>
         </div>
-        
+
         <div class="experience-item">
             <div class="company-header">
                 <div class="company-name">Capsystematic Technologies Pvt Ltd.</div>
@@ -385,52 +399,40 @@
             </div>
             <div class="position">SDE Intern</div>
             <ul>
-                <li>Built foundational knowledge of Apache Camel by studying existing routes and developing tests to enhance coverage and reliability.</li>
-                <li>Implemented new Camel routes for a customer project under mentorship, contributing to middleware workflows for SWIFT/ISO 20022 message processing.</li>
+                <li>Worked with Apache Camel by analyzing existing routes and adding tests to improve reliability and coverage.</li>
+                <li>Implemented Camel routes for SWIFT MT and ISO 20022 message processing, contributing to middleware workflows under mentorship.</li>
             </ul>
         </div>
     </div>
 
     <div class="section">
-    <div class="section-title">Skills</div>
-    <div class="skills-grid">
-        <div class="skill-category">
-            <div class="skill-title">Programming Languages:</div>
-            Java, Python
-        </div>
-        <div class="skill-category">
-            <div class="skill-title">Frameworks & Libraries:</div>
-            Spring Boot, FastAPI, JUnit, Mockito, Jackson (JSON), JAXB (XML)
-        </div>
-        <div class="skill-category">
-            <div class="skill-title">DB & Streaming:</div>
-            PostgreSQL, Apache Kafka
-        </div>
-        <div class="skill-category">
-            <div class="skill-title">Cloud & DevOps:</div>
-            AWS (EC2, S3, RDS, Lambda, IAM, EKS, ECR), Docker, GitLab CI/CD
-        </div>
-        <div class="skill-category">
-            <div class="skill-title">Collaboration & Tools:</div>
-            JIRA, Confluence
-        </div>
-        <div class="skill-category">
-            <div class="skill-title">AI-Powered Tools:</div>
-            GitHub Copilot, Diffblue Cover
-        </div>
-        <div class="skill-category">
-            <div class="skill-title">Operating Systems:</div>
-            Linux (Ubuntu, Amazon Linux), macOS
+        <div class="section-title">Skills</div>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <div class="skill-title">Programming Languages:</div>
+                Java, Python
+            </div>
+            <div class="skill-category">
+                <div class="skill-title">Frameworks & Libraries:</div>
+                Spring Boot, FastAPI, Spring Web, Spring Data JPA, JUnit, Mockito
+            </div>
+            <div class="skill-category">
+                <div class="skill-title">DB & Streaming:</div>
+                PostgreSQL (query optimization, indexing, transactions) Redis, Apache Kafka
+            </div>
+            <div class="skill-category">
+                <div class="skill-title">Cloud & DevOps:</div>
+                AWS (EC2, S3, Lambda, EKS, ECR), Docker, GitLab CI/CD
+            </div>
         </div>
     </div>
-</div>
 
 
     <div class="section">
         <div class="section-title">Education</div>
         <div class="experience-item">
             <div class="company-header">
-                <div class="company-name">Apollo Institute of Engineering (Gujarat technological university)</div>
+                <div class="company-name">Apollo Institute of Engineering (GTU)</div>
                 <div class="date-location">Jul 2015- May 2019 | Ahmedabad - IN</div>
             </div>
             <div>B.E. – Information Technology (CGPA = 8.24)</div>
@@ -450,38 +452,6 @@
             <a target="_blank" href="/#projects">More</a>
         </div>
     </div>
-    <script>
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeIcon = themeToggle.querySelector('i');
-        
-        // Check for saved theme preference or use default
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        
-        // Update icon based on current theme
-        if (savedTheme === 'dark') {
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-        }
-        
-        // Toggle theme when button is clicked
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            
-            // Toggle icon
-            if (newTheme === 'dark') {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-            } else {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-            }
-        });
-    </script>
 </body>
+
 </html>
