@@ -489,33 +489,55 @@ a:hover {
 
 /* Media Queries for responsiveness */
 @media (max-width: 992px) {
+    body {
+        overflow: visible;
+        height: auto;
+        min-height: 100vh;
+    }
+    .dashboard-layout {
+        height: auto;
+        min-height: 100vh;
+    }
+    .layout-main {
+        flex-direction: column;
+        overflow: visible;
+    }
     .profile-rail {
+        width: 100%;
+        order: -1;
+        border-left: none;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 1rem;
+        height: auto;
+    }
+    .terminal-area {
+        height: auto;
+        overflow: visible;
+        border-right: none;
+    }
+    .output-content {
+        overflow-y: visible;
+        padding-bottom: 2rem;
+    }
+    .command-rail {
         display: none;
+    }
+    .terminal-input-wrapper {
+        display: none;
+    }
+    .cmd-echo {
+        display: none; /* Hide the echoes on mobile to make it look like a clean document */
     }
 }
 
 @media (max-width: 768px) {
-    .layout-main {
-        flex-direction: column;
+    .skills-grid {
+        grid-template-columns: 1fr;
     }
-    .command-rail {
-        width: 100%;
-        height: auto;
-    }
-    .sys-metrics {
-        display: none;
-    }
-    .command-list {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-    .output-area {
-        overflow: hidden;
+    .projects-grid {
+        grid-template-columns: 1fr;
     }
     .section-title {
         font-size: 16px;
-    }
-    .skills-grid {
-        grid-template-columns: 1fr;
     }
 }

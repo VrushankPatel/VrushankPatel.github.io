@@ -80,7 +80,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial Welcome Message
     printToOutput(`<div class="cmd-echo">VRUSHANK_PATEL_SYS initialized. Type <span class="highlight-green">'help'</span> to see available commands.</div>`);
-    renderAbout(false); // Initial render without echo
+    
+    // Auto-render all sections for mobile/tablet view
+    if (window.innerWidth <= 992) {
+        renderAbout(false);
+        renderExperience();
+        renderSkills();
+        renderEducation();
+        renderProjects();
+        renderContact();
+    } else {
+        renderAbout(false); // Initial render without echo
+    }
 
     terminalInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
@@ -325,17 +336,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="stat-key">PHONE</span>
                         <span class="stat-val">${contact.phone}</span>
                     </div>
-                    <div class="stat-row">
-                        <span class="stat-key">GITHUB</span>
-                        <span class="stat-val"><a href="${contact.github}" target="_blank">${contact.github}</a></span>
+                    <div class="stat-row" style="justify-content: flex-start; padding-top: 8px;">
+                        <a href="${contact.github}" target="_blank" style="text-decoration: underline; font-weight: bold;">GITHUB</a>
                     </div>
-                    <div class="stat-row">
-                        <span class="stat-key">LINKEDIN</span>
-                        <span class="stat-val"><a href="${contact.linkedin}" target="_blank">${contact.linkedin}</a></span>
+                    <div class="stat-row" style="justify-content: flex-start;">
+                        <a href="${contact.linkedin}" target="_blank" style="text-decoration: underline; font-weight: bold;">LINKEDIN</a>
                     </div>
-                    <div class="stat-row">
-                        <span class="stat-key">CODERSRANK</span>
-                        <span class="stat-val"><a href="${contact.codersrank}" target="_blank">${contact.codersrank}</a></span>
+                    <div class="stat-row" style="justify-content: flex-start;">
+                        <a href="${contact.codersrank}" target="_blank" style="text-decoration: underline; font-weight: bold;">CODERSRANK</a>
                     </div>
                 </div>
             </div>
