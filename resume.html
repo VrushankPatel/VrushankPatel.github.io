@@ -326,130 +326,107 @@
 </head>
 
 <body>
-    <a href="/Vrushank_Resume.pdf" class="download-button" id="download-button" download>
-        <i class="fas fa-download"></i>
-    </a>
-    <div class="header">
-        <h1>Vrushank Patel</h1>
-        <div class="contact-info">
-            +91 9601501725 | <a target="_blank" href="mailto:vrushankpatel5@gmail.com">vrushankpatel5@gmail.com</a> |
-            <a target="_blank" href="https://github.com/VrushankPatel">Github</a> |
-            <a target="_blank" href="https://www.linkedin.com/in/vrushank-patel-69b682180/">LinkedIn</a> |
-            <a target="_blank" href="https://profile.codersrank.io/user/vrushankpatel">CodersRank</a> 
-        </div>
-    </div>
+    <script src="data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const d = portfolioData;
+            
+            // Experience HTML
+            let expHtml = '';
+            d.experience.forEach(exp => {
+                let resHtml = exp.responsibilities.map(r => {
+                    if (Array.isArray(r)) {
+                        return `<ul style="margin-top: 2px; margin-bottom: 2px;">${r.map(subR => `<li>${subR}</li>`).join('')}</ul>`;
+                    }
+                    return `<li>${r}</li>`;
+                }).join('');
+                expHtml += `
+                    <div class="experience-item">
+                        <div class="company-header">
+                            <div class="company-name">${exp.company}</div>
+                            <div class="date-location">${exp.date} | ${exp.location}</div>
+                        </div>
+                        <div class="position">${exp.title}</div>
+                        <ul>${resHtml}</ul>
+                    </div>
+                `;
+            });
 
-    <div class="section">
-        <div class="section-title">Experience (5+ years)</div>
+            // Skills HTML
+            let skillsHtml = '';
+            d.skills.forEach(skill => {
+                skillsHtml += `
+                    <div class="skill-category">
+                        <div class="skill-title">${skill.category}:</div>
+                        ${skill.items.join(', ')}
+                    </div>
+                `;
+            });
 
-        <div class="experience-item">
-            <div class="company-header">
-                <div class="company-name">NASDAQ</div>
-                <div class="date-location">Nov 2022 – Present | Bangalore - IN</div>
-            </div>
-            <div class="position">Senior Software Developer</div>
-            <ul>
-                <li>Developed and optimized solutions for a high-speed order matching and execution system using Java
-                    and Spring Framework. Delivered customer-tailored enhancements for Forex, Equities, and Crypto
-                    across LATAM, US, and EU, including onsite acceptance testing in Colombia for an equity trading
-                    platform handling 500M plus daily volume.</li>
-                <li>Containerized and orchestrated deployments on Amazon EKS, improving system uptime and reducing
-                    infrastructure cost through better resource utilization.</li>
-                <li>Developed and customized a framework acting as a Kubernetes operator to streamline Amazon EKS and
-                    EKS A deployments, designing partitioned Helm layouts that significantly reduced deployment setup
-                    time for a LATAM customer.</li>
-                <li>Internal tools I built/am building from scratch for the productivity of the team:</li>
-                <ul>
-                    <li>KDebug, a debugging utility for Kubernetes-hosted matching engine pods, automates debugger port
-                        discovery, local port forwarding, and reattachment handling to simplify remote debugging in
-                        non-local environments.</li>
-                    <li>Layout Visualizer, a pipeline-integrated visualization tool that converts deployment layout YAML
-                        files into readable graphical views, helping teams review pod counts, replication setup, and
-                        configuration changes from release artifacts stored in Artifactory.</li>
-                    <li>Built a Terraform plan visualization tool for the ops team with expandable and collapsible views
-                        to inspect planned infrastructure changes and configuration details more easily.</li>
-                    <li>Currently building an MCP server that enables users to deploy/destroy/operate the system through
-                        Copilot with controlled internal usage.</li>
-                </ul>
-            </ul>
-        </div>
+            // Education HTML
+            let eduHtml = '';
+            d.education.forEach(edu => {
+                eduHtml += `
+                    <div class="experience-item">
+                        <div class="company-header">
+                            <div class="company-name">${edu.institution}</div>
+                            <div class="date-location">${edu.date} | ${edu.location}</div>
+                        </div>
+                        <div>${edu.degree} (${edu.gpa})</div>
+                    </div>
+                `;
+            });
 
-        <!-- Add other experience items similarly -->
+            // Projects HTML
+            let projHtml = '';
+            d.projects.forEach(proj => {
+                if (proj.link && proj.link !== "#") {
+                    projHtml += `<a target="_blank" href="${proj.link}">${proj.name}</a>\n            `;
+                }
+            });
 
-        <div class="experience-item">
-            <div class="company-header">
-                <div class="company-name">Capsystematic Technologies Pvt Ltd.</div>
-                <div class="date-location">Dec 2019 – Nov 2022 | Bangalore - IN</div>
-            </div>
-            <div class="position">Software Developer</div>
-            <ul>
-                <li>Developed and modernized backend systems for banking and financial clients using Java, Spring Boot, Apache Camel, and Docker, delivering secure and scalable applications.</li>
-                <li>Designed and implemented Apache Camel routes to process and route SWIFT MT and ISO 20022 messages across DB, filesystem, HTTP, SOAP, and MQ endpoints, improving integration between front office and core banking systems and reducing message latency.</li>
-                <li>Migrated a legacy Pro C based system to a modular Java architecture using Spring Boot, JPA, and Spring Security, and built REST APIs for reconciliation, settlement, dispute management, and corporate card operations.</li>
-                <li>Built an internal automation tool using Python and FastAPI to generate Java entities and mappings from SQL procedures and SWIFT message definitions, improving developer productivity and reducing manual mapping errors.</li>
+            const content = `
+                <a href="Vrushank_Resume.pdf" class="download-button" id="download-button" download>
+                    <i class="fas fa-download"></i>
+                </a>
+                <div class="header">
+                    <h1>${d.profile.name}</h1>
+                    <div class="contact-info">
+                        ${d.contact.phone} | <a target="_blank" href="mailto:${d.contact.email}">${d.contact.email}</a> |
+                        <a target="_blank" href="${d.contact.github}">Github</a> |
+                        <a target="_blank" href="${d.contact.linkedin}">LinkedIn</a> |
+                        <a target="_blank" href="${d.contact.codersrank}">CodersRank</a> 
+                    </div>
+                </div>
 
-            </ul>
-        </div>
+                <div class="section">
+                    <div class="section-title">Experience (${d.profile.metrics.experience})</div>
+                    ${expHtml}
+                </div>
 
-        <div class="experience-item">
-            <div class="company-header">
-                <div class="company-name">Capsystematic Technologies Pvt Ltd.</div>
-                <div class="date-location">Sept 2019 – Dec 2019 | Bangalore - IN</div>
-            </div>
-            <div class="position">SDE Intern</div>
-            <ul>
-                <li>Worked with Apache Camel by analyzing existing routes and adding tests to improve reliability and coverage.</li>
-                <li>Implemented Camel routes for SWIFT MT and ISO 20022 message processing, contributing to middleware workflows under mentorship.</li>
-            </ul>
-        </div>
-    </div>
+                <div class="section">
+                    <div class="section-title">Skills</div>
+                    <div class="skills-grid">
+                        ${skillsHtml}
+                    </div>
+                </div>
 
-    <div class="section">
-        <div class="section-title">Skills</div>
-        <div class="skills-grid">
-            <div class="skill-category">
-                <div class="skill-title">Programming Languages:</div>
-                Java, Python
-            </div>
-            <div class="skill-category">
-                <div class="skill-title">Frameworks & Libraries:</div>
-                Spring Boot, Spring Web, Spring Data JPA, JUnit, Mockito
-            </div>
-            <div class="skill-category">
-                <div class="skill-title">DB & Streaming:</div>
-                MySQL (query optimization, indexing, transactions), Redis, Apache Kafka
-            </div>
-            <div class="skill-category">
-                <div class="skill-title">Cloud & DevOps:</div>
-                AWS (EC2, S3, Lambda, EKS, ECR), Docker, GitLab CI/CD
-            </div>
-        </div>
-    </div>
+                <div class="section">
+                    <div class="section-title">Education</div>
+                    ${eduHtml}
+                </div>
 
-
-    <div class="section">
-        <div class="section-title">Education</div>
-        <div class="experience-item">
-            <div class="company-header">
-                <div class="company-name">Apollo Institute of Engineering (GTU)</div>
-                <div class="date-location">Jul 2015- May 2019 | Ahmedabad - IN</div>
-            </div>
-            <div>B.E. – Information Technology (CGPA = 8.24)</div>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="section-title">Projects</div>
-        <div class="projects">
-            <a target="_blank" href="https://apex-docs.readthedocs.io/">APEX</a>
-            <a target="_blank" href="https://github.com/VrushankPatel/bluelink/releases">BlueLink</a>
-            <a target="_blank" href="https://marketron-x.web.app/">Marketron</a>
-            <a target="_blank" href="https://maxine.readthedocs.io/">Maxine</a>
-            <a target="_blank" href="https://github.com/VrushankPatel/complexica-server">Complexica</a>
-            <a target="_blank" href="https://iboard-x.web.app/">iBoard</a>
-            <a target="_blank" href="https://github.com/VrushankPatel">More</a>
-        </div>
-    </div>
+                <div class="section">
+                    <div class="section-title">Projects</div>
+                    <div class="projects">
+                        ${projHtml}
+                    </div>
+                </div>
+            `;
+            
+            document.body.innerHTML = content;
+        });
+    </script>
 </body>
 
 </html>

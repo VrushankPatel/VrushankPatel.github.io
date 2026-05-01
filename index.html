@@ -1,65 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vrushank Patel - Resume</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-    }
-    
-    .container {
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .header {
-      background-color: #333;
-      color: white;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .header h1 {
-      font-size: 20px;
-      font-weight: 600;
-    }
-    
-    .header a {
-      background-color: #0066cc;
-      color: white;
-      padding: 8px 16px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-size: 14px;
-    }
-    
-    .header a:hover {
-      background-color: #0052a3;
-    }
-    
-    #pdf-viewer {
-      flex: 1;
-      width: 100%;
-      border: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vrushank Patel - Terminal Portfolio</title>
+    <meta name="description" content="Senior Software Engineer portfolio for Vrushank Patel, specializing in Capital Markets and High-Speed Backend systems.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <iframe id="pdf-viewer" src="Vrushank_Resume.pdf#toolbar=1&navpanes=0&scrollbar=1"></iframe>
-  </div>
+    <div class="terminal-container">
+        <!-- Top Status Bar -->
+        <header class="status-bar">
+            <div class="status-left">
+                <span class="status-item brand">VRUSHANK_PATEL_SYS</span>
+                <span class="status-item">LATENCY: <span class="highlight-green">0.1ms</span></span>
+                <span class="status-item">UPTIME: <span class="highlight-green">99.99%</span></span>
+            </div>
+            <div class="status-right">
+                <span class="status-item">SYS_TIME: <span id="sys-time"></span></span>
+                <span class="status-item active-status"><span class="pulse"></span> ONLINE</span>
+            </div>
+        </header>
+
+        <!-- Main Layout -->
+        <div class="layout-main">
+            <!-- Left Command Rail -->
+            <aside class="command-rail">
+                <div class="panel-header">COMMAND_PALETTE</div>
+                <ul class="command-list" id="command-list">
+                    <li data-cmd="about">&gt; about</li>
+                    <li data-cmd="experience">&gt; experience</li>
+                    <li data-cmd="skills">&gt; skills</li>
+                    <li data-cmd="education">&gt; education</li>
+                    <li data-cmd="projects">&gt; projects</li>
+                    <li data-cmd="contact">&gt; contact</li>
+                    <li data-cmd="clear" class="util-cmd">&gt; clear</li>
+                    <li data-cmd="help" class="util-cmd">&gt; help</li>
+                </ul>
+                <div class="sys-metrics mt-auto">
+                    <div class="metric">
+                        <span class="metric-label">CPU_LOAD</span>
+                        <div class="progress-bar"><div class="progress" style="width: 24%"></div></div>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">MEM_USAGE</span>
+                        <div class="progress-bar"><div class="progress" style="width: 48%"></div></div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Center Content Area -->
+            <main class="output-area">
+                <div class="output-content" id="output-content">
+                    <!-- Dynamic content will be injected here -->
+                </div>
+                
+                <!-- Terminal Input -->
+                <div class="terminal-input-wrapper">
+                    <span class="prompt">root@vpatel:~$</span>
+                    <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" autofocus>
+                </div>
+            </main>
+
+            <!-- Right Profile Summary Area -->
+            <aside class="profile-rail">
+                <div class="panel-header">SYS_PROFILE</div>
+                <div class="profile-card">
+                    <h2 class="profile-name">Vrushank Patel</h2>
+                    <div class="profile-role">Senior Software Developer</div>
+                    
+                    <div class="profile-badges mt-3">
+                        <span class="badge">Senior</span>
+                        <span class="badge">Backend</span>
+                        <span class="badge">Capital Markets</span>
+                    </div>
+
+                    <div class="profile-stats mt-4" id="dynamic-profile-stats">
+                        <!-- Profile stats injected here -->
+                    </div>
+
+                    <div class="profile-links mt-4" id="quick-links">
+                        <!-- Quick links will be injected here -->
+                    </div>
+
+                    <a href="Vrushank_Resume.pdf" target="_blank" class="resume-btn mt-4">
+                        RESUME<sup>pdf</sup>
+                    </a>
+
+                    <div class="location-section mt-4">
+                        <div id="dynamic-location">
+                            <!-- Location injected here -->
+                        </div>
+                        <div class="globe-container" id="globeViz" style="margin-top: 0.5rem; display: flex; justify-content: center;">
+                            <!-- Globe will be rendered here -->
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+    <script src="https://unpkg.com/globe.gl"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const globeContainer = document.getElementById('globeViz');
+            if(globeContainer) {
+                // Determine width based on the rail width
+                const width = 250;
+                const arcsData = [
+                    { startLat: 12.97, startLng: 77.59, endLat: 51.50, endLng: -0.12, color: '#00ff9d' }, // India to UK
+                    { startLat: 12.97, startLng: 77.59, endLat: 40.71, endLng: -74.00, color: '#00a8ff' } // India to US
+                ];
+
+                const myGlobe = Globe()(globeContainer)
+                    .backgroundColor('rgba(0,0,0,0)')
+                    .showGlobe(true)
+                    .showAtmosphere(true)
+                    .atmosphereColor('#00ff9d')
+                    .atmosphereAltitude(0.2)
+                    .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-topology.png')
+                    .arcsData(arcsData)
+                    .arcColor('color')
+                    .arcDashLength(0.4)
+                    .arcDashGap(0.2)
+                    .arcDashAnimateTime(2000)
+                    .width(width)
+                    .height(width);
+
+                // Highlight India
+                fetch('https://raw.githubusercontent.com/vasturiano/globe.gl/master/example/datasets/ne_110m_admin_0_countries.geojson')
+                    .then(res => res.json())
+                    .then(countries => {
+                        myGlobe.polygonsData(countries.features)
+                            .polygonCapColor(feat => {
+                                const p = feat.properties;
+                                const isIndia = p.ISO_A2 === 'IN' || p.ISO_A3 === 'IND' || p.ADMIN === 'India' || p.NAME === 'India';
+                                return isIndia ? 'rgba(0, 255, 157, 0.5)' : 'rgba(0, 0, 0, 0)';
+                            })
+                            .polygonSideColor(() => 'rgba(0,0,0,0)')
+                            .polygonStrokeColor(() => 'rgba(0,0,0,0)');
+                    });
+
+                myGlobe.controls().autoRotate = true;
+                myGlobe.controls().autoRotateSpeed = 1.5;
+                myGlobe.controls().enableZoom = false;
+                
+                // Point view towards India initially
+                myGlobe.pointOfView({ lat: 15, lng: 70, altitude: 2.2 });
+
+                // Click listener to refocus
+                const locText = document.getElementById('location-text');
+                if (locText) {
+                    locText.addEventListener('click', () => {
+                        myGlobe.pointOfView({ lat: 15, lng: 70, altitude: 2.2 }, 1500); // smooth pan over 1.5s
+                    });
+                }
+            }
+        });
+    </script>
 </body>
 </html>
