@@ -2,7 +2,7 @@ const portfolioData = {
   profile: {
     name: "Vrushank Patel",
     role: "Senior Software Developer",
-    summary: "Senior backend engineer with 5+ years of experience specializing in capital markets, low-latency order matching, and high-reliability systems. Proven track record in developing complex trading systems, orchestrating cloud-native architectures on AWS EKS, and creating internal productivity tools. Strong expertise in Java, Spring Boot, DevOps, and building robust financial infrastructure.",
+    summary: "Senior backend engineer with 5+ years of experience specializing in low-latency order matching, and high-reliability systems. Proven track record in developing complex trading systems, orchestrating cloud-native architectures on AWS EKS, and creating internal productivity tools. Strong expertise in Java, Spring Boot, DevOps, and building robust financial infrastructure.",
     phone: "+91 9601501725",
     email: "vrushankpatel5@gmail.com",
     location: "Bangalore, India",

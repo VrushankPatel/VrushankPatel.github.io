@@ -1,1715 +1,432 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Senior Backend & Distributed Systems Engineer specializing in capital markets infrastructure, JVM, Kubernetes, and high-performance trading systems.">
-  <meta name="robots" content="index, follow">
-  <title>Vrushank Patel — Distributed Systems Engineer</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-      --font-mono: 'IBM Plex Mono', 'Menlo', 'Consolas', monospace;
-
-      /* Type scale */
-      --t-xs:   0.6875rem;
-      --t-sm:   0.8125rem;
-      --t-base: 1rem;
-      --t-lg:   1.125rem;
-      --t-xl:   1.25rem;
-      --t-2xl:  1.5rem;
-      --t-3xl:  2rem;
-      --t-4xl:  2.75rem;
-      --t-5xl:  3.75rem;
-      --t-6xl:  5.25rem;
-
-      /* Spacing */
-      --s-1:  0.25rem;
-      --s-2:  0.5rem;
-      --s-3:  0.75rem;
-      --s-4:  1rem;
-      --s-5:  1.25rem;
-      --s-6:  1.5rem;
-      --s-8:  2rem;
-      --s-10: 2.5rem;
-      --s-12: 3rem;
-      --s-16: 4rem;
-      --s-20: 5rem;
-      --s-24: 6rem;
-      --s-32: 8rem;
-
-      /* Layout */
-      --max-w: 1080px;
-      --max-w-narrow: 680px;
-
-      /* Radii */
-      --r-sm: 4px;
-      --r:    8px;
-      --r-lg: 12px;
-      --r-xl: 18px;
-
-      /* Motion */
-      --ease: cubic-bezier(0.4, 0, 0.2, 1);
-      --fast: 140ms;
-      --base: 240ms;
-      --slow: 420ms;
-    }
-
-    /* ============================================================
-       DARK THEME
-    ============================================================ */
-    [data-theme="dark"] {
-      --bg:            #0a0a0b;
-      --bg-raised:     #111114;
-      --surface:       #17171b;
-      --surface-hover: #1d1d22;
-      --surface-2:     #222228;
-      --border:        rgba(255,255,255,0.065);
-      --border-sub:    rgba(255,255,255,0.035);
-
-      --tx-1: #e6e6e9;
-      --tx-2: #9898a6;
-      --tx-3: #58585f;
-      --tx-4: #3a3a40;
-
-      --accent:     #8fa3bf;
-      --accent-bg:  rgba(143,163,191,0.10);
-
-      --sh-sm: 0 1px 4px rgba(0,0,0,.45), 0 1px 2px rgba(0,0,0,.3);
-      --sh:    0 4px 14px rgba(0,0,0,.55), 0 2px 6px rgba(0,0,0,.3);
-      --sh-lg: 0 14px 36px rgba(0,0,0,.65), 0 4px 12px rgba(0,0,0,.4);
-
-      --glass:        rgba(17,17,20,0.82);
-      --glass-border: rgba(255,255,255,0.055);
-    }
-
-    /* ============================================================
-       LIGHT THEME
-    ============================================================ */
-    [data-theme="light"] {
-      --bg:            #f2f2f5;
-      --bg-raised:     #f8f8fb;
-      --surface:       #ffffff;
-      --surface-hover: #fafafc;
-      --surface-2:     #ededf2;
-      --border:        rgba(0,0,0,0.07);
-      --border-sub:    rgba(0,0,0,0.035);
-
-      --tx-1: #18181d;
-      --tx-2: #45454e;
-      --tx-3: #6e6e78;
-      --tx-4: #a4a4ae;
-
-      --accent:     #3a4e6a;
-      --accent-bg:  rgba(58,78,106,0.07);
-
-      --sh-sm: 0 1px 4px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
-      --sh:    0 4px 14px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.05);
-      --sh-lg: 0 14px 36px rgba(0,0,0,.10), 0 4px 12px rgba(0,0,0,.07);
-
-      --glass:        rgba(242,242,245,0.88);
-      --glass-border: rgba(0,0,0,0.06);
-    }
-
-    /* ============================================================
-       RESET
-    ============================================================ */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html {
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
-    }
-
-    body {
-      font-family: var(--font-sans);
-      font-size: var(--t-base);
-      line-height: 1.65;
-      color: var(--tx-1);
-      background: var(--bg);
-      transition: background var(--slow) var(--ease), color var(--slow) var(--ease);
-      overflow-x: hidden;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    button { cursor: pointer; border: none; background: none; font: inherit; }
-    img { display: block; max-width: 100%; }
-    ul { list-style: none; }
-
-    /* ============================================================
-       LAYOUT
-    ============================================================ */
-    .wrap {
-      width: 100%;
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 var(--s-8);
-    }
-
-    section { padding: var(--s-32) 0; }
-
-    .sep {
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* ============================================================
-       SECTION CHROME
-    ============================================================ */
-    .eyebrow {
-      display: flex;
-      align-items: center;
-      gap: var(--s-3);
-      font-family: var(--font-mono);
-      font-size: var(--t-xs);
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--tx-3);
-      margin-bottom: var(--s-4);
-    }
-
-    .eyebrow::before {
-      content: '';
-      display: block;
-      width: 18px;
-      height: 1px;
-      background: var(--tx-3);
-    }
-
-    .sec-title {
-      font-size: var(--t-3xl);
-      font-weight: 600;
-      letter-spacing: -.025em;
-      line-height: 1.12;
-      color: var(--tx-1);
-    }
-
-    .sec-sub {
-      margin-top: var(--s-4);
-      font-size: var(--t-lg);
-      color: var(--tx-2);
-      line-height: 1.75;
-      max-width: 520px;
-      font-weight: 300;
-    }
-
-    .sec-hd { margin-bottom: var(--s-16); }
-
-    /* ============================================================
-       NAVIGATION
-    ============================================================ */
-    .nav {
-      position: fixed;
-      inset: 0 0 auto;
-      z-index: 100;
-      padding: var(--s-4) 0;
-      transition: background var(--base) var(--ease), border-color var(--base) var(--ease);
-    }
-
-    .nav.scrolled {
-      background: var(--glass);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--glass-border);
-    }
-
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-logo {
-      font-family: var(--font-mono);
-      font-size: var(--t-sm);
-      font-weight: 500;
-      color: var(--tx-1);
-      letter-spacing: -.01em;
-    }
-
-    .nav-logo span { color: var(--tx-3); }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: var(--s-8);
-    }
-
-    .nav-links a {
-      font-size: var(--t-sm);
-      color: var(--tx-2);
-      letter-spacing: .01em;
-      transition: color var(--fast) var(--ease);
-    }
-
-    .nav-links a:hover { color: var(--tx-1); }
-
-    /* Theme toggle */
-    .tog {
-      width: 38px;
-      height: 22px;
-      border-radius: 11px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      position: relative;
-      transition: background var(--base) var(--ease);
-      flex-shrink: 0;
-    }
-
-    .tog-thumb {
-      position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: var(--tx-2);
-      transition: transform var(--base) var(--ease), background var(--base) var(--ease);
-    }
-
-    [data-theme="light"] .tog-thumb {
-      transform: translateX(16px);
-      background: var(--accent);
-    }
-
-    /* ============================================================
-       BUTTONS
-    ============================================================ */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--s-2);
-      font-size: var(--t-sm);
-      font-weight: 500;
-      padding: 10px 20px;
-      border-radius: var(--r);
-      letter-spacing: .01em;
-      transition: opacity var(--fast) var(--ease),
-                  transform var(--fast) var(--ease),
-                  border-color var(--fast) var(--ease),
-                  color var(--fast) var(--ease),
-                  background var(--fast) var(--ease);
-    }
-
-    .btn svg { width: 15px; height: 15px; flex-shrink: 0; }
-
-    .btn-solid {
-      background: var(--tx-1);
-      color: var(--bg);
-    }
-
-    .btn-solid:hover { opacity: .84; transform: translateY(-1px); }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--tx-2);
-      border: 1px solid var(--border);
-    }
-
-    .btn-ghost:hover {
-      border-color: var(--tx-3);
-      color: var(--tx-1);
-      transform: translateY(-1px);
-    }
-
-    /* ============================================================
-       HERO
-    ============================================================ */
-    #hero {
-      min-height: 100svh;
-      display: flex;
-      align-items: center;
-      padding-top: 96px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-eye {
-      font-family: var(--font-mono);
-      font-size: var(--t-xs);
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--tx-3);
-      margin-bottom: var(--s-6);
-      animation: rise .9s var(--ease) .05s both;
-    }
-
-    .hero-h1 {
-      font-size: clamp(var(--t-4xl), 5.5vw, var(--t-6xl));
-      font-weight: 600;
-      letter-spacing: -.035em;
-      line-height: 1.03;
-      color: var(--tx-1);
-      margin-bottom: var(--s-6);
-      max-width: 840px;
-      animation: rise .9s var(--ease) .15s both;
-    }
-
-    .hero-h1 em {
-      font-style: normal;
-      color: var(--tx-2);
-    }
-
-    .hero-lead {
-      font-size: var(--t-xl);
-      color: var(--tx-2);
-      line-height: 1.75;
-      max-width: 540px;
-      font-weight: 300;
-      margin-bottom: var(--s-10);
-      animation: rise .9s var(--ease) .28s both;
-    }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--s-2);
-      margin-bottom: var(--s-10);
-      animation: rise .9s var(--ease) .40s both;
-    }
-
-    .chip {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--tx-3);
-      border: 1px solid var(--border);
-      padding: 3px 10px;
-      border-radius: var(--r-sm);
-      letter-spacing: .04em;
-      background: var(--surface);
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: var(--s-4);
-      flex-wrap: wrap;
-      animation: rise .9s var(--ease) .52s both;
-    }
-
-    /* Decorative grid */
-    .hero-deco {
-      position: absolute;
-      right: -60px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 480px;
-      height: 480px;
-      color: var(--tx-1);
-      opacity: .028;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    /* ============================================================
-       ABOUT
-    ============================================================ */
-    #about { background: var(--bg-raised); }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.6fr;
-      gap: var(--s-24);
-      align-items: start;
-    }
-
-    .about-sticky { position: sticky; top: 96px; }
-
-    .cards-col {
-      display: flex;
-      flex-direction: column;
-      gap: var(--s-4);
-    }
-
-    .phi-card {
-      padding: var(--s-5) var(--s-6);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      transition: border-color var(--base) var(--ease),
-                  transform var(--base) var(--ease),
-                  box-shadow var(--base) var(--ease);
-    }
-
-    .phi-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: var(--sh);
-    }
-
-    .phi-num {
-      font-family: var(--font-mono);
-      font-size: var(--t-xs);
-      color: var(--tx-3);
-      letter-spacing: .1em;
-      margin-bottom: var(--s-2);
-    }
-
-    .phi-h {
-      font-size: var(--t-base);
-      font-weight: 600;
-      color: var(--tx-1);
-      margin-bottom: var(--s-2);
-    }
-
-    .phi-p {
-      font-size: var(--t-sm);
-      color: var(--tx-2);
-      line-height: 1.7;
-    }
-
-    .bio {
-      font-size: var(--t-lg);
-      color: var(--tx-2);
-      line-height: 1.8;
-      font-weight: 300;
-    }
-
-    .bio p + p { margin-top: var(--s-5); }
-
-    .bio strong {
-      color: var(--tx-1);
-      font-weight: 500;
-    }
-
-    /* ============================================================
-       DEEP DIVES
-    ============================================================ */
-    .dives-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-      gap: var(--s-4);
-    }
-
-    .dc {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      overflow: hidden;
-      transition: border-color var(--base) var(--ease),
-                  transform var(--base) var(--ease),
-                  box-shadow var(--base) var(--ease);
-      cursor: pointer;
-    }
-
-    .dc:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--sh); }
-
-    .dc.open { grid-column: 1 / -1; cursor: default; border-color: var(--accent); }
-
-    .dc-top {
-      padding: var(--s-6);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: var(--s-4);
-    }
-
-    .dc-cat {
-      font-family: var(--font-mono);
-      font-size: var(--t-xs);
-      color: var(--tx-3);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      margin-bottom: var(--s-2);
-    }
-
-    .dc-title {
-      font-size: var(--t-xl);
-      font-weight: 600;
-      letter-spacing: -.02em;
-      line-height: 1.3;
-      color: var(--tx-1);
-      margin-bottom: var(--s-2);
-    }
-
-    .dc-blurb {
-      font-size: var(--t-sm);
-      color: var(--tx-2);
-      line-height: 1.65;
-    }
-
-    .dc-plus {
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      color: var(--tx-3);
-      flex-shrink: 0;
-      transition: all var(--base) var(--ease);
-    }
-
-    .dc:hover .dc-plus { border-color: var(--accent); color: var(--accent); }
-
-    .dc.open .dc-plus { transform: rotate(45deg); }
-
-    .dc-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--s-2);
-      padding: 0 var(--s-6) var(--s-6);
-    }
-
-    /* Expanded body */
-    .dc-body {
-      display: none;
-      border-top: 1px solid var(--border);
-    }
-
-    .dc.open .dc-body { display: block; }
-
-    .dc-body-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--s-8);
-      padding: var(--s-6);
-    }
-
-    .dc-sect h4 {
-      font-family: var(--font-mono);
-      font-size: var(--t-xs);
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--tx-3);
-      margin-bottom: var(--s-4);
-    }
-
-    .dc-sect p,
-    .dc-sect li {
-      font-size: var(--t-sm);
-      color: var(--tx-2);
-      line-height: 1.7;
-    }
-
-    .dc-sect ul li {
-      display: flex;
-      gap: var(--s-2);
-      padding: var(--s-2) 0;
-      border-bottom: 1px solid var(--border-sub);
-    }
-
-    .dc-sect ul li::before {
-      content: '→';
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--tx-3);
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .mrow {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: var(--s-2) 0;
-      border-bottom: 1px solid var(--border-sub);
-    }
-
-    .mrow-l { font-size: var(--t-sm); color: var(--tx-2); }
-
-    .mrow-v {
-      font-family: var(--font-mono);
-      font-size: var(--t-sm);
-      color: var(--tx-1);
-      font-weight: 500;
-    }
-
-    /* ============================================================
-       KNOWLEDGE WALL
-    ============================================================ */
-    #knowledge { background: var(--bg-raised); }
-
-    .know-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: var(--s-4);
-    }
-
-    .kg {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      padding: var(--s-5);
-      transition: border-color var(--base) var(--ease);
-    }
-
-    .kg:hover { border-color: var(--accent); }
-
-    .kg-title {
-      font-family: var(--font-mono);
-      font-size: var(--t-xs);
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--tx-3);
-      margin-bottom: var(--s-4);
-      padding-bottom: var(--s-3);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .ki {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: var(--s-2) 0;
-    }
-
-    .ki-n { font-size: var(--t-sm); color: var(--tx-2); }
-
-    .ki-d {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--tx-4);
-      letter-spacing: .06em;
-    }
-
-    /* ============================================================
-       WRITING
-    ============================================================ */
-    .posts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: var(--s-4);
-    }
-
-    .post {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      padding: var(--s-6);
-      cursor: pointer;
-      transition: border-color var(--base) var(--ease),
-                  transform var(--base) var(--ease),
-                  box-shadow var(--base) var(--ease);
-    }
-
-    .post:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--sh); }
-
-    .post-date {
-      font-family: var(--font-mono);
-      font-size: var(--t-xs);
-      color: var(--tx-4);
-      margin-bottom: var(--s-3);
-      letter-spacing: .06em;
-    }
-
-    .post-title {
-      font-size: var(--t-lg);
-      font-weight: 600;
-      letter-spacing: -.02em;
-      line-height: 1.3;
-      color: var(--tx-1);
-      margin-bottom: var(--s-3);
-    }
-
-    .post-snip {
-      font-size: var(--t-sm);
-      color: var(--tx-2);
-      line-height: 1.7;
-      margin-bottom: var(--s-5);
-    }
-
-    .chips { display: flex; flex-wrap: wrap; gap: var(--s-2); }
-
-    /* ============================================================
-       FOCUS
-    ============================================================ */
-    #focus { background: var(--bg-raised); }
-
-    .focus-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--s-16);
-      align-items: start;
-    }
-
-    .focus-list {
-      display: flex;
-      flex-direction: column;
-      gap: var(--s-3);
-    }
-
-    .fi {
-      display: flex;
-      align-items: flex-start;
-      gap: var(--s-4);
-      padding: var(--s-4) var(--s-5);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      transition: border-color var(--base) var(--ease),
-                  background var(--base) var(--ease);
-    }
-
-    .fi:hover { border-color: var(--accent); background: var(--surface-hover); }
-
-    .fi-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      flex-shrink: 0;
-      margin-top: 5px;
-    }
-
-    .fi-txt { font-size: var(--t-sm); color: var(--tx-2); line-height: 1.6; }
-
-    .fi-txt strong { color: var(--tx-1); font-weight: 500; }
-
-    .focus-prose {
-      font-size: var(--t-base);
-      color: var(--tx-2);
-      line-height: 1.8;
-      font-weight: 300;
-    }
-
-    .focus-prose p + p { margin-top: var(--s-4); }
-
-    .focus-prose strong { color: var(--tx-1); font-weight: 500; }
-
-    /* ============================================================
-       RESUME
-    ============================================================ */
-    .resume-center {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: var(--s-10);
-    }
-
-    .resume-card {
-      width: 100%;
-      max-width: 520px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: var(--s-10);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: var(--s-5);
-    }
-
-    .resume-icon {
-      width: 52px;
-      height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--surface-2);
-      border-radius: var(--r);
-      color: var(--tx-2);
-    }
-
-    .resume-name {
-      font-size: var(--t-2xl);
-      font-weight: 600;
-      letter-spacing: -.02em;
-      color: var(--tx-1);
-    }
-
-    .resume-role {
-      font-size: var(--t-sm);
-      color: var(--tx-2);
-      line-height: 1.6;
-    }
-
-    .resume-btns { display: flex; gap: var(--s-3); flex-wrap: wrap; justify-content: center; }
-
-    /* ============================================================
-       FOOTER
-    ============================================================ */
-    footer {
-      padding: var(--s-12) 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: var(--s-6);
-    }
-
-    .footer-id {
-      display: flex;
-      flex-direction: column;
-      gap: var(--s-1);
-    }
-
-    .footer-name {
-      font-family: var(--font-mono);
-      font-size: var(--t-sm);
-      color: var(--tx-1);
-      font-weight: 500;
-    }
-
-    .footer-copy { font-size: var(--t-xs); color: var(--tx-4); }
-
-    .footer-links { display: flex; gap: var(--s-6); }
-
-    .footer-links a {
-      font-size: var(--t-sm);
-      color: var(--tx-3);
-      transition: color var(--fast) var(--ease);
-    }
-
-    .footer-links a:hover { color: var(--tx-1); }
-
-    /* ============================================================
-       SCROLL REVEAL
-    ============================================================ */
-    .r {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 580ms var(--ease), transform 580ms var(--ease);
-    }
-
-    .r.on { opacity: 1; transform: translateY(0); }
-
-    .r.d1 { transition-delay: 80ms; }
-    .r.d2 { transition-delay: 160ms; }
-    .r.d3 { transition-delay: 240ms; }
-    .r.d4 { transition-delay: 320ms; }
-
-    /* ============================================================
-       HERO ENTRANCE
-    ============================================================ */
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(22px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ============================================================
-       RESPONSIVE
-    ============================================================ */
-    @media (max-width: 800px) {
-      section { padding: var(--s-20) 0; }
-      .wrap { padding: 0 var(--s-5); }
-      .about-grid { grid-template-columns: 1fr; gap: var(--s-12); }
-      .about-sticky { position: static; }
-      .focus-grid { grid-template-columns: 1fr; gap: var(--s-10); }
-      .nav-links { display: none; }
-      .dc-body-inner { grid-template-columns: 1fr; }
-      .footer-inner { flex-direction: column; align-items: flex-start; }
-      .sec-title { font-size: var(--t-2xl); }
-    }
-
-    @media (max-width: 480px) {
-      .hero-cta { flex-direction: column; }
-      .btn { width: 100%; justify-content: center; }
-      .resume-btns { flex-direction: column; width: 100%; }
-      .resume-btns .btn { width: 100%; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vrushank Patel - Senior Software Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --border-color: #d1d5db;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --heading-color: #000000;
+            --subtitle-color: #000000;
+            --date-color: #000000;
+            --link-color: #2b6cb0;
+            --section-border: #d1d5db;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            max-width: 950px;
+            margin: 15px auto;
+            padding: 20px;
+            color: var(--text-color);
+            line-height: 1.4;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px var(--shadow-color);
+            text-align: justify;
+            background-color: var(--bg-color);
+            transition: all 0.3s ease;
+        }
+
+        .download-button {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--bg-color);
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            transition: all 0.3s ease;
+            top: 15px;
+            right: 15px;
+        }
+
+        .download-button:hover {
+            transform: scale(1.1);
+        }
+
+        .download-button i {
+            font-size: 18px;
+            color: var(--text-color);
+        }
+
+        /* Print-specific styles */
+        @media print {
+
+            .download-button {
+                display: none !important;
+            }
+
+            body {
+                margin: 30 !important;
+                padding: 15px 15px !important;
+                max-width: 95% !important;
+                border: none !important;
+                box-shadow: none !important;
+                font-size: 12px !important;
+                line-height: 1.4 !important;
+                color: #000 !important;
+                /* Force black text */
+                background-color: #fff !important;
+                /* Force white background */
+            }
+
+            /* Force all text elements to use black color regardless of theme */
+            h1,
+            h2,
+            h3,
+            p,
+            li,
+            div,
+            span,
+            .subtitle,
+            .company-name,
+            .date-location,
+            .position,
+            .skill-title,
+            .skill-category,
+            .section-title {
+                color: #000 !important;
+            }
+
+            .date-location {
+                font-weight: 700 !important;
+            }
+
+            /* Force all backgrounds to be white */
+            div,
+            section,
+            header,
+            footer {
+                background-color: #fff !important;
+            }
+
+            /* Ensure borders are visible */
+            .section-title {
+                border-bottom: 1px solid #000 !important;
+            }
+
+            @page {
+                margin: 0cm;
+                size: 185mm 287mm;
+            }
+
+            h1 {
+                font-size: 25px !important;
+
+            }
+
+            .subtitle {
+                margin-bottom: 2px !important;
+                font-size: 17px !important;
+            }
+
+            .contact-info {
+                font-size: 15px !important;
+                margin-bottom: 5px !important;
+            }
+
+            .section-title {
+                font-size: 14px !important;
+                margin-bottom: 4px !important;
+                padding-bottom: 2px !important;
+            }
+
+            .experience-item,
+            .skill-category {
+                margin-bottom: 0px !important;
+            }
+
+            .company-header {
+                margin-bottom: 0px !important;
+            }
+
+            .company-name {
+                font-size: 14px !important;
+            }
+
+            .date-location {
+                font-size: 13px !important;
+            }
+
+            .position {
+                margin-bottom: 0px !important;
+                font-size: 14px !important;
+            }
+
+            ul {
+                margin-bottom: 3px !important;
+                padding-left: 15px !important;
+            }
+
+            li {
+                margin-bottom: 1px !important;
+                font-size: 13.5px !important;
+                line-height: 1.2 !important;
+            }
+
+            .header {
+                margin-bottom: 4px !important;
+            }
+
+            .section {
+                margin-bottom: 4px !important;
+            }
+
+            .skills-grid {
+                display: block !important;
+            }
+
+            .skill-category {
+                font-size: 13px !important;
+                margin-bottom: 3px !important;
+                display: flex !important;
+            }
+
+            .skill-title {
+                margin-right: 5px !important;
+                min-width: 180px !important;
+                font-size: 13px !important;
+            }
+
+            .projects a {
+                font-size: 12px !important;
+                margin-right: 7px !important;
+            }
+        }
+
+        .header {
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 3px;
+            color: var(--heading-color);
+        }
+
+        .subtitle {
+            font-style: italic;
+            color: var(--subtitle-color);
+            margin-bottom: 5px;
+        }
+
+        .contact-info {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .contact-info a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--section-border);
+            padding-bottom: 3px;
+            margin-bottom: 8px;
+        }
+
+        .experience-item {
+            margin-bottom: 10px;
+        }
+
+        .company-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .company-name {
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 14px;
+        }
+
+        .date-location {
+            color: var(--date-color);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .position {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        ul {
+            padding-left: 16px;
+            margin-bottom: 5px;
+        }
+
+        li {
+            margin-bottom: 2px;
+            font-size: 13.5px;
+            text-align: justify;
+        }
+
+        .skills-grid {
+            display: block;
+        }
+
+        .skill-category {
+            margin-bottom: 8px;
+            font-size: 13px;
+            display: flex;
+        }
+
+        .skill-title {
+            font-weight: 500;
+            margin-right: 5px;
+            min-width: 180px;
+        }
+
+        .projects a {
+            color: var(--link-color);
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .projects a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
+
 <body>
-
-  <!-- =========================================================
-       NAVIGATION
-  ========================================================= -->
-  <nav class="nav" id="nav" role="navigation" aria-label="Primary">
-    <div class="wrap">
-      <div class="nav-inner">
-        <a href="#hero" class="nav-logo">Vrushank<span>.Patel</span></a>
-
-        <ul class="nav-links" role="list">
-          <li><a href="#about">About</a></li>
-          <li><a href="#deep-dives">Architecture</a></li>
-          <li><a href="#knowledge">Systems</a></li>
-          <li><a href="#writing">Writing</a></li>
-          <li><a href="#focus">Focus</a></li>
-          <li><a href="#resume">Resume</a></li>
-        </ul>
-
-        <button class="tog" id="themeBtn" aria-label="Toggle theme" title="Toggle light / dark">
-          <div class="tog-thumb"></div>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <!-- =========================================================
-       SECTION 1 — HERO
-  ========================================================= -->
-  <section id="hero" aria-labelledby="hero-h1">
-    <div class="wrap">
-      <p class="hero-eye">Backend &amp; Distributed Systems Engineer</p>
-
-      <h1 class="hero-h1" id="hero-h1">
-        Engineering reliable,<br>
-        <em>high-performance</em><br>
-        distributed systems.
-      </h1>
-
-      <p class="hero-lead">
-        Capital markets infrastructure. JVM internals. Fault-tolerant architecture at scale.
-        Obsessed with correctness, sub-millisecond latency, and operational simplicity.
-      </p>
-
-      <div class="hero-tags">
-        <span class="chip">Backend Systems</span>
-        <span class="chip">Distributed Systems</span>
-        <span class="chip">JVM</span>
-        <span class="chip">Kubernetes</span>
-        <span class="chip">Reliability Engineering</span>
-        <span class="chip">Trading Infrastructure</span>
-        <span class="chip">Kafka</span>
-        <span class="chip">Low Latency</span>
-      </div>
-
-      <div class="hero-cta">
-        <a href="#resume" class="btn btn-solid">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          Resume
-        </a>
-        <a href="https://github.com/VrushankPatel" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.775.003 1.555.105 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
-          GitHub
-        </a>
-        <a href="https://linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          LinkedIn
-        </a>
-      </div>
-    </div>
-
-    <svg class="hero-deco" viewBox="0 0 480 480" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs>
-        <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse">
-          <path d="M40 0L0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.8"/>
-        </pattern>
-      </defs>
-      <rect width="480" height="480" fill="url(#g)"/>
-    </svg>
-  </section>
-
-  <div class="sep"></div>
-
-  <!-- =========================================================
-       SECTION 2 — ABOUT
-  ========================================================= -->
-  <section id="about" aria-labelledby="about-h2">
-    <div class="wrap">
-      <div class="about-grid">
-
-        <div class="about-sticky">
-          <div class="sec-hd">
-            <p class="eyebrow">About</p>
-            <h2 class="sec-title" id="about-h2">Engineering<br>Philosophy</h2>
-          </div>
-
-          <div class="cards-col">
-            <div class="phi-card r">
-              <p class="phi-num">01 / SYSTEMS</p>
-              <h3 class="phi-h">Systems Thinking First</h3>
-              <p class="phi-p">Every design decision begins with understanding the full system boundary. Complexity is the enemy of reliability, and clever architecture is debt that compounds.</p>
-            </div>
-            <div class="phi-card r d1">
-              <p class="phi-num">02 / OBSERVABILITY</p>
-              <h3 class="phi-h">Build for Failure</h3>
-              <p class="phi-p">Assume every dependency will fail. Design for graceful degradation. Invest in observability before you need it, not after an outage.</p>
-            </div>
-            <div class="phi-card r d2">
-              <p class="phi-num">03 / PERFORMANCE</p>
-              <h3 class="phi-h">Latency is a Feature</h3>
-              <p class="phi-p">In capital markets, p99 latency is a product requirement. Profiling, GC tuning, and lock-free data structures are first-class engineering concerns.</p>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="sec-hd">
-            <p class="eyebrow">Background</p>
-            <h2 class="sec-title" id="background-h2">Senior Engineer,<br>Capital Markets</h2>
-          </div>
-
-          <div class="bio r">
-            <p>
-              I design and operate <strong>distributed backend systems</strong> for capital markets infrastructure.
-              My work lives at the intersection of correctness guarantees, microsecond-level performance, and operational reliability under real production load.
-            </p>
-            <p>
-              My engineering philosophy is shaped by a deep respect for <strong>operational simplicity</strong>.
-              A system that is easy to reason about, debug, and operate at 3 AM is more valuable than one that is architecturally clever but operationally opaque.
-            </p>
-            <p>
-              I think in terms of <strong>failure modes, queuing theory, and consensus semantics</strong>.
-              I optimize for long-term maintainability over short-term cleverness.
-              Years of studying how distributed systems fail in production, not just how they work on whiteboards, have shaped every architectural decision I make.
-            </p>
-            <p>
-              Outside of engineering, I am drawn to <strong>systems design in the broadest sense</strong>: how markets clear, how incentives shape behavior, and how large-scale coordination problems are solved across domains.
-              These mental models cross-pollinate directly into better software architecture.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <div class="sep"></div>
-
-  <!-- =========================================================
-       SECTION 3 — ARCHITECTURE DEEP DIVES
-  ========================================================= -->
-  <section id="deep-dives" aria-labelledby="dives-h2">
-    <div class="wrap">
-      <div class="sec-hd r">
-        <p class="eyebrow">Architecture</p>
-        <h2 class="sec-title" id="dives-h2">Engineering Deep Dives</h2>
-        <p class="sec-sub">Case studies from real system design decisions. Tap any card to expand the full analysis.</p>
-      </div>
-
-      <div class="dives-grid" id="divesGrid">
-
-        <!-- CARD 1 -->
-        <article class="dc r" role="button" tabindex="0" aria-expanded="false">
-          <div class="dc-top">
-            <div>
-              <p class="dc-cat">Latency Engineering</p>
-              <h3 class="dc-title">Low Latency Order Routing</h3>
-              <p class="dc-blurb">Sub-100µs order routing for equity trading: from kernel bypass to JVM heap elimination on the critical path.</p>
-            </div>
-            <div class="dc-plus" aria-hidden="true">
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="2"><line x1="5.5" y1="0" x2="5.5" y2="11"/><line x1="0" y1="5.5" x2="11" y2="5.5"/></svg>
-            </div>
-          </div>
-          <div class="dc-chips chips">
-            <span class="chip">DPDK</span><span class="chip">ZGC</span><span class="chip">Lock-Free Queues</span><span class="chip">CPU Affinity</span>
-          </div>
-          <div class="dc-body" aria-hidden="true">
-            <div class="dc-body-inner">
-              <div class="dc-sect">
-                <h4>Problem</h4>
-                <p>A market-making desk required order-to-wire latency under 100µs at p99. The existing stack used standard Linux networking and JVM heap patterns causing multi-millisecond GC pauses under load.</p>
-              </div>
-              <div class="dc-sect">
-                <h4>Key Metrics</h4>
-                <div class="mrow"><span class="mrow-l">p50 latency (before)</span><span class="mrow-v">340µs</span></div>
-                <div class="mrow"><span class="mrow-l">p50 latency (after)</span><span class="mrow-v">48µs</span></div>
-                <div class="mrow"><span class="mrow-l">p99 latency (after)</span><span class="mrow-v">91µs</span></div>
-                <div class="mrow"><span class="mrow-l">GC pause reduction</span><span class="mrow-v">99.7%</span></div>
-              </div>
-              <div class="dc-sect">
-                <h4>Approach</h4>
-                <ul>
-                  <li>Migrated from standard sockets to DPDK-based kernel bypass for NIC-to-application path</li>
-                  <li>Adopted object pooling and off-heap memory to eliminate GC pressure on hot paths</li>
-                  <li>Replaced ConcurrentHashMap with a lock-free open-addressing table</li>
-                  <li>Pinned threads to isolated cores with NUMA-aware allocation</li>
-                  <li>Tuned ZGC with compact pause targets for a 16 GB capital markets heap</li>
-                </ul>
-              </div>
-              <div class="dc-sect">
-                <h4>Tradeoffs</h4>
-                <ul>
-                  <li>DPDK requires dedicated NIC hardware and significantly raises operator expertise bar</li>
-                  <li>Off-heap memory management reintroduces manual lifecycle complexity</li>
-                  <li>Thread pinning reduces throughput headroom for burst capacity</li>
-                  <li>Lock-free structures are harder to reason about during incident debugging</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- CARD 2 -->
-        <article class="dc r d1" role="button" tabindex="0" aria-expanded="false">
-          <div class="dc-top">
-            <div>
-              <p class="dc-cat">JVM Internals</p>
-              <h3 class="dc-title">JVM Memory &amp; GC Optimization</h3>
-              <p class="dc-blurb">Eliminating stop-the-world pauses in a latency-sensitive trading application via heap archaeology and GC log analysis.</p>
-            </div>
-            <div class="dc-plus" aria-hidden="true">
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="2"><line x1="5.5" y1="0" x2="5.5" y2="11"/><line x1="0" y1="5.5" x2="11" y2="5.5"/></svg>
-            </div>
-          </div>
-          <div class="dc-chips chips">
-            <span class="chip">ZGC</span><span class="chip">G1GC</span><span class="chip">async-profiler</span><span class="chip">Heap Analysis</span>
-          </div>
-          <div class="dc-body" aria-hidden="true">
-            <div class="dc-body-inner">
-              <div class="dc-sect">
-                <h4>Problem</h4>
-                <p>A risk calculation service was experiencing unpredictable 300ms GC pauses during peak market hours. The pauses caused downstream timeout cascades and missed SLA windows.</p>
-              </div>
-              <div class="dc-sect">
-                <h4>Key Metrics</h4>
-                <div class="mrow"><span class="mrow-l">Max GC pause (before)</span><span class="mrow-v">340ms</span></div>
-                <div class="mrow"><span class="mrow-l">Max GC pause (after)</span><span class="mrow-v">2.1ms</span></div>
-                <div class="mrow"><span class="mrow-l">Allocation rate reduction</span><span class="mrow-v">68%</span></div>
-                <div class="mrow"><span class="mrow-l">Heap size</span><span class="mrow-v">24 GB</span></div>
-              </div>
-              <div class="dc-sect">
-                <h4>Approach</h4>
-                <ul>
-                  <li>Used async-profiler in allocation mode to identify hot allocation sites</li>
-                  <li>Replaced short-lived churn with object pool patterns on critical paths</li>
-                  <li>Migrated from G1GC to ZGC; tuned concurrent GC threads and region sizes</li>
-                  <li>Fixed humongous object allocations causing premature old-gen promotion</li>
-                  <li>Reduced live set by 40% by fixing reference retention bugs via heap dump analysis</li>
-                </ul>
-              </div>
-              <div class="dc-sect">
-                <h4>Tradeoffs</h4>
-                <ul>
-                  <li>ZGC trades higher memory overhead for lower latency guarantees</li>
-                  <li>Object pooling increases code complexity and introduces reset-bug risk</li>
-                  <li>Aggressive GC tuning is JVM-version sensitive; revisit on every major upgrade</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- CARD 3 -->
-        <article class="dc r d2" role="button" tabindex="0" aria-expanded="false">
-          <div class="dc-top">
-            <div>
-              <p class="dc-cat">Kubernetes</p>
-              <h3 class="dc-title">Stateful Workloads on Kubernetes</h3>
-              <p class="dc-blurb">Running Kafka and stateful trading services on Kubernetes: storage class selection, graceful pod disruption, and broker identity preservation.</p>
-            </div>
-            <div class="dc-plus" aria-hidden="true">
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="2"><line x1="5.5" y1="0" x2="5.5" y2="11"/><line x1="0" y1="5.5" x2="11" y2="5.5"/></svg>
-            </div>
-          </div>
-          <div class="dc-chips chips">
-            <span class="chip">StatefulSets</span><span class="chip">PodDisruptionBudget</span><span class="chip">CSI</span><span class="chip">Kafka on K8s</span>
-          </div>
-          <div class="dc-body" aria-hidden="true">
-            <div class="dc-body-inner">
-              <div class="dc-sect">
-                <h4>Problem</h4>
-                <p>Running a Kafka cluster on Kubernetes while maintaining ordering guarantees, handling node drains gracefully, and preserving broker-to-partition affinity during rolling upgrades.</p>
-              </div>
-              <div class="dc-sect">
-                <h4>Key Metrics</h4>
-                <div class="mrow"><span class="mrow-l">Rolling upgrade downtime</span><span class="mrow-v">0 ms</span></div>
-                <div class="mrow"><span class="mrow-l">Storage IOPS (local NVMe)</span><span class="mrow-v">450K</span></div>
-                <div class="mrow"><span class="mrow-l">Post-restart rebalance</span><span class="mrow-v">&lt; 8 s</span></div>
-              </div>
-              <div class="dc-sect">
-                <h4>Approach</h4>
-                <ul>
-                  <li>StatefulSets with stable pod DNS for deterministic broker identity</li>
-                  <li>PodDisruptionBudgets enforcing max-unavailable during node drains</li>
-                  <li>Local NVMe via CSI driver over network storage for I/O latency SLOs</li>
-                  <li>pre-stop lifecycle hooks for graceful leader handoff before SIGTERM</li>
-                  <li>topologySpreadConstraints to avoid broker co-location on same failure domain</li>
-                </ul>
-              </div>
-              <div class="dc-sect">
-                <h4>Tradeoffs</h4>
-                <ul>
-                  <li>Local NVMe ties pods to specific nodes, complicating rescheduling</li>
-                  <li>StatefulSet rollouts are serial and significantly slower than Deployment rollouts</li>
-                  <li>PDB constraints can block cluster-autoscaler from draining nodes</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- CARD 4 -->
-        <article class="dc r" role="button" tabindex="0" aria-expanded="false">
-          <div class="dc-top">
-            <div>
-              <p class="dc-cat">Messaging Architecture</p>
-              <h3 class="dc-title">Message Queue Architecture at Scale</h3>
-              <p class="dc-blurb">Durable, ordered, multi-consumer event streaming for high-frequency market data distribution at 2M+ events per second.</p>
-            </div>
-            <div class="dc-plus" aria-hidden="true">
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="2"><line x1="5.5" y1="0" x2="5.5" y2="11"/><line x1="0" y1="5.5" x2="11" y2="5.5"/></svg>
-            </div>
-          </div>
-          <div class="dc-chips chips">
-            <span class="chip">Kafka</span><span class="chip">Consumer Groups</span><span class="chip">Compacted Topics</span><span class="chip">Exactly-Once</span>
-          </div>
-          <div class="dc-body" aria-hidden="true">
-            <div class="dc-body-inner">
-              <div class="dc-sect">
-                <h4>Problem</h4>
-                <p>Fan out 2M+ events/second to 40+ consumer groups with per-instrument ordering guarantees, at-least-once semantics with idempotent consumers, and sub-5ms end-to-end latency.</p>
-              </div>
-              <div class="dc-sect">
-                <h4>Key Metrics</h4>
-                <div class="mrow"><span class="mrow-l">Throughput</span><span class="mrow-v">2.4M msg/s</span></div>
-                <div class="mrow"><span class="mrow-l">p99 e2e latency</span><span class="mrow-v">3.8ms</span></div>
-                <div class="mrow"><span class="mrow-l">Consumer groups</span><span class="mrow-v">43</span></div>
-                <div class="mrow"><span class="mrow-l">Partition count</span><span class="mrow-v">480</span></div>
-              </div>
-              <div class="dc-sect">
-                <h4>Approach</h4>
-                <ul>
-                  <li>Partitioned by instrument ID for strict ordering within each instrument stream</li>
-                  <li>Compacted topics for latest-state snapshots alongside raw event topics</li>
-                  <li>9-broker cluster with rack-aware replication (RF=3, min.insync=2)</li>
-                  <li>Tuned linger.ms and batch.size for the throughput/latency tradeoff</li>
-                  <li>Consumer-side idempotency keys to tolerate duplicate delivery</li>
-                </ul>
-              </div>
-              <div class="dc-sect">
-                <h4>Tradeoffs</h4>
-                <ul>
-                  <li>Instrument-keyed partitioning creates hot partitions for high-volume tickers</li>
-                  <li>Large partition counts increase coordinator overhead and rebalance duration</li>
-                  <li>Kafka transactions (exactly-once) add ~15% latency overhead on producers</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- CARD 5 -->
-        <article class="dc r d1" role="button" tabindex="0" aria-expanded="false">
-          <div class="dc-top">
-            <div>
-              <p class="dc-cat">Distributed Systems</p>
-              <h3 class="dc-title">Distributed System Tradeoffs</h3>
-              <p class="dc-blurb">A practical framework for navigating consistency, availability, and partition tolerance in production systems — beyond the CAP theorem abstraction.</p>
-            </div>
-            <div class="dc-plus" aria-hidden="true">
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="2"><line x1="5.5" y1="0" x2="5.5" y2="11"/><line x1="0" y1="5.5" x2="11" y2="5.5"/></svg>
-            </div>
-          </div>
-          <div class="dc-chips chips">
-            <span class="chip">CAP / PACELC</span><span class="chip">Raft</span><span class="chip">Linearizability</span><span class="chip">HLC</span>
-          </div>
-          <div class="dc-body" aria-hidden="true">
-            <div class="dc-body-inner">
-              <div class="dc-sect">
-                <h4>Framework</h4>
-                <p>CAP is a useful mental model but insufficient for production decisions. PACELC provides better guidance: during partitions choose between Availability and Consistency; otherwise choose between Latency and Consistency. Most real systems decide based on data criticality, not theology.</p>
-              </div>
-              <div class="dc-sect">
-                <h4>Decision Matrix</h4>
-                <div class="mrow"><span class="mrow-l">Order state</span><span class="mrow-v">Linearizable</span></div>
-                <div class="mrow"><span class="mrow-l">Market data</span><span class="mrow-v">Eventual OK</span></div>
-                <div class="mrow"><span class="mrow-l">Risk limits</span><span class="mrow-v">Strong + Fence</span></div>
-                <div class="mrow"><span class="mrow-l">Audit logs</span><span class="mrow-v">Durable ordered</span></div>
-              </div>
-              <div class="dc-sect">
-                <h4>Key Insights</h4>
-                <ul>
-                  <li>Raft provides linearizable reads only when routing through the leader; followers are stale by design</li>
-                  <li>Fencing tokens on distributed locks prevent split-brain writes during network partitions</li>
-                  <li>Monotonic read guarantees are sufficient for most UI and reporting workloads</li>
-                  <li>Clock skew limits distributed timestamp ordering; prefer logical clocks or HLCs</li>
-                </ul>
-              </div>
-              <div class="dc-sect">
-                <h4>Common Failure Modes</h4>
-                <ul>
-                  <li>Assuming eventual consistency is safe for financial position calculations</li>
-                  <li>Using wall-clock time for ordering in distributed systems without NTP discipline</li>
-                  <li>Ignoring split-brain scenarios in active-active database setups</li>
-                  <li>Conflating idempotency with exactly-once delivery semantics</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- CARD 6 -->
-        <article class="dc r d2" role="button" tabindex="0" aria-expanded="false">
-          <div class="dc-top">
-            <div>
-              <p class="dc-cat">Reliability</p>
-              <h3 class="dc-title">Failure-Oriented Design</h3>
-              <p class="dc-blurb">Building systems where failure is a first-class design input. From chaos engineering to SLO-driven architecture decisions.</p>
-            </div>
-            <div class="dc-plus" aria-hidden="true">
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="2"><line x1="5.5" y1="0" x2="5.5" y2="11"/><line x1="0" y1="5.5" x2="11" y2="5.5"/></svg>
-            </div>
-          </div>
-          <div class="dc-chips chips">
-            <span class="chip">SLOs</span><span class="chip">Chaos Engineering</span><span class="chip">Circuit Breakers</span><span class="chip">Bulkheads</span>
-          </div>
-          <div class="dc-body" aria-hidden="true">
-            <div class="dc-body-inner">
-              <div class="dc-sect">
-                <h4>Philosophy</h4>
-                <p>Reliability is not a feature added at the end of a project. It is an emergent property of accumulated design decisions. Every component should have a documented failure mode, a defined blast radius, and a recovery mechanism that has been tested under realistic conditions.</p>
-              </div>
-              <div class="dc-sect">
-                <h4>SLO Architecture</h4>
-                <div class="mrow"><span class="mrow-l">Availability target</span><span class="mrow-v">99.95%</span></div>
-                <div class="mrow"><span class="mrow-l">Error budget / month</span><span class="mrow-v">21.9 min</span></div>
-                <div class="mrow"><span class="mrow-l">Latency SLO (p95)</span><span class="mrow-v">&lt; 200ms</span></div>
-                <div class="mrow"><span class="mrow-l">MTTR target</span><span class="mrow-v">&lt; 5 min</span></div>
-              </div>
-              <div class="dc-sect">
-                <h4>Techniques</h4>
-                <ul>
-                  <li>Circuit breakers with half-open probing to prevent thundering herd on recovery</li>
-                  <li>Bulkhead isolation per consumer to contain failure blast radius</li>
-                  <li>Timeout hierarchy: client timeout > server timeout > dependency timeout</li>
-                  <li>Backpressure signaling from downstream to upstream via reactive streams</li>
-                  <li>Chaos injection in staging: pod kills, network latency, disk failures</li>
-                </ul>
-              </div>
-              <div class="dc-sect">
-                <h4>Key Lessons</h4>
-                <ul>
-                  <li>Retry storms are often worse than the original failure they respond to</li>
-                  <li>The most dangerous failures are silent ones: data corruption, partial writes</li>
-                  <li>SLOs drive architectural decisions better than vague uptime aspirations</li>
-                  <li>Runbooks rot; prefer automation and self-healing over documentation</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <div class="sep"></div>
-
-  <!-- =========================================================
-       SECTION 4 — KNOWLEDGE WALL
-  ========================================================= -->
-  <section id="knowledge" aria-labelledby="know-h2">
-    <div class="wrap">
-      <div class="sec-hd r">
-        <p class="eyebrow">Systems Knowledge</p>
-        <h2 class="sec-title" id="know-h2">Deep Domain Study</h2>
-        <p class="sec-sub">Technologies studied to production depth, not tutorial depth.</p>
-      </div>
-
-      <div class="know-grid">
-
-        <div class="kg r">
-          <p class="kg-title">JVM Platform</p>
-          <div class="ki"><span class="ki-n">JVM Internals</span><span class="ki-d">deep</span></div>
-          <div class="ki"><span class="ki-n">GC Algorithms</span><span class="ki-d">deep</span></div>
-          <div class="ki"><span class="ki-n">JIT Compilation</span><span class="ki-d">solid</span></div>
-          <div class="ki"><span class="ki-n">async-profiler</span><span class="ki-d">solid</span></div>
-          <div class="ki"><span class="ki-n">Off-heap Memory</span><span class="ki-d">solid</span></div>
-        </div>
-
-        <div class="kg r d1">
-          <p class="kg-title">Distributed Systems</p>
-          <div class="ki"><span class="ki-n">Raft Consensus</span><span class="ki-d">deep</span></div>
-          <div class="ki"><span class="ki-n">CAP / PACELC</span><span class="ki-d">deep</span></div>
-          <div class="ki"><span class="ki-n">Vector Clocks</span><span class="ki-d">solid</span></div>
-          <div class="ki"><span class="ki-n">CRDT</span><span class="ki-d">solid</span></div>
-          <div class="ki"><span class="ki-n">Two-Phase Commit</span><span class="ki-d">solid</span></div>
-        </div>
-
-        <div class="kg r d2">
-          <p class="kg-title">Messaging &amp; Streaming</p>
-          <div class="ki"><span class="ki-n">Kafka Internals</span><span class="ki-d">deep</span></div>
-          <div class="ki"><span class="ki-n">Log Compaction</span><span class="ki-d">deep</span></div>
-          <div class="ki"><span class="ki-n">Consumer Group Protocol</span><span class="ki-d">solid</span></div>
-          <div class="ki"><span class="ki-n">Exactly-Once Semantics</span><span class="ki-d">solid</span></div>
-          <div class="ki"><span class="ki-n">Backpressure</span><span class="ki-d">solid</span></div>
-        </div>
-
-        <div class="kg r d3">
-          <p class="kg-title">Kubernetes</p>
-          <div class="ki"><span class="ki-n">Control Plane Internals</span><span class="ki-d">solid</span></div>
-          <div class="ki"><span class="ki-n">StatefulSets</span><span class="ki-d">deep</span></div>
-          <div class="ki"><span class="ki-n">CNI Plugins</span><span class="ki-d">solid</span></div>
-          <div class="ki"><span class="ki-n">Operator Pattern</span><span class="ki-d">solid</span></div>
-          <div class="ki"><span class="ki-n">Resource Management</span><span class="ki-d">deep</span></div>
-        </div>
-
-        <div class="kg r d1">
-          <p class="kg-title">Databases &amp; Storage</p>
-          <div class="ki"><span class="ki-n">B-Tree Internals</span><span class="ki-d">solid</span></div>
-          <div class="ki"><span class="ki-n">LSM-Tree / RocksDB</span><span class="ki-d">solid</span></div>
-          <div class="ki"><span class="ki-n">MVCC</span><span class="ki-d">solid</span></div>
-          <div class="ki"><span class="ki-n">Write-Ahead Logs</span><span class="ki-d">deep</span></div>
-          <div class="ki"><span class="ki-n">Time-Series DBs</span><span class="ki-d">solid</span></div>
-        </div>
-
-        <div class="kg r d2">
-          <p class="kg-title">Security &amp; Protocol</p>
-          <div class="ki"><span class="ki-n">TLS 1.3</span><span class="ki-d">solid</span></div>
-          <div class="ki"><span class="ki-n">mTLS</span><span class="ki-d">solid</span></div>
-          <div class="ki"><span class="ki-n">FIX Protocol</span><span class="ki-d">deep</span></div>
-          <div class="ki"><span class="ki-n">gRPC / Protobuf</span><span class="ki-d">solid</span></div>
-          <div class="ki"><span class="ki-n">PKIX / X.509</span><span class="ki-d">solid</span></div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <div class="sep"></div>
-
-  <!-- =========================================================
-       SECTION 5 — TECHNICAL WRITING
-  ========================================================= -->
-  <section id="writing" aria-labelledby="writing-h2">
-    <div class="wrap">
-      <div class="sec-hd r">
-        <p class="eyebrow">Writing</p>
-        <h2 class="sec-title" id="writing-h2">Engineering Insights</h2>
-        <p class="sec-sub">Notes from the trenches. No tutorials. Just hard-won operational understanding.</p>
-      </div>
-
-      <div class="posts-grid">
-
-        <article class="post r">
-          <p class="post-date">2024 · 12</p>
-          <h3 class="post-title">Why Your Service Mesh is Slower Than You Think</h3>
-          <p class="post-snip">The hidden cost of sidecar proxy interception: iptables overhead, per-connection TLS setup time, and measuring the real latency tax of mTLS in high-throughput services.</p>
-          <div class="chips"><span class="chip">Networking</span><span class="chip">Latency</span></div>
-        </article>
-
-        <article class="post r d1">
-          <p class="post-date">2024 · 10</p>
-          <h3 class="post-title">The Backpressure Problem No One Talks About</h3>
-          <p class="post-snip">How reactive streams backpressure signals propagate through system boundaries, where they silently break, and what actually happens to your Kafka lag when a consumer falls behind.</p>
-          <div class="chips"><span class="chip">Kafka</span><span class="chip">Streaming</span></div>
-        </article>
-
-        <article class="post r d2">
-          <p class="post-date">2024 · 08</p>
-          <h3 class="post-title">Kubernetes StatefulSet Gotchas in Production</h3>
-          <p class="post-snip">Rolling upgrades on StatefulSets behave very differently from Deployments: ordered pod termination, PVC lifecycle edge cases, and the race conditions that bite you during node drains.</p>
-          <div class="chips"><span class="chip">Kubernetes</span><span class="chip">Reliability</span></div>
-        </article>
-
-        <article class="post r">
-          <p class="post-date">2024 · 06</p>
-          <h3 class="post-title">Raft Is Not Magic: What the Paper Does Not Explain</h3>
-          <p class="post-snip">Reading the Raft paper gives you the algorithm. Running it in production teaches you about leader lease expiry, snapshot transfer interruptions, and follower log divergence under write amplification.</p>
-          <div class="chips"><span class="chip">Consensus</span><span class="chip">Raft</span></div>
-        </article>
-
-        <article class="post r d1">
-          <p class="post-date">2024 · 03</p>
-          <h3 class="post-title">GC Tuning Is Not About the GC</h3>
-          <p class="post-snip">Most GC problems are allocation problems in disguise. Profiling methodology, identifying hot allocation sites with async-profiler, and the surprising places object churn hides in JVM applications.</p>
-          <div class="chips"><span class="chip">JVM</span><span class="chip">Performance</span></div>
-        </article>
-
-        <article class="post r d2">
-          <p class="post-date">2024 · 01</p>
-          <h3 class="post-title">The Real Cost of Exactly-Once in Kafka</h3>
-          <p class="post-snip">Kafka transactions guarantee exactly-once delivery, but at a price. Epoch management, producer fencing, and the latency implications of transactional producers in high-throughput systems.</p>
-          <div class="chips"><span class="chip">Kafka</span><span class="chip">Consistency</span></div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <div class="sep"></div>
-
-  <!-- =========================================================
-       SECTION 6 — CURRENT FOCUS
-  ========================================================= -->
-  <section id="focus" aria-labelledby="focus-h2">
-    <div class="wrap">
-      <div class="sec-hd r">
-        <p class="eyebrow">Current Focus</p>
-        <h2 class="sec-title" id="focus-h2">What I am Exploring</h2>
-      </div>
-
-      <div class="focus-grid">
-        <div class="focus-list">
-          <div class="fi r">
-            <div class="fi-dot"></div>
-            <p class="fi-txt"><strong>eBPF</strong> — Kernel observability and network policy enforcement without kernel modules or service mesh overhead</p>
-          </div>
-          <div class="fi r d1">
-            <div class="fi-dot"></div>
-            <p class="fi-txt"><strong>Linux Scheduler Internals</strong> — CFS, task groups, and the impact of NUMA topology on tail latency</p>
-          </div>
-          <div class="fi r d2">
-            <div class="fi-dot"></div>
-            <p class="fi-txt"><strong>JVM Vector API</strong> — SIMD intrinsics through Java's Panama project for numeric compute workloads</p>
-          </div>
-          <div class="fi r d3">
-            <div class="fi-dot"></div>
-            <p class="fi-txt"><strong>Kubernetes Gateway API</strong> — The next generation of traffic management beyond Ingress</p>
-          </div>
-          <div class="fi r">
-            <div class="fi-dot"></div>
-            <p class="fi-txt"><strong>Deterministic Simulation Testing</strong> — FoundationDB-style correctness verification for distributed systems</p>
-          </div>
-        </div>
-
-        <div class="focus-prose r">
-          <p>
-            My current learning is oriented toward the intersection of <strong>kernel-level observability</strong> and application-level performance. eBPF represents a fundamental shift in how we can instrument production systems without performance overhead or invasive code changes.
-          </p>
-          <p>
-            I am also deeply interested in <strong>deterministic simulation testing</strong>, a technique pioneered by FoundationDB where an entire distributed system is simulated deterministically, allowing bugs that would take months to surface in production to be reproduced in seconds.
-          </p>
-          <p>
-            These two directions represent the same underlying thesis: the future of reliability engineering is a shift from reactive observability toward <strong>proactive correctness verification</strong>.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="sep"></div>
-
-  <!-- =========================================================
-       SECTION 7 — RESUME
-  ========================================================= -->
-  <section id="resume" aria-labelledby="resume-h2">
-    <div class="wrap">
-      <div class="resume-center">
-        <div class="sec-hd r" style="text-align:center; max-width:none; width:100%;">
-          <p class="eyebrow" style="justify-content:center;">Resume</p>
-          <h2 class="sec-title" id="resume-h2">Work History</h2>
-        </div>
-
-        <div class="resume-card r">
-          <div class="resume-icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          </div>
-          <p class="resume-name">Vrushank Patel</p>
-          <p class="resume-role">Senior Backend &amp; Distributed Systems Engineer<br>Capital Markets Infrastructure</p>
-          <div class="resume-btns">
-            <a href="./Vrushank_Resume.pdf" class="btn btn-solid" download aria-label="Download Resume PDF">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Download PDF
-            </a>
-            <a href="https://linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">View LinkedIn</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================
-       FOOTER
-  ========================================================= -->
-  <footer role="contentinfo">
-    <div class="wrap">
-      <div class="footer-inner">
-        <div class="footer-id">
-          <span class="footer-name">Vrushank.Patel</span>
-          <span class="footer-copy">&copy; 2025. All rights reserved.</span>
-        </div>
-        <ul class="footer-links" role="list">
-          <li><a href="https://github.com/VrushankPatel" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-          <li><a href="https://linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-          <li><a href="mailto:Vrushank@example.com">Email</a></li>
-          <li><a href="#" download>Resume</a></li>
-        </ul>
-      </div>
-    </div>
-  </footer>
-
-  <!-- =========================================================
-       JAVASCRIPT
-  ========================================================= -->
-  <script>
-    /* ---- Theme ---- */
-    const root = document.documentElement;
-    const btn  = document.getElementById('themeBtn');
-
-    const systemTheme = () =>
-      window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-
-    const setTheme = (t) => {
-      root.setAttribute('data-theme', t);
-      localStorage.setItem('theme', t);
-    };
-
-    setTheme(localStorage.getItem('theme') || systemTheme());
-
-    btn.addEventListener('click', () => {
-      setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-    });
-
-    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
-      if (!localStorage.getItem('theme')) setTheme(e.matches ? 'light' : 'dark');
-    });
-
-    /* ---- Nav scroll state ---- */
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 48);
-    }, { passive: true });
-
-    /* ---- Scroll reveal ---- */
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
-
-    document.querySelectorAll('.r').forEach(el => io.observe(el));
-
-    /* ---- Deep dive expand / collapse ---- */
-    document.querySelectorAll('.dc').forEach(card => {
-      const body = card.querySelector('.dc-body');
-      const plus = card.querySelector('.dc-plus');
-
-      const open = () => {
-        card.classList.add('open');
-        card.setAttribute('aria-expanded', 'true');
-        body.setAttribute('aria-hidden', 'false');
-        // Scroll card into view after layout
-        requestAnimationFrame(() => {
-          setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 60);
+    <script src="data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const d = portfolioData;
+            
+            // Experience HTML
+            let expHtml = '';
+            d.experience.forEach(exp => {
+                let resHtml = exp.responsibilities.map(r => {
+                    if (Array.isArray(r)) {
+                        return `<ul style="margin-top: 2px; margin-bottom: 2px;">${r.map(subR => `<li>${subR}</li>`).join('')}</ul>`;
+                    }
+                    return `<li>${r}</li>`;
+                }).join('');
+                expHtml += `
+                    <div class="experience-item">
+                        <div class="company-header">
+                            <div class="company-name">${exp.company}</div>
+                            <div class="date-location">${exp.date} | ${exp.location}</div>
+                        </div>
+                        <div class="position">${exp.title}</div>
+                        <ul>${resHtml}</ul>
+                    </div>
+                `;
+            });
+
+            // Skills HTML
+            let skillsHtml = '';
+            d.skills.forEach(skill => {
+                skillsHtml += `
+                    <div class="skill-category">
+                        <div class="skill-title">${skill.category}:</div>
+                        ${skill.items.join(', ')}
+                    </div>
+                `;
+            });
+
+            // Education HTML
+            let eduHtml = '';
+            d.education.forEach(edu => {
+                eduHtml += `
+                    <div class="experience-item">
+                        <div class="company-header">
+                            <div class="company-name">${edu.institution}</div>
+                            <div class="date-location">${edu.date} | ${edu.location}</div>
+                        </div>
+                        <div>${edu.degree} (${edu.gpa})</div>
+                    </div>
+                `;
+            });
+
+            // Projects HTML
+            let projHtml = '';
+            d.projects.forEach(proj => {
+                if (proj.link && proj.link !== "#") {
+                    projHtml += `<a target="_blank" href="${proj.link}">${proj.name}</a>\n            `;
+                }
+            });
+
+            const content = `
+                <a href="Vrushank_Resume.pdf" class="download-button" id="download-button" download>
+                    <i class="fas fa-download"></i>
+                </a>
+                <div class="header">
+                    <h1>${d.profile.name}</h1>
+                    <div class="contact-info">
+                        ${d.contact.phone} | <a target="_blank" href="mailto:${d.contact.email}">${d.contact.email}</a> |
+                        <a target="_blank" href="${d.contact.github}">Github</a> |
+                        <a target="_blank" href="${d.contact.linkedin}">LinkedIn</a> |
+                        <a target="_blank" href="${d.contact.codersrank}">CodersRank</a> 
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Experience (${d.profile.metrics.experience})</div>
+                    ${expHtml}
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Skills</div>
+                    <div class="skills-grid">
+                        ${skillsHtml}
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Education</div>
+                    ${eduHtml}
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Projects</div>
+                    <div class="projects">
+                        ${projHtml}
+                    </div>
+                </div>
+            `;
+            
+            document.body.innerHTML = content;
         });
-      };
-
-      const close = () => {
-        card.classList.remove('open');
-        card.setAttribute('aria-expanded', 'false');
-        body.setAttribute('aria-hidden', 'true');
-      };
-
-      card.addEventListener('click', e => {
-        // If already open: only close when clicking the header area or plus button
-        if (card.classList.contains('open')) {
-          if (e.target.closest('.dc-body')) return; // allow interaction inside body
-          close();
-        } else {
-          // Close any other open card first
-          document.querySelectorAll('.dc.open').forEach(c => {
-            c.classList.remove('open');
-            c.setAttribute('aria-expanded', 'false');
-            c.querySelector('.dc-body').setAttribute('aria-hidden', 'true');
-          });
-          open();
-        }
-      });
-
-      // Keyboard support
-      card.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          card.click();
-        }
-      });
-    });
-
-    /* ---- Smooth scroll for anchor links ---- */
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (!target) return;
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    });
-  </script>
+    </script>
 </body>
+
 </html>
