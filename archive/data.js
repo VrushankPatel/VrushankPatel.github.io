@@ -79,6 +79,26 @@ const portfolioData = {
   ],
   projects: [
     {
+      name: "Godseye",
+      description: "Fullscreen interactive 3D OSINT geospatial dashboard.",
+      link: "https://vrushankpatel.github.io/godseye/"
+    },
+    {
+      name: "Relay",
+      description: "High-performance provider-agnostic LLM caching proxy.",
+      link: "https://vrushankpatel.github.io/relay/"
+    },
+    {
+      name: "Pulsaar",
+      description: "Production-safe read-only Kubernetes container file explorer.",
+      link: "https://vrushankpatel.github.io/pulsaar/"
+    },
+    {
+      name: "Maxine",
+      description: "Node.js service discovery registry and operational control plane.",
+      link: "https://vrushankpatel.github.io/Maxine/"
+    },
+    {
       name: "APEX",
       description: "Project documentation and details.",
       link: "https://apex-docs.readthedocs.io/"
@@ -92,11 +112,6 @@ const portfolioData = {
       name: "Marketron",
       description: "Marketron web application.",
       link: "https://marketron-x.web.app/"
-    },
-    {
-      name: "Maxine",
-      description: "Maxine project documentation.",
-      link: "https://maxine.readthedocs.io/"
     },
     {
       name: "Complexica",
