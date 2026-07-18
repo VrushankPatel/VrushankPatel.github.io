@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kubernetes StatefulSet Gotchas in Production — Engineering Insights</title>
+  <meta name="description" content="A production-focused analysis of Kubernetes StatefulSets. Understanding OrderedReady rollout blocks, PVC garbage collection races, and how node drains bypass ordinal guarantees.">
+  <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+  <!-- =========================================================
+       NAVIGATION
+       ========================================================= -->
+  <nav class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="../index.html" class="nav-logo">Vrushank.Patel<span>/blog</span></a>
+      <div class="nav-actions">
+        <a href="index.html" class="nav-link">All Posts</a>
+        <button class="tog" id="themeBtn" aria-label="Toggle theme" title="Toggle light / dark">
+          <div class="tog-thumb"></div>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =========================================================
+       ARTICLE CONTENT
+       ========================================================= -->
+  <article class="art-container">
+    <header class="art-header">
+      <div class="art-meta">
+        <span>2024 · 08</span>
+        <span>•</span>
+        <span>11 min read</span>
+      </div>
+      <h1 class="art-title">Kubernetes StatefulSet Gotchas in Production</h1>
+    </header>
+
+    <div class="art-body">
+      <p>A routine Kubernetes cluster upgrade was underway. The automation began cordoning and draining nodes sequentially. In the middle of the operation, a high availability, quorum based metadata service (such as ZooKeeper, etcd, or a Kafka controller quorum) lost consensus and went offline. The platform team was surprised. The service was deployed as a StatefulSet with three replicas, and a PodDisruptionBudget was active. Yet, the drain operation evicted two out of the three replicas simultaneously, violating the quorum requirements and stalling the entire database pipeline. The upgrade passed staging tests, but failed under production load.</p>
+
+      <p>This incident highlights a major trap in Kubernetes operations. StatefulSets look like Deployments with stable network names and persistent storage, making it tempting to treat them the same way. They are not. The guarantees of StatefulSets, such as ordered pod startup, sequential rollout, and persistent volume associations, are managed by the StatefulSet controller. However, cluster level operations like node drains and scheduling decisions are completely unaware of these ordinals. When these two layers interact, they create race conditions and failure modes that can take down your stateful workloads.</p>
+
+      <h2>Understanding OrderedReady Semantics and Rollout Blocks</h2>
+      
+      <p>The default behavior of a StatefulSet is governed by the <code>podManagementPolicy: OrderedReady</code> configuration. This policy enforces strict sequential execution during scaling and updates. During a rolling update, the controller updates pods in reverse ordinal order, from the highest ordinal down to zero. For a StatefulSet with three replicas (pod-0, pod-1, pod-2), the rollout progresses as follows:</p>
+
+      <ol>
+        <li>The controller terminates pod-2.</li>
+        <li>The controller schedules the replacement pod-2 with the new container image.</li>
+        <li>The controller waits for pod-2 to transition to the Running state and pass all active readiness probes.</li>
+        <li>Only after pod-2 is marked Ready does the controller proceed to terminate and update pod-1.</li>
+      </ol>
+
+      <p>This ordering is designed to preserve application availability. By waiting for the highest ordinal to become healthy before touching its predecessor, the controller ensures that the cluster maintains replication quorum. However, this policy introduces a significant risk. The official Kubernetes documentation explicitly warns that using Rolling Updates with the default OrderedReady policy can leave a StatefulSet in a broken state that requires manual intervention to repair, as updated in the StatefulSet concepts guide in 2026.</p>
+
+      <p>If a bug in the new container image or a database migration failure causes the replacement pod-2 to fail its readiness checks, the rollout stalls. Because pod-2 never becomes Ready, the StatefulSet controller will block indefinitely and will never attempt to update pod-1 or pod-0. If the service experiences a crash on pod-1 while the rollout is blocked, the application can lose quorum. The entire rollout is held hostage by a single failing pod, and SREs must manually rollback the image configuration or delete the blocked pod to restore reconciliation.</p>
+
+      <h2>The PVC Ownership Model and Garbage Collection</h2>
+      
+      <p>Another major difference between Deployments and StatefulSets is how they handle storage. Deployments typically share network attached storage or use ephemeral volumes. StatefulSets use the <code>volumeClaimTemplates</code> specification to dynamically provision a dedicated PersistentVolumeClaim (PVC) for each ordinal pod.</p>
+
+      <p>To prevent accidental data loss, Kubernetes separates the lifecycle of the pods from the lifecycle of their PVCs. When a StatefulSet pod is terminated or deleted, its associated PVC is not deleted. The PVC remains bound to the PersistentVolume (PV) in the cluster, ensuring that when the pod is rescheduled (whether due to a rollout or a node failure), it reconnects to the exact same storage volume, preserving the database state.</p>
+
+      <p>To manage this relationship, the StatefulSet controller writes owner references to the PVCs it creates. The garbage collector only deletes these PVCs after the owning pod has transitioned out of the active state. This sequencing is necessary to ensure the pod can cleanly unmount the volume before the storage backplane reclaims the underlying block device. If an SRE force deletes a stuck pod (using the <code>--force --grace-period=0</code> flags), this lifecycle sequence breaks. The scheduler may attempt to bind the replacement pod before the volume is detached from the old host, leading to volume attachment locks that keep the new pod stuck in <code>ContainerCreating</code> for hours.</p>
+
+      <h2>The Local PV Race Condition: Issue #128164</h2>
+      
+      <p>The risks of PVC garbage collection are magnified when using local PersistentVolumes. Unlike network attached storage (such as AWS EBS or Google Persistent Disk) which can be mounted on any node in a zone, a local PV is pinned to a specific physical host. This physical binding creates a scheduling race condition, which was documented in Kubernetes GitHub issue #128164, filed in October 2024.</p>
+
+      <p>The bug occurs when a pod and its associated PVC at a given ordinal are deleted at nearly the same time, a common occurrence during automated cluster scale downs or node decommissioning. Under the hood, the Kubernetes scheduler and the volume controller run as independent loops, relying on separate informers to track cluster state. Because the scheduler's pod informer often runs faster than its PVC informer, the scheduler can observe the replacement pod before it realizes that the associated PVC is in the process of being deleted. The sequence of events is detailed below:</p>
+
+      <div class="diagram">
+1. Pod-2 and PVC-2 are marked for deletion.
+2. The scheduler's pod informer detects the replacement Pod-2 first.
+3. The scheduler attempts to place the new Pod-2 on the node.
+4. Because PVC-2 is mid-deletion, the scheduler binds Pod-2 to a stale PV.
+5. Result: The new Pod-2 is stuck in a Pending state indefinitely:
+   "volume node affinity conflict" or "waiting for PVC to be bound"</div>
+
+      <p>This race condition specifically affects local PVs because they are bound to a single node's physical storage. The scheduler cannot choose an alternative node to resolve the conflict. The replacement pod remains stuck Pending until an administrator manually deletes the stale PV objects. As discussed in the GitHub issue, the primary mitigation is to prevent the scheduler from considering PVCs that are marked for deletion when scheduling new pods. A secondary fix is adding a PVC to pod owner reference so the scheduler can back off if the PVC is not owned by the pod being scheduled. However, as of late 2026, SRE teams operating local PVs must still watch for this race during node maintenance.</p>
+
+      <h2>How Node Drains Bypass Ordinal Guarantees</h2>
+      
+      <p>The most common cause of StatefulSet outages in production is the node drain operation. A node drain is a cluster level administrative task. It cordons a node to prevent new pods from being scheduled on it, and evicts all active pods currently running on that host.</p>
+
+      <p>Crucially, the node drain process does not know about StatefulSet ordinals. It operates on a per node basis. The eviction API issues delete requests for pods based on their physical placement across the cluster, not their logical dependency hierarchy. If you have a three replica StatefulSet (pod-0, pod-1, pod-2), and pod-0 and pod-1 happen to be scheduled on separate hosts that are drained around the same time, both pods will be evicted simultaneously.</p>
+
+      <p>This parallel eviction violates the sequential shutdown assumption built into stateful systems. For example, in a Kafka cluster, broker-0 expects broker-1 to be online when it shuts down so it can replicate its remaining in flight messages. If a node drain evicts both brokers together, the cluster loses availability, causing client write failures. The StatefulSet's OrderedReady configuration is powerless here because the evictions are triggered by the node manager, not the StatefulSet controller.</p>
+
+      <h2>The Local PV Node Lock</h2>
+      
+      <p>Using local PVs also complicates node drains. If a pod using network attached storage is evicted, the scheduler can run the replacement pod on any healthy node in the zone. Detaching and attaching the volume takes a few minutes, but the pod returns to service automatically.</p>
+
+      <p>If a pod using a local PV is evicted during a node drain, it is physically locked to that host. The local PV cannot be moved. Because the node is cordoned, the scheduler is forbidden from running the pod on that node, but it is also unable to run it anywhere else due to the PV node affinity. The pod gets stuck in a <code>Pending</code> state and remains offline until the physical node is uncordoned and returned to service. The application operates with degraded capacity throughout the maintenance window.</p>
+
+      <h2>StatefulSet vs. Deployment</h2>
+      
+      <p>The table below summarizes the operational differences between Deployments and StatefulSets, compiled from the Kubernetes API reference guide in 2026:</p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Feature Behavior</th>
+              <th>Deployment</th>
+              <th>StatefulSet</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Rollout Ordering</strong></td>
+              <td>Parallel. New replica set scales up while the old scales down. No ordinal constraints.</td>
+              <td>Strict sequential (highest to lowest ordinal). Each pod must pass readiness before the next begins.</td>
+              <td>Kubernetes Workloads Guide (2026)</td>
+            </tr>
+            <tr>
+              <td><strong>Scale-down Ordering</strong></td>
+              <td>Random or based on pod age and scheduling constraints.</td>
+              <td>Strict reverse ordinal (highest ordinal terminated first).</td>
+              <td>Kubernetes API Reference (2026)</td>
+            </tr>
+            <tr>
+              <td><strong>Storage Association</strong></td>
+              <td>Typically shared volumes or ephemeral storage. PVCs are shared across replicas.</td>
+              <td>1-to-1 persistent mapping via <code>volumeClaimTemplates</code>. PVCs persist after pod deletion.</td>
+              <td>StatefulSet Concepts Guide (2026)</td>
+            </tr>
+            <tr>
+              <td><strong>Node Drain Interaction</strong></td>
+              <td>Pods are evicted in parallel. Replicas are rescheduled instantly on other nodes.</td>
+              <td>Pods evicted in parallel based on host placement. Local PV pods get stuck Pending.</td>
+              <td>Node Eviction API Manual (2026)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>The Production Checklist</h2>
+      
+      <p>To run stateful workloads safely on Kubernetes, implement these configuration patterns:</p>
+
+      <h3>1. Configure a PodDisruptionBudget</h3>
+      <p>Never rely on StatefulSet ordinals to protect availability during node drains. You must define a <code>PodDisruptionBudget</code> (PDB) that explicitly declares the minimum number of healthy replicas required for your quorum. During a drain, the eviction controller will block any eviction that violates this budget:</p>
+
+      <pre><div class="code-header">yaml</div><code>apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: zookeeper-pdb
+  namespace: database-ns
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: zookeeper</code></pre>
+
+      <h3>2. Leverage Persistent Volume Retention Policies</h3>
+      <p>Ensure that your StatefulSet defines a clear retention policy for PVCs. This ensures that PVCs are cleaned up automatically when the StatefulSet is scaled down, preventing orphaned volumes and reducing the risk of informer races:</p>
+
+      <pre><div class="code-header">yaml</div><code>apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: datastore
+  namespace: database-ns
+spec:
+  serviceName: "datastore-service"
+  replicas: 3
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Retain
+    whenScaled: Delete
+  template:
+    metadata:
+      labels:
+        app: datastore
+    spec:
+      containers:
+      - name: datastore
+        image: datastore:v2.1
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/data
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 100Gi</code></pre>
+
+      <h3>3. Implement Application-Level Readiness Checks</h3>
+      <p>A pod is not "Ready" simply because the application process has started. The readiness probe must check the internal sync state of the database. If a database replica has not caught up with the write log, it must remain unready. This ensures that the OrderedReady controller wait times are actually load bearing and represent real synchronization:</p>
+
+      <pre><div class="code-header">yaml</div><code>readinessProbe:
+  exec:
+    command:
+    - /bin/sh
+    - -c
+    - "mysqladmin ping && [ $(mysql -e 'SHOW SLAVE STATUS\G' | grep 'Seconds_Behind_Master' | awk '{print $2}') -lt 10 ]"
+  initialDelaySeconds: 30
+  periodSeconds: 10</code></pre>
+
+      <h2>When to Avoid StatefulSets</h2>
+      
+      <p>StatefulSets are excellent for workloads that require stable names and ordinal properties, such as primary-replica database clusters or consensus engines. However, the ordering guarantees add operational complexity and increase the risk of blocked rollouts.</p>
+
+      <p>If your application can handle data replication internally and does not require fixed names, a Deployment configuration combined with a separate PVC strategy is often simpler. Modern cloud native databases like CockroachDB or Cassandra can run successfully under a Deployment model, allowing the scheduler to manage evictions and rollouts without the constraints of ordinal ordering.</p>
+    </div>
+  </article>
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <p>&copy; 2026 Vrushank Patel. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="../index.html" class="footer-link">Portfolio</a>
+        <a href="index.html" class="footer-link">Blog Home</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       JAVASCRIPT
+       ========================================================= -->
+  <script>
+    const root = document.documentElement;
+    const btn = document.getElementById('themeBtn');
+
+    const systemTheme = () =>
+      window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+
+    const setTheme = (t) => {
+      root.setAttribute('data-theme', t);
+      localStorage.setItem('theme', t);
+    };
+
+    setTheme(localStorage.getItem('theme') || systemTheme());
+
+    btn.addEventListener('click', () => {
+      setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
+      if (!localStorage.getItem('theme')) setTheme(e.matches ? 'light' : 'dark');
+    });
+  </script>
+</body>
+</html>

@@ -857,6 +857,8 @@
     }
 
     .post {
+      display: block;
+      text-decoration: none;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--r-lg);
@@ -2053,55 +2055,55 @@
 
       <div class="posts-grid">
 
-        <article class="post r">
+        <a href="blog/why-your-service-mesh-is-slower-than-you-think.html" class="post r">
           <p class="post-date">2024 · 12</p>
           <h3 class="post-title">Why Your Service Mesh is Slower Than You Think</h3>
           <p class="post-snip">The hidden cost of sidecar proxy interception: iptables overhead, per-connection TLS
             setup time, and measuring the real latency tax of mTLS in high-throughput services.</p>
           <div class="chips"><span class="chip">Networking</span><span class="chip">Latency</span></div>
-        </article>
+        </a>
 
-        <article class="post r d1">
+        <a href="blog/the-backpressure-problem-no-one-talks-about.html" class="post r d1">
           <p class="post-date">2024 · 10</p>
           <h3 class="post-title">The Backpressure Problem No One Talks About</h3>
           <p class="post-snip">How reactive streams backpressure signals propagate through system boundaries, where they
             silently break, and what actually happens to your Kafka lag when a consumer falls behind.</p>
           <div class="chips"><span class="chip">Kafka</span><span class="chip">Streaming</span></div>
-        </article>
+        </a>
 
-        <article class="post r d2">
+        <a href="blog/kubernetes-statefulset-gotchas-in-production.html" class="post r d2">
           <p class="post-date">2024 · 08</p>
           <h3 class="post-title">Kubernetes StatefulSet Gotchas in Production</h3>
           <p class="post-snip">Rolling upgrades on StatefulSets behave very differently from Deployments: ordered pod
             termination, PVC lifecycle edge cases, and the race conditions that bite you during node drains.</p>
           <div class="chips"><span class="chip">Kubernetes</span><span class="chip">Reliability</span></div>
-        </article>
+        </a>
 
-        <article class="post r">
+        <a href="blog/raft-is-not-magic-what-the-paper-does-not-explain.html" class="post r">
           <p class="post-date">2024 · 06</p>
           <h3 class="post-title">Raft Is Not Magic: What the Paper Does Not Explain</h3>
           <p class="post-snip">Reading the Raft paper gives you the algorithm. Running it in production teaches you
             about leader lease expiry, snapshot transfer interruptions, and follower log divergence under write
             amplification.</p>
           <div class="chips"><span class="chip">Consensus</span><span class="chip">Raft</span></div>
-        </article>
+        </a>
 
-        <article class="post r d1">
+        <a href="blog/gc-tuning-is-not-about-the-gc.html" class="post r d1">
           <p class="post-date">2024 · 03</p>
           <h3 class="post-title">GC Tuning Is Not About the GC</h3>
           <p class="post-snip">Most GC problems are allocation problems in disguise. Profiling methodology, identifying
             hot allocation sites with async-profiler, and the surprising places object churn hides in JVM applications.
           </p>
           <div class="chips"><span class="chip">JVM</span><span class="chip">Performance</span></div>
-        </article>
+        </a>
 
-        <article class="post r d2">
+        <a href="blog/the-real-cost-of-exactly-once-in-kafka.html" class="post r d2">
           <p class="post-date">2024 · 01</p>
           <h3 class="post-title">The Real Cost of Exactly-Once in Kafka</h3>
           <p class="post-snip">Kafka transactions guarantee exactly-once delivery, but at a price. Epoch management,
             producer fencing, and the latency implications of transactional producers in high-throughput systems.</p>
           <div class="chips"><span class="chip">Kafka</span><span class="chip">Consistency</span></div>
-        </article>
+        </a>
 
       </div>
     </div>
