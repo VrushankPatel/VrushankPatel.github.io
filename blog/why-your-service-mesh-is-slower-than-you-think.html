@@ -105,13 +105,11 @@
 
       <h2>The TLS Handshake Tax and Connection Churn</h2>
       
-      <p>The single largest source of latency overhead in a service mesh is mTLS handshake negotiation. When a client proxy establishes a connection to a server proxy, they must negotiate a TLS session. This involves a cryptographic handshake where certificates are exchanged, validated, and session keys are derived.</p>
-
-      <p>Negotiating a TLS session requires a cryptographic handshake where certificates are exchanged, signatures are verified, and session keys are derived. This process is computationally expensive compared to establishing a basic TCP connection. If your microservices establish long lived TCP connections and reuse them for thousands of requests, this handshake cost is amortized to zero. However, if your applications use short lived connections, the handshake tax must be paid repeatedly.</p>
+      <p>The single largest source of latency overhead in a service mesh is mTLS handshake negotiation. Negotiating a TLS session requires a cryptographic handshake where certificates are exchanged, signatures are verified, and session keys are derived. This process is computationally expensive compared to establishing a basic TCP connection. If your microservices establish long lived TCP connections and reuse them for thousands of requests, this handshake cost is amortized to zero. However, if your applications use short lived connections, the handshake tax must be paid repeatedly.</p>
 
       <h3>The Shopify Case Study</h3>
       
-      <p>This dynamic was illustrated in a systems engineering review published on `systemdr.systemdrd.com` in 2026, analyzing Shopify's historical 2021 Istio rollout. Shopify migrated their Ruby on Rails microservices environment to the mesh. Unlike Java or Go applications which naturally leverage persistent connection pools, Ruby on Rails processes historically relied on short lived HTTP/1.1 connections. The introduction of the service mesh forced Envoy to perform a full mTLS handshake for almost every HTTP request because the application layer was constantly opening and closing connections.</p>
+      <p>This dynamic was illustrated in a third party analysis published on `systemdr.systemdrd.com` in May 2026, describing Shopify's 2021 Istio adoption. Shopify migrated their Ruby on Rails microservices environment to the mesh. Unlike Java or Go applications which naturally leverage persistent connection pools, Ruby on Rails processes historically relied on short lived HTTP/1.1 connections. The introduction of the service mesh forced Envoy to perform a full mTLS handshake for almost every HTTP request because the application layer was constantly opening and closing connections.</p>
 
       <p>This connection churn caused p99 latency to rise by 3 to 4 milliseconds on inter service calls. The platform team resolved this issue not by tuning Istio configuration flags, but by modifying the application behavior. They enabled Envoy connection coalescing and enforced HTTP/2 internally. This change allowed multiple logical HTTP requests to be multiplexed over a single persistent TCP connection, reducing the frequency of mTLS handshakes by 80% and restoring p99 latencies to pre mesh baselines.</p>
 
@@ -180,7 +178,7 @@
       
       <p>While iptables latency is negligible for a single request, the aggregate CPU consumption of iptables packet processing becomes a bottleneck at extreme scale. This scaling bottleneck is what led LinkedIn to reevaluate their redirection mechanism.</p>
 
-      <p>A systems analysis published on `systemdr.systemdrd.com` in 2026 reports that LinkedIn's platform team analyzed their cluster infrastructure under extreme scale. They discovered that at traffic volumes exceeding 2 million requests per second fleet wide, the CPU cycles spent performing iptables NAT loopback redirection consumed 8% of their entire Kubernetes cluster CPU capacity. While this redirection had a tiny impact on individual request latencies, the CPU cost in terms of infrastructure spend was massive.</p>
+      <p>A systems analysis published on `systemdr.systemdrd.com` in May 2026 reports that LinkedIn's platform team found that at traffic volumes exceeding 2 million requests per second fleet wide, the CPU cycles spent performing iptables NAT loopback redirection consumed 8% of their entire Kubernetes cluster CPU capacity. While this redirection had a tiny impact on individual request latencies, the CPU cost in terms of infrastructure spend was massive.</p>
 
       <p>LinkedIn addressed this by replacing iptables with Cilium's eBPF (Extended Berkeley Packet Filter) host routing. eBPF allows the network stack to be bypassed, transferring packets directly from the socket of the application container to the socket of the proxy container. This modification reclaimed the 8% CPU overhead and eliminated the aggregate loopback packet processing cost.</p>
 
