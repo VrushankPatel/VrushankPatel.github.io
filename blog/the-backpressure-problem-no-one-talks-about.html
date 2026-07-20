@@ -66,18 +66,12 @@ Lag Growth Rate = 10,000 records/sec - 7,000 records/sec = 3,000 records/sec</co
       <pre><div class="code-header">math</div><code>Retention Capacity = Write Rate * Retention Duration
 Retention Capacity = 10,000 records/sec * 86,400 seconds = 864,000,000 records</code></pre>
 
-      <p>Kafka deletes data based on the age of the log segments, not individual records. At a write rate of 10,000 records per second, a record written at time zero will be eligible for deletion exactly 24 hours later. However, because the consumer only processes 7,000 records per second, it takes longer to reach that offset. The time required for the consumer to reach the end of the 24 hour buffer is 34.28 hours:</p>
+      <p>Kafka deletes data based on the age of the log segments, not individual records. At a write rate of 10,000 records per second, a record written at time zero will be eligible for deletion exactly 24 hours later. The consumer will experience data loss when the accumulated lag exceeds the retention capacity, which is the volume of data Kafka retains at any given time. We calculate this horizon below:</p>
 
-      <pre><div class="code-header">math</div><code>Time to Process Buffer = Retention Capacity / Consumption Rate
-Time to Process Buffer = 864,000,000 records / 7,000 records/sec = 123,428 seconds = 34.28 hours</code></pre>
+      <pre><div class="code-header">math</div><code>Time to Data Loss = Retention Capacity / Lag Growth Rate
+Time to Data Loss = 864,000,000 records / 3,000 records/sec = 288,000 seconds = 80 hours</code></pre>
 
-      <p>Because it takes the consumer 34.28 hours to reach records that are deleted after 24 hours, the consumer will fall behind the deletion horizon. The time to reach this deletion point occurs when the lag equals the 24 hour retention capacity, which happens after 2.67 hours of sustained mismatch:</p>
-
-      <pre><div class="code-header">math</div><code>Time to Data Loss = (Retention Duration * Consumption Rate) / Lag Growth Rate
-Time to Data Loss = (24 hours * 7,000 records/sec) / 3,000 records/sec = 56 hours * (7000 / 3000)
-Time to Data Loss = 864,000,000 records / (3,000 records/sec * 3600 seconds/hour) = 80 hours / 30 = 2.67 hours</code></pre>
-
-      <p>After exactly 2.67 hours of sustained traffic mismatch, the oldest unconsumed records in the queue reach 24 hours of age. At this point, the Kafka broker deletes the log segments containing those records. The consumer will skip these deleted offsets, resulting in permanent, silent data loss. The application log shows no errors because the offsets simply vanished from the broker.</p>
+      <p>At a write rate of 10,000 records per second and a consumption rate of 7,000 records per second against a 24 hour retention window, the consumer takes 80 hours of sustained mismatch before it falls behind the deletion horizon and starts silently losing data. The further the consumption rate falls behind the production rate, the faster this horizon arrives. If consumption ever stalls to zero, data loss begins at exactly the retention window itself (24 hours), which is the sanity check bound for this formula. Once this point is reached, the oldest unconsumed records in the queue exceed the retention threshold, and the Kafka broker deletes the corresponding log segments. The consumer will skip these deleted offsets, resulting in permanent, silent data loss without throwing application errors.</p>
 
       <h2>Where Backpressure Breaks: Internal Async Boundaries</h2>
       
@@ -173,7 +167,7 @@ Time to Data Loss = 864,000,000 records / (3,000 records/sec * 3600 seconds/hour
 
       <h2>Flow Control Strategies and Tradeoffs</h2>
       
-      <p>When building Kafka consumer applications, you must choose a flow control strategy. The table below outlines the primary patterns and their engineering tradeoffs, as compiled from industry architectural playbooks in 2026:</p>
+      <p>When building Kafka consumer applications, you must choose a flow control strategy. The table below outlines the primary patterns and their engineering tradeoffs, based on common Kafka consumer patterns:</p>
 
       <div class="table-wrapper">
         <table>
