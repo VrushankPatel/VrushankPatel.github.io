@@ -30,13 +30,8 @@
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --fast: 150ms;
   --base: 250ms;
-}
 
-/* ============================================================
-   THEMES (Synchronized with portfolio)
-   ============================================================ */
-
-[data-theme="dark"] {
+  /* Dark Theme Default */
   --bg: #0a0a0b;
   --bg-rgb: 10, 10, 11;
   --bg-raised: #111114;
@@ -67,39 +62,6 @@
   --token-comment: #5f5f67;
   --token-number: #dfb27f;
   --token-function: #8fa3bf;
-}
-
-[data-theme="light"] {
-  --bg: #f2f2f5;
-  --bg-rgb: 242, 242, 245;
-  --bg-raised: #f8f8fb;
-  --surface: #ffffff;
-  --surface-hover: #fafafc;
-  --surface-2: #ededf2;
-  --border: rgba(0, 0, 0, 0.07);
-  --border-sub: rgba(0, 0, 0, 0.035);
-
-  --tx-1: #18181d;
-  --tx-2: #45454e;
-  --tx-3: #6e6e78;
-  --tx-4: #a4a4ae;
-
-  --accent: #3a4e6a;
-  --accent-bg: rgba(58, 78, 106, 0.07);
-  --accent-sub: #7a8fa9;
-
-  --sh-sm: 0 1px 4px rgba(0, 0, 0, .06);
-  --sh: 0 4px 14px rgba(0, 0, 0, .08);
-  --glass: rgba(242, 242, 245, 0.88);
-  --glass-border: rgba(0, 0, 0, 0.06);
-
-  --code-bg: #f7f7fa;
-  --code-header: #eaeaea;
-  --token-keyword: #b03a3a;
-  --token-string: #2d6b3b;
-  --token-comment: #80808c;
-  --token-number: #b0621a;
-  --token-function: #1f4b75;
 }
 
 /* ============================================================

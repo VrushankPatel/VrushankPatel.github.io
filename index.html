@@ -62,12 +62,8 @@
       --fast: 140ms;
       --base: 240ms;
       --slow: 420ms;
-    }
 
-    /* ============================================================
-       DARK THEME
-    ============================================================ */
-    [data-theme="dark"] {
+      /* Dark Theme Default */
       --bg: #0a0a0b;
       --bg-raised: #111114;
       --surface: #17171b;
@@ -90,34 +86,6 @@
 
       --glass: rgba(17, 17, 20, 0.82);
       --glass-border: rgba(255, 255, 255, 0.055);
-    }
-
-    /* ============================================================
-       LIGHT THEME
-    ============================================================ */
-    [data-theme="light"] {
-      --bg: #f2f2f5;
-      --bg-raised: #f8f8fb;
-      --surface: #ffffff;
-      --surface-hover: #fafafc;
-      --surface-2: #ededf2;
-      --border: rgba(0, 0, 0, 0.07);
-      --border-sub: rgba(0, 0, 0, 0.035);
-
-      --tx-1: #18181d;
-      --tx-2: #45454e;
-      --tx-3: #6e6e78;
-      --tx-4: #a4a4ae;
-
-      --accent: #3a4e6a;
-      --accent-bg: rgba(58, 78, 106, 0.07);
-
-      --sh-sm: 0 1px 4px rgba(0, 0, 0, .06), 0 1px 2px rgba(0, 0, 0, .04);
-      --sh: 0 4px 14px rgba(0, 0, 0, .08), 0 2px 6px rgba(0, 0, 0, .05);
-      --sh-lg: 0 14px 36px rgba(0, 0, 0, .10), 0 4px 12px rgba(0, 0, 0, .07);
-
-      --glass: rgba(242, 242, 245, 0.88);
-      --glass-border: rgba(0, 0, 0, 0.06);
     }
 
     /* ============================================================
@@ -285,33 +253,7 @@
       color: var(--tx-1);
     }
 
-    /* Theme toggle */
-    .tog {
-      width: 38px;
-      height: 22px;
-      border-radius: 11px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      position: relative;
-      transition: background var(--base) var(--ease);
-      flex-shrink: 0;
-    }
 
-    .tog-thumb {
-      position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: var(--tx-2);
-      transition: transform var(--base) var(--ease), background var(--base) var(--ease);
-    }
-
-    [data-theme="light"] .tog-thumb {
-      transform: translateX(16px);
-      background: var(--accent);
-    }
 
     /* ============================================================
        BUTTONS
@@ -1311,10 +1253,6 @@
           <li><a href="#focus">Focus</a></li>
           <li><a href="#resume">Resume</a></li>
         </ul>
-
-        <button class="tog" id="themeBtn" aria-label="Toggle theme" title="Toggle light / dark">
-          <div class="tog-thumb"></div>
-        </button>
       </div>
     </div>
   </nav>
@@ -2270,27 +2208,7 @@
        JAVASCRIPT
   ========================================================= -->
   <script>
-    /* ---- Theme ---- */
-    const root = document.documentElement;
-    const btn = document.getElementById('themeBtn');
 
-    const systemTheme = () =>
-      window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-
-    const setTheme = (t) => {
-      root.setAttribute('data-theme', t);
-      localStorage.setItem('theme', t);
-    };
-
-    setTheme(localStorage.getItem('theme') || systemTheme());
-
-    btn.addEventListener('click', () => {
-      setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-    });
-
-    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
-      if (!localStorage.getItem('theme')) setTheme(e.matches ? 'light' : 'dark');
-    });
 
     /* ---- Nav scroll state ---- */
     const nav = document.getElementById('nav');

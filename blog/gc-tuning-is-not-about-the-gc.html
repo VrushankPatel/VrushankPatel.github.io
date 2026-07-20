@@ -17,9 +17,6 @@
       <a href="../index.html" class="nav-logo">Vrushank.Patel<span>/blog</span></a>
       <div class="nav-actions">
         <a href="index.html" class="nav-link">All Posts</a>
-        <button class="tog" id="themeBtn" aria-label="Toggle theme" title="Toggle light / dark">
-          <div class="tog-thumb"></div>
-        </button>
       </div>
     </div>
   </nav>
@@ -229,26 +226,7 @@
        JAVASCRIPT
        ========================================================= -->
   <script>
-    const root = document.documentElement;
-    const btn = document.getElementById('themeBtn');
 
-    const systemTheme = () =>
-      window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-
-    const setTheme = (t) => {
-      root.setAttribute('data-theme', t);
-      localStorage.setItem('theme', t);
-    };
-
-    setTheme(localStorage.getItem('theme') || systemTheme());
-
-    btn.addEventListener('click', () => {
-      setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-    });
-
-    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
-      if (!localStorage.getItem('theme')) setTheme(e.matches ? 'light' : 'dark');
-    });
   </script>
 </body>
 </html>
