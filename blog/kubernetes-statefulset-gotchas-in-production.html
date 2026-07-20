@@ -205,7 +205,7 @@ spec:
       
       <p>StatefulSets are excellent for workloads that require stable names and ordinal properties, such as primary-replica database clusters or consensus engines. However, the ordering guarantees add operational complexity and increase the risk of blocked rollouts.</p>
 
-      <p>If your application can handle data replication internally and does not require fixed names or ordinal guarantees, standard Deployment configurations are often simpler. Systems built for stateless tiering or fully dynamic peer-to-peer data replication—where nodes auto-discover peers without relying on fixed network identities—can run effectively under standard Deployments, allowing the scheduler to manage evictions and rollouts without ordinal constraints.</p>
+      <p>If your application can handle data replication internally and does not require fixed names or ordinal guarantees, standard Deployment configurations are often simpler. Systems built for stateless tiering or fully dynamic peer-to-peer data replication, where nodes auto-discover peers without relying on fixed network identities, can run effectively under standard Deployments, allowing the scheduler to manage evictions and rollouts without ordinal constraints.</p>
     </div>
   </article>
 
