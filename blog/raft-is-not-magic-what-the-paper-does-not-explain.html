@@ -66,7 +66,7 @@ Result: Term remains at 1. No disruption occurs when partition heals.</div>
       
       <p>In Section 8 ("Client interaction"), the original Raft paper identifies a critical challenge for read-only queries: if a leader is partitioned away with a minority of nodes while the majority elects a new leader, the stale leader could continue to answer local reads, violating linearizable read consistency. To prevent stale reads without writing every read operation to the replicated log, the paper briefly sketches two mitigations: having the leader exchange heartbeats with a majority of nodes before answering a read query, and relying on time-bounded leader leases that depend on bounded clock drift.</p>
 
-      <p>However, the academic paper only outlines these mechanisms at a high level without specifying the concrete state transitions or boundary checks required for production safety. Production consensus engines took these high-level sketches and formalized them into robust, hardened implementations—such as etcd's ReadIndex protocol and production-grade lease state machines.</p>
+      <p>However, the academic paper only outlines these mechanisms at a high level without specifying the concrete state transitions or boundary checks required for production safety. Production consensus engines took these high-level sketches and formalized them into robust, hardened implementations, such as etcd's ReadIndex protocol and production-grade lease state machines.</p>
 
       <p>Production consensus engines address this using two main techniques: time bounded leader leases and etcd's ReadIndex mechanism.</p>
 
