@@ -47,7 +47,7 @@
 
       <h2>The Formula of GC Overhead</h2>
       
-      <p>Many developers treat garbage collection pause time as an independent variable controlled by JVM flags. In reality, GC pause duration and CPU consumption are downstream consequences of your allocation rate and object lifetime distribution. We can frame this relationship with a simple mental model published in JVM performance journals in late 2025:</p>
+      <p>Many developers treat garbage collection pause time as an independent variable controlled by JVM flags. In reality, GC pause duration and CPU consumption are downstream consequences of your allocation rate and object lifetime distribution. We can frame this relationship with a simple mental model:</p>
 
       <pre><div class="code-header">math</div><code>GC CPU Overhead = Allocation Rate (MB/s) * Collection Cost (CPU seconds/MB)</code></pre>
 
@@ -73,7 +73,7 @@
       <h3>1. Java Flight Recorder (JFR)</h3>
       <p>JFR is integrated into the OpenJDK JVM and has a latency impact of under 1%. You can start an allocation profile on a running JVM process using the <code>jcmd</code> utility:</p>
 
-      <pre><div class="code-header">shell</div><code>jcmd &lt;PID&gt; JFR.start name=alloc profile=settings=profile duration=120s filename=alloc.jfr</code></pre>
+      <pre><div class="code-header">shell</div><code>jcmd &lt;PID&gt; JFR.start name=alloc settings=profile duration=120s filename=alloc.jfr</code></pre>
 
       <p>Once the JFR recording completes, you can extract the allocation event statistics. The key events to analyze are <code>jdk.ObjectAllocationInNewTLAB</code> (allocation in a thread local allocation buffer) and <code>jdk.ObjectAllocationOutsideTLAB</code> (allocation directly in the young generation, indicating larger objects):</p>
 
@@ -96,7 +96,7 @@
       <p>If an object is too large to fit in a TLAB, the JVM bypasses the buffer and allocates it directly in the shared young generation. This slow path requires synchronization and adds latency. Look closely at <code>jdk.ObjectAllocationOutsideTLAB</code> events in your JFR logs. These events indicate that your objects are larger than your average TLAB size, indicating a need to optimize object sizes or adjust JVM TLAB configurations.</p>
 
       <h3>G1 Humongous Allocations</h3>
-      <p>In the G1 collector, the heap is divided into equal sized regions. Any object that requires more than 50% of a G1 region's size is classified as a "humongous allocation." These objects bypass the young generation entirely and are allocated directly into the old generation. This behavior is documented in JVM performance guides from late 2025.</p>
+      <p>In the G1 collector, the heap is divided into equal sized regions. Any object that requires more than 50% of a G1 region's size is classified as a "humongous allocation." These objects bypass the young generation entirely and are allocated directly into the old generation, per the OpenJDK G1 Garbage Collector documentation.</p>
 
       <p>Humongous allocations are expensive. Because they sit in the old generation, they are not collected during minor GCs. Frequent humongous allocations force G1 to start concurrent marking cycles early or trigger full GC pauses, degrading tail latency. You can identify these events in your GC logs by enabling unified GC logging (<code>-Xlog:gc+phases=debug</code>) and searching for "Humongous" entries. Match the byte size of the allocation in your JFR profile with the GC log entries to find the class triggering the humongous allocation.</p>
 
@@ -161,7 +161,7 @@
 
       <h2>Tuning the Collector</h2>
       
-      <p>If your allocation rate is optimized but GC pauses still violate your tail latency SLA, you can begin tuning the collector flags. The table below outlines the primary collectors and their key configurations, verified against OpenJDK documentation in late 2025:</p>
+      <p>If your allocation rate is optimized but GC pauses still violate your tail latency SLA, you can begin tuning the collector flags. The table below outlines the primary collectors and their key configurations, compiled from OpenJDK documentation:</p>
 
       <div class="table-wrapper">
         <table>
@@ -190,7 +190,7 @@
               <td><strong>ZGC / GenZGC</strong></td>
               <td>Strict low pause latency (sub-millisecond target).</td>
               <td><code>-XX:+UseZGC -XX:+ZGenerational</code> (enables generational ZGC)<br><code>-XX:ZAllocationSpikeTolerance=n</code> (handles sudden load)</td>
-              <td>Production ready on JDK 17 / 21</td>
+              <td>ZGC production ready since JDK 15. Generational ZGC (-XX:+ZGenerational) available since JDK 21, default since JDK 23.</td>
             </tr>
           </tbody>
         </table>
