@@ -109,7 +109,7 @@ Result: Broker ignores duplicate, returns success Ack. No duplicates written.</d
 
       <h2>Performance Overhead Benchmarks</h2>
       
-      <p>The performance cost of Kafka transactions is a direct consequence of the extra round trips and disk writes required by the commit protocol. The table below compares throughput and latency characteristics across different producer and consumer configurations based on benchmark studies published in early 2026:</p>
+      <p>The performance cost of Kafka transactions is a direct consequence of the extra round trips and disk writes required by the commit protocol. The table below illustrates typical throughput and latency profiles based on the mechanics described above (where LSO blocking scales with commit interval, and transaction registration adds fixed per-commit overhead):</p>
 
       <div class="table-wrapper">
         <table>
@@ -119,7 +119,6 @@ Result: Broker ignores duplicate, returns success Ack. No duplicates written.</d
               <th>Throughput Capacity</th>
               <th>p99 Write Latency</th>
               <th>p99 Consumer Read Latency</th>
-              <th>Source &amp; Date</th>
             </tr>
           </thead>
           <tbody>
@@ -128,28 +127,24 @@ Result: Broker ignores duplicate, returns success Ack. No duplicates written.</d
               <td>100% (Baseline)</td>
               <td>2.1 ms</td>
               <td>&lt; 5 ms</td>
-              <td>Conduktor Performance Guide (2026)</td>
             </tr>
             <tr>
               <td><strong>Idempotent Producer</strong></td>
               <td>98%</td>
               <td>2.3 ms</td>
               <td>&lt; 5 ms</td>
-              <td>Conduktor Performance Guide (2026)</td>
             </tr>
             <tr>
               <td><strong>Transactional (100ms commits)</strong></td>
               <td>65%</td>
               <td>12.5 ms</td>
               <td>110 ms</td>
-              <td>Streamkap Transaction Blog (2026)</td>
             </tr>
             <tr>
               <td><strong>Transactional (1s commits)</strong></td>
               <td>90%</td>
               <td>4.2 ms</td>
               <td>1050 ms</td>
-              <td>Streamkap Transaction Blog (2026)</td>
             </tr>
           </tbody>
         </table>
