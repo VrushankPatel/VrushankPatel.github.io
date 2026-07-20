@@ -38,7 +38,7 @@
     </header>
 
     <div class="art-body">
-      <p>A routine Kubernetes cluster upgrade was underway. The automation began cordoning and draining nodes sequentially. In the middle of the operation, a high availability, quorum based metadata service (such as ZooKeeper, etcd, or a Kafka controller quorum) lost consensus and went offline. The platform team was surprised. The service was deployed as a StatefulSet with three replicas, and a PodDisruptionBudget was active. Yet, the drain operation evicted two out of the three replicas simultaneously, violating the quorum requirements and stalling the entire database pipeline. The upgrade passed staging tests, but failed under production load.</p>
+      <p>A routine Kubernetes cluster upgrade was underway. The automation began cordoning and draining nodes sequentially. In the middle of the operation, a high availability, quorum-based metadata service (such as ZooKeeper, etcd, or a Kafka controller quorum) lost consensus and went offline. The platform team was surprised: the service was deployed as a StatefulSet with three replicas, and a PodDisruptionBudget (PDB) was configured to protect it. However, due to a label selector mistake, the PDB failed to match the pods, so it silently protected nothing. As a result, the drain operation evicted two out of the three replicas simultaneously, violating the quorum requirements and stalling the entire database pipeline. The upgrade passed staging tests, but failed under production load.</p>
 
       <p>This incident highlights a major trap in Kubernetes operations. StatefulSets look like Deployments with stable network names and persistent storage, making it tempting to treat them the same way. They are not. The guarantees of StatefulSets, such as ordered pod startup, sequential rollout, and persistent volume associations, are managed by the StatefulSet controller. However, cluster level operations like node drains and scheduling decisions are completely unaware of these ordinals. When these two layers interact, they create race conditions and failure modes that can take down your stateful workloads.</p>
 
@@ -53,7 +53,7 @@
         <li>Only after pod-2 is marked Ready does the controller proceed to terminate and update pod-1.</li>
       </ol>
 
-      <p>This ordering is designed to preserve application availability. By waiting for the highest ordinal to become healthy before touching its predecessor, the controller ensures that the cluster maintains replication quorum. However, this policy introduces a significant risk. The official Kubernetes documentation explicitly warns that using Rolling Updates with the default OrderedReady policy can leave a StatefulSet in a broken state that requires manual intervention to repair, as updated in the StatefulSet concepts guide in 2026.</p>
+      <p>This ordering is designed to preserve application availability. By waiting for the highest ordinal to become healthy before touching its predecessor, the controller ensures that the cluster maintains replication quorum. However, this policy introduces a significant risk. The official Kubernetes documentation explicitly warns that using Rolling Updates with the default OrderedReady policy can leave a StatefulSet in a broken state that requires manual intervention to repair, per the Kubernetes StatefulSet concepts guide.</p>
 
       <p>If a bug in the new container image or a database migration failure causes the replacement pod-2 to fail its readiness checks, the rollout stalls. Because pod-2 never becomes Ready, the StatefulSet controller will block indefinitely and will never attempt to update pod-1 or pod-0. If the service experiences a crash on pod-1 while the rollout is blocked, the application can lose quorum. The entire rollout is held hostage by a single failing pod, and SREs must manually rollback the image configuration or delete the blocked pod to restore reconciliation.</p>
 
@@ -79,7 +79,7 @@
 5. Result: The new Pod-2 is stuck in a Pending state indefinitely:
    "volume node affinity conflict" or "waiting for PVC to be bound"</div>
 
-      <p>This race condition specifically affects local PVs because they are bound to a single node's physical storage. The scheduler cannot choose an alternative node to resolve the conflict. The replacement pod remains stuck Pending until an administrator manually deletes the stale PV objects. As discussed in the GitHub issue, the primary mitigation is to prevent the scheduler from considering PVCs that are marked for deletion when scheduling new pods. A secondary fix is adding a PVC to pod owner reference so the scheduler can back off if the PVC is not owned by the pod being scheduled. However, as of late 2026, SRE teams operating local PVs must still watch for this race during node maintenance.</p>
+      <p>This race condition specifically affects local PVs because they are bound to a single node's physical storage. The scheduler cannot choose an alternative node to resolve the conflict. The replacement pod remains stuck Pending until an administrator manually deletes the stale PV objects. As discussed in the GitHub issue, proposed mitigations included preventing the scheduler from considering PVCs marked for deletion or enforcing PVC-to-pod owner references. Although issue #128164 was closed on GitHub (closed as not planned), SRE teams operating local PVs should remain aware of this potential race when deleting pods and PVCs concurrently during node maintenance.</p>
 
       <h2>How Node Drains Bypass Ordinal Guarantees</h2>
       
@@ -97,7 +97,7 @@
 
       <h2>StatefulSet vs. Deployment</h2>
       
-      <p>The table below summarizes the operational differences between Deployments and StatefulSets, compiled from the Kubernetes API reference guide in 2026:</p>
+      <p>The table below summarizes the operational differences between Deployments and StatefulSets, compiled from current Kubernetes documentation:</p>
 
       <div class="table-wrapper">
         <table>
@@ -113,25 +113,25 @@
               <td><strong>Rollout Ordering</strong></td>
               <td>Parallel. New replica set scales up while the old scales down. No ordinal constraints.</td>
               <td>Strict sequential (highest to lowest ordinal). Each pod must pass readiness before the next begins.</td>
-              <td>Kubernetes Workloads Guide (2026)</td>
+              <td>Kubernetes Workloads Guide</td>
             </tr>
             <tr>
               <td><strong>Scale-down Ordering</strong></td>
               <td>Random or based on pod age and scheduling constraints.</td>
               <td>Strict reverse ordinal (highest ordinal terminated first).</td>
-              <td>Kubernetes API Reference (2026)</td>
+              <td>Kubernetes API Reference</td>
             </tr>
             <tr>
               <td><strong>Storage Association</strong></td>
               <td>Typically shared volumes or ephemeral storage. PVCs are shared across replicas.</td>
               <td>1-to-1 persistent mapping via <code>volumeClaimTemplates</code>. PVCs persist after pod deletion.</td>
-              <td>StatefulSet Concepts Guide (2026)</td>
+              <td>StatefulSet Concepts Guide</td>
             </tr>
             <tr>
               <td><strong>Node Drain Interaction</strong></td>
               <td>Pods are evicted in parallel. Replicas are rescheduled instantly on other nodes.</td>
               <td>Pods evicted in parallel based on host placement. Local PV pods get stuck Pending.</td>
-              <td>Node Eviction API Manual (2026)</td>
+              <td>Node Eviction API Documentation</td>
             </tr>
           </tbody>
         </table>
@@ -156,7 +156,7 @@ spec:
       app: zookeeper</code></pre>
 
       <h3>2. Leverage Persistent Volume Retention Policies</h3>
-      <p>Ensure that your StatefulSet defines a clear retention policy for PVCs. This ensures that PVCs are cleaned up automatically when the StatefulSet is scaled down, preventing orphaned volumes and reducing the risk of informer races:</p>
+      <p>Ensure that your StatefulSet defines a clear retention policy for PVCs via <code>persistentVolumeClaimRetentionPolicy</code>. This field controls whether PVCs are automatically deleted or retained when a StatefulSet is scaled down or deleted, preventing orphaned storage volumes in your cluster. (Note: the <code>StatefulSetAutoDeletePVC</code> feature graduated to stable and enabled by default in Kubernetes 1.32, after being introduced as alpha in 1.23 and beta in 1.27.):</p>
 
       <pre><div class="code-header">yaml</div><code>apiVersion: apps/v1
 kind: StatefulSet
@@ -205,7 +205,7 @@ spec:
       
       <p>StatefulSets are excellent for workloads that require stable names and ordinal properties, such as primary-replica database clusters or consensus engines. However, the ordering guarantees add operational complexity and increase the risk of blocked rollouts.</p>
 
-      <p>If your application can handle data replication internally and does not require fixed names, a Deployment configuration combined with a separate PVC strategy is often simpler. Modern cloud native databases like CockroachDB or Cassandra can run successfully under a Deployment model, allowing the scheduler to manage evictions and rollouts without the constraints of ordinal ordering.</p>
+      <p>If your application can handle data replication internally and does not require fixed names or ordinal guarantees, standard Deployment configurations are often simpler. Systems built for stateless tiering or fully dynamic peer-to-peer data replication—where nodes auto-discover peers without relying on fixed network identities—can run effectively under standard Deployments, allowing the scheduler to manage evictions and rollouts without ordinal constraints.</p>
     </div>
   </article>
 
