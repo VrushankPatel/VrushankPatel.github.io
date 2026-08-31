@@ -43,8 +43,7 @@
       
       <p>To understand where the latency is introduced, we must trace a request as it moves from a client application container to a server application container in a sidecar based service mesh deployment. A single logical HTTP request now undergoes a five stage journey:</p>
 
-      <div class="diagram">
-+------------------+
+      <pre class="diagram">+------------------+
 |   Client Pod     |
 |  +------------+  |
 |  | Client App |  |
@@ -64,7 +63,7 @@
 |  +-----v------+  |
 |  | Server App |  |
 |  +------------+  |
-+------------------+</div>
++------------------+</pre>
 
       <ol>
         <li><strong>Client App to Client Sidecar (Loopback Interception):</strong> The client application initiates a TCP connection to the destination service name. The local iptables rules intercept this outbound traffic and redirect it to Envoy's local listening port, typically port 15001. This hop occurs entirely over the localhost loopback interface.</li>

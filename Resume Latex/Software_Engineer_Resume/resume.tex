@@ -1,0 +1,159 @@
+%-------------------------
+% Resume in Latex
+% Author : Sourabh Bajaj (template), adapted for Vrushank Patel
+% Website: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+% Changed letterpaper to a4paper to gain extra vertical height
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{latexsym}
+% Pushed top/bottom margins to the maximum printer-safe limit of 0.25in
+% \usepackage[top=0.25in, bottom=0.25in, left=0.4in, right=0.4in]{geometry}
+\usepackage[paperwidth=8.27in, paperheight=12.5in, top=0.40in, bottom=0in, left=0.4in, right=0.4in]{geometry}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{fontspec}
+
+\setmainfont{SegoeUI}[
+  Path = fonts/,
+  Extension = .ttf,
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic
+]
+
+\hypersetup{hidelinks}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\urlstyle{same}
+
+\raggedbottom
+\setlength{\tabcolsep}{0in}
+
+% Squeezed itemsep to 0pt to pull all bullet points slightly tighter together
+\setlist[itemize]{topsep=0pt, itemsep=0pt, parsep=0pt, partopsep=0pt}
+
+% Sections formatting -- Exo2 has no small-caps glyphs, so swap \scshape
+% for bold + a touch of extra letter/word spacing to keep headers crisp.
+\titleformat{\section}{
+  \vspace{-6pt}\bfseries\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-6pt}]
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item \textbf{#1}{: #2}
+}
+
+% FIX: Shifted Date | Location to the second row alongside the Job Title 
+% and applied italics (\textit{}) to both.
+\newcommand{\resumeSubheading}[4]{
+  \vspace{1pt}\item
+    \begin{tabular*}{\linewidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \\
+      \textit{#3} & \textit{#4 \textbar{} #2} \\
+    \end{tabular*}\vspace{1pt}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}}
+
+\renewcommand{\labelitemii}{$\circ$}
+
+% FIX: Main lists now use a smaller, standard math-mode bullet instead of the bulky textbullet.
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.15in, label={\small$\bullet$}]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{1pt}}
+
+%-------------------------------------------
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING-----------------
+% Squeezed vertical spacing in the header block
+\begin{center}
+    {\Huge \textbf{Vrushank Patel}} \\ \vspace{2pt}
+    \small 
+    +91 96015 01725 \textbar{} \href{mailto:vrushankpatel5@gmail.com}{vrushankpatel5@gmail.com} \textbar{} \href{https://vrushankpatel.github.io}{Portfolio} \\ \vspace{1pt}
+    \href{https://github.com/VrushankPatel}{GitHub} \textbar{} \href{https://www.linkedin.com/in/vrushank-patel-69b682180/}{LinkedIn} \textbar{} \href{https://profile.codersrank.io/user/vrushankpatel}{CodersRank}
+\end{center}
+
+%-----------EXPERIENCE-----------------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {NASDAQ}{Bangalore - IN}
+      {Senior Software Developer}{Nov 2022 - Present}
+      \resumeItemListStart
+        \item Developed and optimized a high speed order matching and execution system using Java and Spring Framework, delivering customer tailored enhancements for Forex, Equities, and Crypto across LATAM, US, and EU markets.
+        \item Led onsite acceptance testing in Colombia for an equity trading platform processing 500M+ daily volume, executing full overnight release cycles end to end and confirming clean deliveries with zero rollbacks.
+        \item Migrated matching engine deployments from static, dedicated EC2 hosts to Amazon EKS, enabling the team to run multiple concurrent releases and batch test across isolated namespaces in parallel, with ingress based routing giving full control over traffic per environment.
+        \item Developed a custom Kubernetes operator framework to streamline Amazon EKS and EKS A deployments, designing partitioned Helm layouts that cut deployment setup time significantly.
+        \item Internal tools built from scratch to boost team productivity:
+          % Sublist hollow circle
+          \begin{itemize}[leftmargin=0.2in, label={$\circ$}]
+            \item \textbf{KDebug}, a debugging utility for Kubernetes hosted system pods that automates debugger port discovery, local port forwarding, and reattachment handling, cutting remote debugging setup time in non local environments.
+            \item \textbf{Layout Visualizer}, a pipeline integrated tool converting deployment layout YAML into graphical views, helping teams review pod counts, replication setup, and config changes from Artifactory release artifacts.
+            \item \textbf{TerraViz}, a Terraform plan visualization tool for the ops team with expandable and collapsible views to inspect the terraform plan for infrastructure changes more easily.
+            \item \textbf{EqlipseMCP}, an MCP server that lets users operate the trading system through natural language via GitHub Copilot with guardrails and HIIT controlling what actions are permitted.
+          \end{itemize}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Capsystematic Technologies Pvt Ltd.}{Bangalore - IN}
+      {Software Developer}{Dec 2019 - Nov 2022}
+      \resumeItemListStart
+        \item Developed and modernized backend systems for banking and financial clients using Java, Spring Boot, Apache Camel, and Docker, delivering secure and scalable applications.
+        \item Designed and implemented Apache Camel routes to process and route SWIFT MT and ISO 20022 messages across DB, filesystem, HTTP, SOAP, and MQ endpoints, improving integration between front office and core banking systems and reducing message latency.
+        \item Migrated a legacy Pro C based system to a modular Java architecture using Spring Boot, JPA, and Spring Security, and built REST APIs for reconciliation, settlement, dispute management, and corporate card operations.
+        \item Built an internal automation tool using Python and FastAPI to generate Java entities and mappings from SQL procedures and SWIFT message definitions, improving developer productivity and reducing manual mapping errors.
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Capsystematic Technologies Pvt Ltd.}{Bangalore - IN}
+      {SDE Intern}{Sept 2019 - Dec 2019}
+      \resumeItemListStart
+        \item Worked with Apache Camel by analyzing existing routes and adding tests to improve reliability and coverage.
+        \item Implemented Camel routes for SWIFT MT and ISO 20022 message processing, contributing to middleware workflows.
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%--------PROGRAMMING SKILLS------------
+\section{Skills}
+ \resumeSubHeadingListStart
+   \item{
+     \textbf{Languages}{: Java, Python, SQL}
+     \hfill
+     \textbf{Technologies}{: Kafka, AWS, Docker, Gitlab CI/CD}
+   }
+ \resumeSubHeadingListEnd
+ 
+%-----------EDUCATION-----------------
+\section{Education}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Apollo Institute of Engineering [GTU]}{Ahmedabad, IN}
+      {B.E. in Information Technology \hspace{0.5em} (CGPA: 8.24)}{Jul. 2015 - May 2019}
+
+  \resumeSubHeadingListEnd
+
+%-------------------------------------------
+\end{document}

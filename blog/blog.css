@@ -485,6 +485,8 @@ tr:nth-child(even) td {
    ============================================================ */
 
 .diagram {
+  display: block;
+  white-space: pre;
   background: var(--code-bg);
   border: 1px solid var(--border);
   border-radius: var(--r);
