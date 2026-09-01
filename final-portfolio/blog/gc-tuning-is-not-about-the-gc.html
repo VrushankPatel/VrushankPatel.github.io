@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GC Tuning Is Not About the GC — Engineering Insights</title>
+  <meta name="description" content="A guide to diagnosing and fixing Java Garbage Collection issues. Why profiling memory allocation rates, not tweaking JVM collector flags, is the key to latency reduction.">
+  <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+  <!-- =========================================================
+       NAVIGATION
+       ========================================================= -->
+  <nav class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="../index.html" class="nav-logo">Vrushank.Patel<span>/blog</span></a>
+      <div class="nav-actions">
+        <a href="index.html" class="nav-link">All Posts</a>
+        <a href="../assets/Vrushank_Resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-link">Resume</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =========================================================
+       ARTICLE CONTENT
+       ========================================================= -->
+  <article class="art-container">
+    <header class="art-header">
+      <div class="art-meta">
+        <span>2024 · 09</span>
+        <span>•</span>
+        <span>11 min read</span>
+      </div>
+      <h1 class="art-title">GC Tuning Is Not About the GC</h1>
+    </header>
+
+    <div class="art-body">
+      <p>For three weeks, a platform engineering team iterated on G1 Garbage Collector configurations. The service, a high-throughput Java API, was experiencing tail latency spikes. SREs systematically adjusted JVM flags, changing <code>MaxGCPauseMillis</code> from 200 to 100 and then to 50, altering G1 region sizes, adjusting survivor ratios, and expanding the heap from 8 gigabytes to 16 gigabytes. Each attempt yielded confusing results. The p99 tail latency spikes persisted, and CPU utilization steadily climbed with every new flag added. The team was tuning the collector in the dark.</p>
+
+      <p>The breakthrough came when they stopped looking at the collector and started profiling memory allocations. Using a low-overhead Java Flight Recorder profile, the team discovered that a logging statement on a hot request path was implicitly evaluating the <code>toString()</code> method of a large metadata object graph on every request. This single line of code generated over 150 megabytes per second of garbage. Once this logging line was corrected, the allocation rate dropped by 90%, the tail latency spikes disappeared, and the JVM returned to stable operation. The weeks spent tuning GC flags was wasted effort because they treated a code symptom rather than its root cause.</p>
+
+      <h2>The Generational Hypothesis</h2>
+      
+      <p>The fundamental mechanics of JVM garbage collectors are built upon the generational hypothesis. This empirical observation states that in most software applications, the vast majority of allocated objects die shortly after creation. A typical request handling pipeline instantiates short lived objects, such as database query result rows, JSON parsers, and string builders, which become unreachable as soon as the HTTP response is written. Only a tiny fraction of objects (such as connection pools, configuration maps, and cache stores) survive long enough to transition into the old generation.</p>
+
+      <p>To exploit this behavior, JVM heaps are divided into young and old generations. Young generation collections (minor GCs) are frequent but fast, copying surviving objects to survivor spaces. Old generation collections (major or concurrent GCs) are less frequent but more expensive because they must process larger volumes of memory. If your application's allocation rate is low, minor GCs are rare, and the garbage collector has little work to do. If your allocation rate is high, the young generation fills up rapidly, forcing frequent collections and accelerating the rate at which objects are prematurely promoted to the old generation.</p>
+
+      <h2>The Formula of GC Overhead</h2>
+      
+      <p>Many developers treat garbage collection pause time as an independent variable controlled by JVM flags. In reality, GC pause duration and CPU consumption are downstream consequences of your allocation rate and object lifetime distribution. We can frame this relationship with a simple mental model:</p>
+
+      <pre><div class="code-header">math</div><code>GC CPU Overhead = Allocation Rate (MB/s) * Collection Cost (CPU seconds/MB)</code></pre>
+
+      <p>The collection cost is a factor of your collector choice (G1, ZGC, or Parallel) and the hardware architecture. The variable you actually control in your code is the allocation rate. If you double your allocation rate, you double the CPU cycles lost to garbage collection, regardless of which collector flags you configure. Tweaking GC parameters without addressing allocation rate is an attempt to optimize the division of labor between young and old generations without reducing the total work required.</p>
+
+      <h2>The Diagnostics Sequence</h2>
+      
+      <p>To optimize JVM performance, you must follow a structured diagnostics sequence. Tuning flags must always be the final step, not the first:</p>
+
+      <ol>
+        <li><strong>Measure baseline allocation rate and GC pause behavior:</strong> Collect performance metrics under production load using Java Flight Recorder (JFR) or async-profiler. Never make decisions based on local micro-benchmarks or synthetic tests.</li>
+        <li><strong>Identify hot allocation call sites:</strong> Analyze the profiling data to find the specific methods and classes generating the highest volume of temporary objects.</li>
+        <li><strong>Fix the code:</strong> Modify the application code to eliminate unnecessary allocations, reuse objects, or move data off-heap.</li>
+        <li><strong>Re-measure to confirm improvement:</strong> Validate that the code changes have reduced the allocation rate and lowered the GC pause frequency.</li>
+        <li><strong>Tune the collector:</strong> If latency targets are still violated after code level fixes, begin adjusting collector parameters.</li>
+        <li><strong>Validate changes before wide rollout:</strong> Test any configuration flag changes under production load using canary deployments. Never copy flags from a blog post without validating them on your own workload.</li>
+      </ol>
+
+      <h2>Diagnostic Commands: JFR and async-profiler</h2>
+      
+      <p>To identify where memory is being allocated, you must use low-overhead profiling tools that are safe to run in production environments.</p>
+
+      <h3>1. Java Flight Recorder (JFR)</h3>
+      <p>JFR is integrated into the OpenJDK JVM and has a latency impact of under 1%. You can start an allocation profile on a running JVM process using the <code>jcmd</code> utility:</p>
+
+      <pre><div class="code-header">shell</div><code>jcmd &lt;PID&gt; JFR.start name=alloc settings=profile duration=120s filename=alloc.jfr</code></pre>
+
+      <p>Once the JFR recording completes, you can extract the allocation event statistics. The key events to analyze are <code>jdk.ObjectAllocationInNewTLAB</code> (allocation in a thread local allocation buffer) and <code>jdk.ObjectAllocationOutsideTLAB</code> (allocation directly in the young generation, indicating larger objects):</p>
+
+      <pre><div class="code-header">shell</div><code>jfr print --events=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB alloc.jfr | head -n 50</code></pre>
+
+      <h3>2. async-profiler</h3>
+      <p>For finding hot allocation paths, `async-profiler` is often preferred because it avoids JVM Safepoint bias. You can profile allocations by targeting the <code>alloc</code> event, which monitors memory allocation in New TLABs and outside TLABs. The command below generates an interactive HTML flame graph:</p>
+
+      <pre><div class="code-header">shell</div><code>./asprof -e alloc -d 120 -f alloc_flame.html &lt;PID&gt;</code></pre>
+
+      <p>Open the generated HTML file in a browser. The flame graph displays the call stacks. The width of each bar corresponds to the total volume of memory allocated by that method and its callees. Focus your optimization efforts on the widest bars at the top of the stack.</p>
+
+      <h2>Reading the Results: TLABs and Humongous Allocations</h2>
+      
+      <p>When reviewing your allocation profiles, you must distinguish between the fast path and slow path of JVM allocation.</p>
+
+      <h3>Thread Local Allocation Buffers (TLABs)</h3>
+      <p>To avoid lock contention when multiple threads allocate memory simultaneously, the JVM assigns each thread a dedicated chunk of the young generation called a TLAB. When a thread requests memory (for example, creating a short lived DTO), the JVM allocates it out of the thread's TLAB. This is a fast path operation requiring no synchronization. Only when a TLAB fills up does the thread synchronize with the main heap to acquire a new TLAB.</p>
+
+      <p>If an object is too large to fit in a TLAB, the JVM bypasses the buffer and allocates it directly in the shared young generation. This slow path requires synchronization and adds latency. Look closely at <code>jdk.ObjectAllocationOutsideTLAB</code> events in your JFR logs. These events indicate that your objects are larger than your average TLAB size, indicating a need to optimize object sizes or adjust JVM TLAB configurations.</p>
+
+      <h3>G1 Humongous Allocations</h3>
+      <p>In the G1 collector, the heap is divided into equal sized regions. Any object that requires more than 50% of a G1 region's size is classified as a "humongous allocation." These objects bypass the young generation entirely and are allocated directly into the old generation, per the OpenJDK G1 Garbage Collector documentation.</p>
+
+      <p>Humongous allocations are expensive. Because they sit in the old generation, they are not collected during minor GCs. Frequent humongous allocations force G1 to start concurrent marking cycles early or trigger full GC pauses, degrading tail latency. You can identify these events in your GC logs by enabling unified GC logging (<code>-Xlog:gc+phases=debug</code>) and searching for "Humongous" entries. Match the byte size of the allocation in your JFR profile with the GC log entries to find the class triggering the humongous allocation.</p>
+
+      <h2>Common Hot Allocation Offenders</h2>
+      
+      <p>The table below lists the most common allocation anti patterns found in Java applications, along with their performance impact:</p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Anti-Pattern</th>
+              <th>Operational Cost / Mechanism</th>
+              <th>Common Fix</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Autoboxing in Hot Loops</strong></td>
+              <td>Converting a primitive (<code>int</code>) to its boxed object (<code>Integer</code>) instantiates a new wrapper object on every iteration, causing massive object churn.</td>
+              <td>Use primitive collections (e.g. Trove, Eclipse Collections) or design loops to use primitives directly.</td>
+            </tr>
+            <tr>
+              <td><strong>String Concatenation</strong></td>
+              <td>Using the <code>+</code> operator in request paths creates intermediate <code>StringBuilder</code> and <code>String</code> objects for every concatenated block.</td>
+              <td>Use pre-sized <code>StringBuilder</code> structures or pre-compile format patterns.</td>
+            </tr>
+            <tr>
+              <td><strong>byte[] Churn from Serialization</strong></td>
+              <td>Serializing large JSON payloads or database rows to byte arrays on every request creates massive arrays that must be collected immediately.</td>
+              <td>Use streaming serialization APIs (like Jackson streaming) to write directly to socket output streams.</td>
+            </tr>
+            <tr>
+              <td><strong>BigDecimal in Tight Loops</strong></td>
+              <td><code>BigDecimal</code> is an immutable object. Every arithmetic operation (<code>add</code>, <code>multiply</code>) allocates a new instance.</td>
+              <td>Perform calculations using scaled long primitives where possible, or instantiate BigDecimals only for final outputs.</td>
+            </tr>
+            <tr>
+              <td><strong>Stream Pipeline Overuse</strong></td>
+              <td>Java Streams are elegant but allocate intermediate pipeline stage objects, iterator wrappers, and lambda contexts on every execution.</td>
+              <td>Use standard imperative loops inside high frequency, latency-critical request paths.</td>
+            </tr>
+            <tr>
+              <td><strong>Accidental toString() Calls</strong></td>
+              <td>Evaluating log lines containing string concatenations (e.g. <code>log.debug("User data: " + userObj)</code>) evaluates the string even if the debug level is disabled.</td>
+              <td>Use parameterized logging (<code>log.debug("User data: {}", userObj)</code>) to defer string evaluation.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Fix Levers Before Touching GC Flags</h2>
+      
+      <p>Before modifying any JVM configuration flags, apply these code level optimizations to reduce memory pressure:</p>
+
+      <ol>
+        <li><strong>Buffer Reuse:</strong> Reuse reusable buffers (such as serialization byte arrays or compression streams) using <code>ThreadLocal</code> pools or object arenas to avoid allocating new buffers on every request.</li>
+        <li><strong>Primitive Collections:</strong> Replace boxed generic collections (like <code>Map&lt;Integer, Double&gt;</code>) with primitive collections to eliminate autoboxing overhead.</li>
+        <li><strong>Flatten DTO Chains:</strong> Avoid creating nested Data Transfer Objects (DTOs) that exist only to pass data through application layers. Flatten your data structures to minimize allocation depth.</li>
+        <li><strong>Move Caches Off-Heap:</strong> If your application maintains large, long lived caches, move them off-heap using direct <code>ByteBuffers</code> or off-heap cache libraries like Netty, Agrona, or Chronicle. This removes the cache memory from the garbage collector's responsibility entirely.</li>
+      </ol>
+
+      <h2>Tuning the Collector</h2>
+      
+      <p>If your allocation rate is optimized but GC pauses still violate your tail latency SLA, you can begin tuning the collector flags. The table below outlines the primary collectors and their key configurations, compiled from OpenJDK documentation:</p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Collector Name</th>
+              <th>Target Workload SLA</th>
+              <th>Key Tuning Levers</th>
+              <th>Default JDK Version</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Parallel GC</strong></td>
+              <td>Pure batch throughput. No latency constraints.</td>
+              <td><code>-XX:ParallelGCThreads=n</code> (set worker threads)</td>
+              <td>Default on JDK 8</td>
+            </tr>
+            <tr>
+              <td><strong>G1 GC</strong></td>
+              <td>General purpose. Balanced latency and throughput.</td>
+              <td><code>-XX:MaxGCPauseMillis=200</code> (adaptive pause target)<br><code>-XX:InitiatingHeapOccupancyPercent=45</code> (starts concurrent cycle)</td>
+              <td>Default since JDK 9</td>
+            </tr>
+            <tr>
+              <td><strong>ZGC / GenZGC</strong></td>
+              <td>Strict low pause latency (sub-millisecond target).</td>
+              <td><code>-XX:+UseZGC -XX:+ZGenerational</code> (enables generational ZGC)<br><code>-XX:ZAllocationSpikeTolerance=n</code> (handles sudden load)</td>
+              <td>ZGC production ready since JDK 15. Generational ZGC (-XX:+ZGenerational) available since JDK 21, default since JDK 23.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Validation Methodology</h2>
+      
+      <p>When validating a GC configuration change, never analyze GC pause histograms in isolation. A configuration that reduces average pause times can sometimes degrade overall throughput or increase CPU usage. Implement these validation metrics on your dashboard:</p>
+
+      <ul>
+        <li><strong>Promotion Rate:</strong> Track the volume of memory promoted from the young generation to the old generation per second. A high promotion rate indicates premature promotion, meaning objects are dying in the old generation instead of the young generation.</li>
+        <li><strong>Tenuring Threshold:</strong> Monitor the age histogram of survivor space objects. A declining tenuring threshold indicates that survivor spaces are full, forcing G1 to promote young objects early.</li>
+        <li><strong>Correlated Latency Dashboards:</strong> Annotate your deploy markers, JVM flag configurations, and application releases directly on your p95 and p99 SLA charts. This visual correlation is essential for verifying cause and effect.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <p>&copy; 2026 Vrushank Patel. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="../index.html" class="footer-link">Portfolio</a>
+        <a href="index.html" class="footer-link">Blog Home</a>
+        <a href="https://vrushankpatel5.medium.com/" target="_blank" rel="noopener noreferrer" class="footer-link">Medium</a>
+        <a href="https://github.com/VrushankPatel" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+        <a href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
+        <a href="mailto:vrushankpatel5@gmail.com" class="footer-link">Email</a>
+        <a href="../assets/Vrushank_Resume.pdf" target="_blank" rel="noopener noreferrer" class="footer-link">Resume</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       JAVASCRIPT
+       ========================================================= -->
+  <script>
+
+  </script>
+</body>
+</html>

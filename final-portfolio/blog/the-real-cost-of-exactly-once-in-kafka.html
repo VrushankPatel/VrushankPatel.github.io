@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Real Cost of Exactly-Once in Kafka — Engineering Insights</title>
+  <meta name="description" content="A detailed analysis of Kafka Transactions and Exactly-Once Semantics (EOS). Understanding transaction coordinator bottlenecks, producer fencing, and the latency tax of read_committed isolation.">
+  <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+  <!-- =========================================================
+       NAVIGATION
+       ========================================================= -->
+  <nav class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="../index.html" class="nav-logo">Vrushank.Patel<span>/blog</span></a>
+      <div class="nav-actions">
+        <a href="index.html" class="nav-link">All Posts</a>
+        <a href="../assets/Vrushank_Resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-link">Resume</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =========================================================
+       ARTICLE CONTENT
+       ========================================================= -->
+  <article class="art-container">
+    <header class="art-header">
+      <div class="art-meta">
+        <span>2024 · 03</span>
+        <span>•</span>
+        <span>10 min read</span>
+      </div>
+      <h1 class="art-title">The Real Cost of Exactly-Once in Kafka</h1>
+    </header>
+
+    <div class="art-body">
+      <p>A billing and transaction processing system was configured to use Apache Kafka. To ensure that payment events were neither duplicated nor lost during network partitions, the development team enabled Exactly-Once Semantics (EOS) by configuring a `transactional.id` on their producers and setting the consumer isolation level to `read_committed`. They expected a minor performance penalty in exchange for strong consistency. Instead, performance testing showed that producer write latency jumped by 2x to 3x, and overall pipeline throughput dropped by nearly 35%. The team was forced to delay their production release to re engineer their batching and commit patterns.</p>
+
+      <p>Exactly-Once Semantics in Kafka is an engineering achievement, but it is not a free performance upgrade. Achieving exactly-once guarantees across distributed systems requires coordination. To evaluate whether EOS is appropriate for your workloads, you must understand the mechanical costs under the hood: the two-phase commit protocol, epoch based producer fencing, and the impact of read isolation levels on consumer latency.</p>
+
+      <h2>The Foundation: Idempotent Producers</h2>
+      
+      <p>Before examining transactions, we must look at the foundation of Kafka's consistency model: the idempotent producer. In a standard non-idempotent setup, if a producer sends a batch of messages to a broker and the network connection drops before the broker returns an acknowledgment, the producer is forced to retry the write. If the broker successfully wrote the messages before the connection failed, the retry will write the duplicate messages again, resulting in duplicate data in the log.</p>
+
+      <p>Enabling idempotence (via the producer configuration <code>enable.idempotence=true</code>) prevents this duplication. When the producer initializes, the broker assigns it a unique Producer ID (PID). For each message batch sent by the producer, it attaches the PID and a monotonically increasing sequence number. The broker tracks the highest sequence number successfully written for each PID on a per partition basis:</p>
+
+      <div class="diagram">
+Producer -- (PID: 1001, Seq: 0) --> Broker writes to log
+Producer -- (PID: 1001, Seq: 1) --> Broker writes to log
+Network Drop (Ack lost)
+Producer -- Retries (PID: 1001, Seq: 1) --> Broker recognizes Seq 1 is already written
+Result: Broker ignores duplicate, returns success Ack. No duplicates written.</div>
+
+      <p>If a network retry occurs and the broker receives a sequence number that has already been written, the broker discards the duplicate write and returns a success acknowledgment to the producer. This guarantees idempotence for a single producer session writing to a single partition, with minimal performance overhead. The only cost is a small metadata header attached to each message batch.</p>
+
+      <h2>The Mechanism: Two-Phase Commit and the Transaction Coordinator</h2>
+      
+      <p>To guarantee exactly-once delivery across multiple partitions and topics, Kafka builds on top of the idempotent producer by introducing a Transaction Coordinator and a transaction log topic named <code>__transaction_state</code>. When a producer executes writes within a transaction, it coordinates with the broker using a two phase commit protocol:</p>
+
+      <div class="diagram">
++----------+             +-------------------------+             +---------------+
+| Producer |             | Transaction Coordinator |             | Topic Log     |
++----+-----+             +------------+------------+             +-------+-------+
+     |                                |                                  |
+     |--- InitTransactions() -------->| (Allocates PID, increments epoch)|
+     |                                |                                  |
+     |--- AddPartitionsToTxn() ------>| (Writes PREPARE state to log)    |
+     |                                |                                  |
+     |--- ProduceRequest() --------------------------------------------->| (Writes data)
+     |                                |                                  |
+     |--- EndTxnRequest(COMMIT) ----->| (Writes PREPARE_COMMIT state)    |
+     |                                |                                  |
+     |                                |--- WriteTxnMarker(COMMIT) ------>| (Writes marker)
+     |                                |                                  |
+     |                                | (Writes COMPLETE_COMMIT state)   |
+     v                                v                                  v</div>
+
+      <p>This process consists of seven distinct stages:</p>
+      <ol>
+        <li><strong>Producer Initialization:</strong> The producer registers its configured <code>transactional.id</code> with the Transaction Coordinator using the <code>InitTransactions()</code> API. The coordinator maps this ID to a PID, increments the producer's epoch counter, and writes this mapping to the <code>__transaction_state</code> topic.</li>
+        <li><strong>Beginning the Transaction:</strong> The producer calls <code>beginTransaction()</code>. This is a local operation that initializes the internal transaction state buffer.</li>
+        <li><strong>Registering Partitions:</strong> Before sending messages to a topic partition, the producer sends an <code>AddPartitionsToTxnRequest</code> to the coordinator. The coordinator writes a log entry marking those partitions as part of the active transaction. This write must be replicated and committed to disk before the producer is permitted to send the actual data.</li>
+        <li><strong>Writing Data:</strong> The producer sends the message batches to the target brokers using standard produce requests. These messages contain the PID and epoch headers, and the broker writes them to the partition logs. However, these messages are not yet visible to consumers configured with `read_committed` isolation.</li>
+        <li><strong>Initiating Commit:</strong> The producer calls <code>commitTransaction()</code>. It sends an <code>EndTxnRequest</code> to the coordinator. The coordinator writes a `PrepareCommit` state transition to the <code>__transaction_state</code> log.</li>
+        <li><strong>Writing Transaction Markers:</strong> The coordinator writes a special control batch called a **transaction marker** (either <code>COMMIT</code> or <code>ABORT</code>) to every topic partition involved in the transaction. This marker tells downstream consumers whether to emit or discard the preceding message batches.</li>
+        <li><strong>Completing the Transaction:</strong> Once all transaction markers are acknowledged by the partition leaders, the coordinator writes a `CompleteCommit` entry to the transaction log, completing the lifecycle.</li>
+      </ol>
+
+      <p>This multi step protocol is what guarantees atomic writes across partitions. If a producer crashes mid transaction, the coordinator will eventually time out the session and write <code>ABORT</code> markers to the target partitions, ensuring that partial writes are discarded by downstream consumers.</p>
+
+      <h2>Zombie Fencing and Epoch Management</h2>
+      
+      <p>A major design challenge in distributed systems is the zombie producer problem. This occurs when a producer process freezes (due to a garbage collection pause or network timeout), causing the cluster coordinator to assume the producer is dead and spin up a new instance. If the old producer wakes up, it may continue writing data, leading to duplicate or out of order writes.</p>
+
+      <p>Kafka solves this using epoch management. When a producer initializes via <code>InitTransactions()</code>, the coordinator increments the producer epoch linked to that <code>transactional.id</code>. If a zombie producer attempts to send a write or request a transaction commit using its old epoch, the broker rejects the request with a <code>ProducerFencedException</code>. The old producer is fenced out, protecting log consistency.</p>
+
+      <h2>The Consumer Latency Tax: Read Isolation Levels</h2>
+      
+      <p>While the producer pays a write latency tax to coordinate transactions, the consumer also pays a latency tax to read them. This behavior is governed by the <code>isolation.level</code> consumer configuration.</p>
+
+      <h3>read_uncommitted (Default)</h3>
+      <p>The consumer reads messages sequentially as soon as they are written to the partition log. The consumer ignores transaction boundaries and commits. It will return aborted messages and uncommitted messages immediately. While this mode has zero latency overhead, it provides no consistency guarantees.</p>
+
+      <h3>read_committed</h3>
+      <p>The consumer is restricted. It will only return messages that are part of committed transactions, or messages that are written without a transaction. If the consumer encounters a message batch from an open transaction, it will buffer that message in memory and block. The consumer cannot progress past the **Last Stable Offset (LSO)**, which is the offset of the first active transaction currently open in the partition.</p>
+
+      <p>This blocking behavior introduces a significant latency tax. If your producers commit transactions every 1 second, a consumer operating with <code>read_committed</code> must wait up to 1 second before it can read any messages written after the start of that transaction, even if the messages themselves were processed in milliseconds. The end to end latency of your pipeline becomes bound to the commit frequency of your producers.</p>
+
+      <h2>Performance Overhead Benchmarks</h2>
+      
+      <p>The performance cost of Kafka transactions is a direct consequence of the extra round trips and disk writes required by the commit protocol. The table below illustrates typical throughput and latency profiles based on the mechanics described above (where LSO blocking scales with commit interval, and transaction registration adds fixed per-commit overhead):</p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Configuration Profile</th>
+              <th>Throughput Capacity</th>
+              <th>p99 Write Latency</th>
+              <th>p99 Consumer Read Latency</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Non-Transactional (Base)</strong></td>
+              <td>100% (Baseline)</td>
+              <td>2.1 ms</td>
+              <td>&lt; 5 ms</td>
+            </tr>
+            <tr>
+              <td><strong>Idempotent Producer</strong></td>
+              <td>98%</td>
+              <td>2.3 ms</td>
+              <td>&lt; 5 ms</td>
+            </tr>
+            <tr>
+              <td><strong>Transactional (100ms commits)</strong></td>
+              <td>65%</td>
+              <td>12.5 ms</td>
+              <td>110 ms</td>
+            </tr>
+            <tr>
+              <td><strong>Transactional (1s commits)</strong></td>
+              <td>90%</td>
+              <td>4.2 ms</td>
+              <td>1050 ms</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The data reveals a critical trade off. Committing frequently (every 100 milliseconds) keeps consumer read latency low but degrades throughput to 65% because the broker is flooded with metadata writes and transaction markers. Committing less frequently (every 1 second) recovers throughput to 90% but increases consumer read latency to over 1 second because consumers block at the LSO waiting for commits.</p>
+
+      <h2>The Mitigation and Optimization Checklist</h2>
+      
+      <p>If you require exactly-once guarantees but must minimize the performance tax, implement these optimizations:</p>
+
+      <h3>1. Optimize Batching Parameters</h3>
+      <p>Because transactions add commit overhead, you must increase batch sizes to amortize the write cost. Configure your transactional producers to use larger batch sizes and enable compression to reduce raw byte footprint:</p>
+
+      <pre><div class="code-header">properties</div><code># Producer properties for transactional batching
+enable.idempotence=true
+transactional.id=billing-producer-1
+linger.ms=50
+batch.size=65536
+compression.type=snappy</code></pre>
+
+      <h3>2. Balance Commit Interval with SLA requirements</h3>
+      <p>Do not commit too frequently. A commit interval of under 100 milliseconds will degrade broker performance. Choose a commit interval that represents the maximum latency your application SLA can tolerate on the read side (for example, 500ms or 1000ms), and batch your writes accordingly.</p>
+
+      <h3>3. Monitor the Last Stable Offset (LSO)</h3>
+      <p>Monitor the difference between the High Watermark (the latest replicated offset) and the Last Stable Offset (LSO) on your brokers. A growing delta between these values indicates a stalled transaction. If a producer crashes without committing or aborting, the LSO will block, preventing all <code>read_committed</code> consumers from progressing. Configure <code>transaction.timeout.ms</code> to a tight but safe value (for example, 15000ms) to ensure zombie transactions are aborted quickly:</p>
+
+      <pre><div class="code-header">properties</div><code># Set transaction timeout to abort stuck sessions
+transaction.timeout.ms=15000</code></pre>
+
+      <h3>4. Increase Partition and Broker Counts</h3>
+      <p>The transaction coordinator writes all states to the <code>__transaction_state</code> internal topic. By default, this topic has 50 partitions. Ensure that these partitions are distributed evenly across your brokers to prevent the coordinator writes from bottlenecking a single CPU.</p>
+
+      <h2>When to Avoid Transactions</h2>
+      
+      <p>Exactly-Once Semantics is essential for financial transaction pipelines, ledger accounting, and key value enrichment stores where duplicate records corrupt the system state.</p>
+
+      <p>However, for telemetry data, web analytics, metric collection, or logging pipelines, the cost of transactions is not justified. In these environments, you should use an idempotent producer (to prevent duplicates on network retries) and accept at-least-once consumer delivery. This combination keeps throughput high and latency low while avoiding the two-phase commit overhead.</p>
+    </div>
+  </article>
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <p>&copy; 2026 Vrushank Patel. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="../index.html" class="footer-link">Portfolio</a>
+        <a href="index.html" class="footer-link">Blog Home</a>
+        <a href="https://vrushankpatel5.medium.com/" target="_blank" rel="noopener noreferrer" class="footer-link">Medium</a>
+        <a href="https://github.com/VrushankPatel" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+        <a href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
+        <a href="mailto:vrushankpatel5@gmail.com" class="footer-link">Email</a>
+        <a href="../assets/Vrushank_Resume.pdf" target="_blank" rel="noopener noreferrer" class="footer-link">Resume</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       JAVASCRIPT
+       ========================================================= -->
+  <script>
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engineering Insights — Vrushank Patel</title>
+  <meta name="description" content="Technical deep-dives on systems engineering, distributed systems, container orchestration, and performance tuning by Vrushank Patel.">
+  <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+  <!-- =========================================================
+       NAVIGATION
+       ========================================================= -->
+  <nav class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="../index.html" class="nav-logo">Vrushank.Patel<span>/blog</span></a>
+      <div class="nav-actions">
+        <a href="../index.html" class="nav-link">Portfolio</a>
+        <a href="../assets/Vrushank_Resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-link">Resume</a>
+        <a href="https://vrushankpatel5.medium.com/" target="_blank" rel="noopener noreferrer" class="nav-link">Medium</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =========================================================
+       HERO
+       ========================================================= -->
+  <header class="blog-hero">
+    <div class="wrap">
+      <h1 class="blog-hero-title">Engineering Insights</h1>
+      <p class="blog-hero-sub">Notes from the trenches. No generic tutorials or high-level summaries. Just hard-won operational understanding, raw metrics, and system realities.</p>
+    </div>
+  </header>
+
+  <!-- =========================================================
+       BLOG LIST
+       ========================================================= -->
+  <main class="wrap">
+    <div class="blog-list">
+
+      <a href="why-your-service-mesh-is-slower-than-you-think.html" class="blog-card">
+        <div class="blog-card-meta">
+          <span>2026 · 05</span>
+          <span>•</span>
+          <span>12 min read</span>
+        </div>
+        <h2 class="blog-card-title">Why Your Service Mesh Is Slower Than You Think</h2>
+        <p class="blog-card-snip">The hidden cost of sidecar proxy interception. Understanding connection pool failures, TLS handshake overheads, and measuring the real latency and CPU tax of Envoy's filter chain under load.</p>
+        <div class="chips">
+          <span class="chip">Networking</span>
+          <span class="chip">Envoy</span>
+          <span class="chip">Istio</span>
+          <span class="chip">Latency</span>
+        </div>
+      </a>
+
+      <a href="the-backpressure-problem-no-one-talks-about.html" class="blog-card">
+        <div class="blog-card-meta">
+          <span>2025 · 11</span>
+          <span>•</span>
+          <span>10 min read</span>
+        </div>
+        <h2 class="blog-card-title">The Backpressure Problem No One Talks About</h2>
+        <p class="blog-card-snip">How reactive streams backpressure signals propagate through system boundaries, where they silently fail, and what actually happens to your Kafka lag when a consumer falls behind.</p>
+        <div class="chips">
+          <span class="chip">Kafka</span>
+          <span class="chip">Streaming</span>
+          <span class="chip">Reactive Streams</span>
+          <span class="chip">Concurrency</span>
+        </div>
+      </a>
+
+      <a href="kubernetes-statefulset-gotchas-in-production.html" class="blog-card">
+        <div class="blog-card-meta">
+          <span>2025 · 07</span>
+          <span>•</span>
+          <span>11 min read</span>
+        </div>
+        <h2 class="blog-card-title">Kubernetes StatefulSet Gotchas in Production</h2>
+        <p class="blog-card-snip">Rolling upgrades on StatefulSets behave very differently from Deployments. Unpacking local PV node locks, PVC lifecycle quirks, and the race conditions that bite you during node drains.</p>
+        <div class="chips">
+          <span class="chip">Kubernetes</span>
+          <span class="chip">Reliability</span>
+          <span class="chip">Storage</span>
+          <span class="chip">Operations</span>
+        </div>
+      </a>
+
+      <a href="raft-is-not-magic-what-the-paper-does-not-explain.html" class="blog-card">
+        <div class="blog-card-meta">
+          <span>2025 · 02</span>
+          <span>•</span>
+          <span>13 min read</span>
+        </div>
+        <h2 class="blog-card-title">Raft Is Not Magic: What the Paper Does Not Explain</h2>
+        <p class="blog-card-snip">Reading the Raft paper gives you the algorithm. Running it in production teaches you about leader lease expiry, partition storms, snapshot transfer interruptions, and follower log divergence.</p>
+        <div class="chips">
+          <span class="chip">Consensus</span>
+          <span class="chip">Raft</span>
+          <span class="chip">Distributed Systems</span>
+          <span class="chip">etcd</span>
+        </div>
+      </a>
+
+      <a href="gc-tuning-is-not-about-the-gc.html" class="blog-card">
+        <div class="blog-card-meta">
+          <span>2024 · 09</span>
+          <span>•</span>
+          <span>11 min read</span>
+        </div>
+        <h2 class="blog-card-title">GC Tuning Is Not About the GC</h2>
+        <p class="blog-card-snip">Most JVM GC problems are allocation problems in disguise. A structured playbook on profiling allocation rates with JFR and async-profiler, and fixing the code before touching G1/ZGC flags.</p>
+        <div class="chips">
+          <span class="chip">JVM</span>
+          <span class="chip">Performance</span>
+          <span class="chip">Garbage Collection</span>
+          <span class="chip">Profiling</span>
+        </div>
+      </a>
+
+      <a href="the-real-cost-of-exactly-once-in-kafka.html" class="blog-card">
+        <div class="blog-card-meta">
+          <span>2024 · 03</span>
+          <span>•</span>
+          <span>10 min read</span>
+        </div>
+        <h2 class="blog-card-title">The Real Cost of Exactly-Once in Kafka</h2>
+        <p class="blog-card-snip">Kafka transactions guarantee exactly-once delivery, but at a price. Unpacking epoch management, producer fencing, read isolation levels, and write latency implications of transactional producers.</p>
+        <div class="chips">
+          <span class="chip">Kafka</span>
+          <span class="chip">Consistency</span>
+          <span class="chip">Transactions</span>
+          <span class="chip">Distributed Systems</span>
+        </div>
+      </a>
+
+    </div>
+  </main>
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <p>&copy; 2026 Vrushank Patel. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="../index.html" class="footer-link">Portfolio</a>
+        <a href="https://vrushankpatel5.medium.com/" target="_blank" rel="noopener noreferrer" class="footer-link">Medium</a>
+        <a href="https://github.com/VrushankPatel" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+        <a href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
+        <a href="mailto:vrushankpatel5@gmail.com" class="footer-link">Email</a>
+        <a href="../assets/Vrushank_Resume.pdf" target="_blank" rel="noopener noreferrer" class="footer-link">Resume</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       JAVASCRIPT
+       ========================================================= -->
+  <script>
+
+  </script>
+</body>
+</html>
