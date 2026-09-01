@@ -2,11 +2,14 @@
    DESIGN SYSTEM FOR VRUSHANK PATEL'S TECHNICAL BLOG
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap');
 
 :root {
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'IBM Plex Mono', 'Menlo', 'Consolas', monospace;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --t-base: 0.875rem;
+  --t-sm: 0.75rem;
 
   /* Spacing */
   --s-1: 0.25rem;
@@ -32,36 +35,36 @@
   --base: 250ms;
 
   /* Dark Theme Default */
-  --bg: #0a0a0b;
-  --bg-rgb: 10, 10, 11;
-  --bg-raised: #111114;
-  --surface: #17171b;
-  --surface-hover: #1d1d22;
-  --surface-2: #222228;
-  --border: rgba(255, 255, 255, 0.065);
-  --border-sub: rgba(255, 255, 255, 0.035);
+  --bg: #0a0a0c;
+  --bg-rgb: 10, 10, 12;
+  --bg-raised: #0d0e10;
+  --surface: #131418;
+  --surface-hover: #181a1e;
+  --surface-2: #1d1f24;
+  --border: #24262c;
+  --border-sub: rgba(255, 255, 255, 0.045);
 
-  --tx-1: #e6e6e9;
-  --tx-2: #9898a6;
-  --tx-3: #58585f;
-  --tx-4: #3a3a40;
+  --tx-1: #ece9e3;
+  --tx-2: #a3a09a;
+  --tx-3: #777670;
+  --tx-4: #4c4d4b;
 
-  --accent: #8fa3bf;
-  --accent-bg: rgba(143, 163, 191, 0.08);
-  --accent-sub: #586b84;
+  --accent: #d9a455;
+  --accent-bg: rgba(217, 164, 85, 0.10);
+  --accent-sub: #8a6b3a;
 
   --sh-sm: 0 1px 4px rgba(0, 0, 0, .45);
   --sh: 0 4px 14px rgba(0, 0, 0, .55);
-  --glass: rgba(17, 17, 20, 0.82);
-  --glass-border: rgba(255, 255, 255, 0.055);
+  --glass: rgba(10, 10, 12, 0.86);
+  --glass-border: #24262c;
   
-  --code-bg: #121215;
-  --code-header: #1b1b22;
+  --code-bg: #0d0e10;
+  --code-header: #181a1e;
   --token-keyword: #dd7f7f;
   --token-string: #8dbf8f;
   --token-comment: #5f5f67;
   --token-number: #dfb27f;
-  --token-function: #8fa3bf;
+  --token-function: #d9a455;
 }
 
 /* ============================================================
@@ -187,9 +190,10 @@ body {
 }
 
 .blog-hero-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 7vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
   line-height: 1.15;
   margin-bottom: var(--s-3);
   color: var(--tx-1);
@@ -521,6 +525,8 @@ tr:nth-child(even) td {
 .footer-links {
   display: flex;
   gap: var(--s-4);
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .footer-link {
