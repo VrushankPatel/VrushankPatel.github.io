@@ -10,6 +10,6 @@ Shared design system:
 - `assets/js/site.js`
 
 Dark mode is the default. The theme preference is stored in localStorage.
-Replace `assets/img/profile-placeholder.jpg` with your square portrait.
+Replace `assets/img/Hero.png` with your square portrait.
 
 The six blog article body regions are preserved from the supplied original HTML files; only the surrounding site shell/navigation was replaced so that all pages share the same header, theme, and responsive design.

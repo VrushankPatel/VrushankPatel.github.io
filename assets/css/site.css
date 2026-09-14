@@ -508,3 +508,39 @@ html[data-theme="dark"] .article-body code:not(pre code){background:#111923;bord
   .article-body pre .code-header{margin:-15px -16px 12px}
   .article-body table{font-size:11px;min-width:700px}
 }
+
+
+/* ===== FINAL TYPOGRAPHY / SCALE PASS ===== */
+body{font-size:16px}
+.hero-copy h1{font-size:clamp(56px,4.7vw,80px);letter-spacing:-.035em;line-height:1.03;font-weight:760}
+.hero-copy p{font-size:15px;line-height:1.78}
+.tags{gap:7px}.tag{font-size:11px;padding:7px 10px}
+.hero-actions{gap:9px}.btn{min-height:45px;padding:0 15px;font-size:12px}
+.quote strong{font-size:10px}.quote p{font-size:19px;line-height:1.5}
+.metrics{gap:9px}.metric{padding:15px 16px}.metric b{font-size:27px}.metric span{font-size:10px;margin-top:6px}
+.info-card{padding:16px}.info-card h3{font-size:12px;margin-bottom:10px}
+.philosophy{gap:8px}.phi{padding:11px}.phi .num{font-size:9px}.phi h4{font-size:12px;margin:6px 0}.phi p{font-size:10px;line-height:1.55}
+.focus-copy{font-size:10px;line-height:1.6}
+.explore-grid{gap:8px}.explore{padding:11px}.explore b{font-size:11px}.explore span{font-size:9px;line-height:1.45}
+.footer-strip{font-size:9px}
+.section-head h1{font-size:56px}.section-head p{font-size:15px}
+.project{min-height:300px;padding:23px}.project .index{font-size:9px}.project h2{font-size:33px}.project .summary{font-size:15px;line-height:1.78;max-width:100%}.project-meta{gap:7px;padding-top:16px}.project .tag{font-size:11px;padding:7px 10px}.stack{font-size:12px;line-height:1.55}.small-btn{font-size:11px;padding:9px 12px}
+.post{padding:19px 20px;grid-template-columns:95px minmax(0,1fr) 34px;gap:18px}.post .date{font-size:10px}.post h2{font-size:21px}.post p{font-size:13px;line-height:1.65}.post .tag{font-size:10px;padding:6px 8px}
+.article-body p{font-size:18px;line-height:1.95}.article-body h2{font-size:36px}.article-body h3{font-size:25px}.article-body ol,.article-body ul{font-size:18px;line-height:1.9}.article-body pre,.article-body .diagram{font-size:14px;line-height:1.72}
+
+@media(max-width:1080px){
+  .hero-copy h1{font-size:clamp(50px,6vw,72px)}
+}
+@media(max-width:760px){
+  .hero-copy h1{font-size:42px;letter-spacing:-.028em}
+  .hero-copy p{font-size:14px}
+  .tag{font-size:10px}
+  .btn{font-size:11px}
+  .metric b{font-size:24px}.metric span{font-size:9px}
+  .phi h4{font-size:12px}.phi p{font-size:10px}
+  .explore b{font-size:11px}.explore span{font-size:9px}
+  .section-head h1{font-size:43px}.section-head p{font-size:13px}
+  .project{min-height:250px;padding:20px}.project h2{font-size:28px}.project .summary{font-size:14px;line-height:1.72}.stack{font-size:11px}
+  .post h2{font-size:19px}.post p{font-size:12px}
+  .article-body p{font-size:16px;line-height:1.85}.article-body h2{font-size:29px}.article-body h3{font-size:22px}.article-body ol,.article-body ul{font-size:16px}.article-body pre,.article-body .diagram{font-size:12.5px}
+}
