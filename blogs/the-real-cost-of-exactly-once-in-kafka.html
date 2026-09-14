@@ -1,41 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Real Cost of Exactly-Once in Kafka — Engineering Insights</title>
-  <meta name="description" content="A detailed analysis of Kafka Transactions and Exactly-Once Semantics (EOS). Understanding transaction coordinator bottlenecks, producer fencing, and the latency tax of read_committed isolation.">
-  <link rel="stylesheet" href="blog.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#05070a">
+<title>The Real Cost of Exactly-Once in Kafka — Vrushank Patel</title>
+<meta name="description" content="A detailed analysis of Kafka Transactions and Exactly-Once Semantics (EOS). Understanding transaction coordinator bottlenecks, producer fencing, and the latency tax of read_committed isolation.">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem("vrushank-theme")==="light"?"light":"dark"}catch(e){}})();</script>
 </head>
 <body>
-
-  <!-- =========================================================
-       NAVIGATION
-       ========================================================= -->
-  <nav class="nav" id="nav">
-    <div class="wrap nav-inner">
-      <a href="../index.html" class="nav-logo">Vrushank.Patel<span>/blog</span></a>
-      <div class="nav-actions">
-        <a href="index.html" class="nav-link">All Posts</a>
-        <a href="../assets/Vrushank_Resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-link">Resume</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- =========================================================
-       ARTICLE CONTENT
-       ========================================================= -->
-  <article class="art-container">
-    <header class="art-header">
-      <div class="art-meta">
-        <span>2024 · 03</span>
-        <span>•</span>
-        <span>10 min read</span>
-      </div>
-      <h1 class="art-title">The Real Cost of Exactly-Once in Kafka</h1>
-    </header>
-
-    <div class="art-body">
+<header class="site-header"><div class="container nav"><a class="brand" href="../index.html"><span class="brand-mark">VP</span><span>Vrushank Patel</span></a><div class="nav-right"><nav class="nav-links" data-nav><a class="nav-link" data-nav-link href="../index.html">Home</a><a class="nav-link" data-nav-link href="../projects.html">Projects</a><a class="nav-link active" data-nav-link href="../blog.html">Blog</a><a class="nav-link" data-nav-link href="https://github.com/VrushankPatel" target="_blank" rel="noreferrer">GitHub ↗</a><a class="nav-link" data-nav-link href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noreferrer">LinkedIn ↗</a></nav><button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle theme">☀</button><button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-label="Open navigation">☰</button></div></div></header>
+<main><article class="article"><div class="eyebrow">Engineering Notes</div><div class="art-meta">
+<span>2024 · 03</span>
+<span>•</span>
+<span>10 min read</span>
+</div><h1 class="article-title">The Real Cost of Exactly-Once in Kafka</h1><div class="article-body">
       <p>A billing and transaction processing system was configured to use Apache Kafka. To ensure that payment events were neither duplicated nor lost during network partitions, the development team enabled Exactly-Once Semantics (EOS) by configuring a `transactional.id` on their producers and setting the consumer isolation level to `read_committed`. They expected a minor performance penalty in exchange for strong consistency. Instead, performance testing showed that producer write latency jumped by 2x to 3x, and overall pipeline throughput dropped by nearly 35%. The team was forced to delay their production release to re engineer their batching and commit patterns.</p>
 
       <p>Exactly-Once Semantics in Kafka is an engineering achievement, but it is not a free performance upgrade. Achieving exactly-once guarantees across distributed systems requires coordination. To evaluate whether EOS is appropriate for your workloads, you must understand the mechanical costs under the hood: the two-phase commit protocol, epoch based producer fencing, and the impact of read isolation levels on consumer latency.</p>
@@ -184,32 +164,6 @@ transaction.timeout.ms=15000</code></pre>
       <p>Exactly-Once Semantics is essential for financial transaction pipelines, ledger accounting, and key value enrichment stores where duplicate records corrupt the system state.</p>
 
       <p>However, for telemetry data, web analytics, metric collection, or logging pipelines, the cost of transactions is not justified. In these environments, you should use an idempotent producer (to prevent duplicates on network retries) and accept at-least-once consumer delivery. This combination keeps throughput high and latency low while avoiding the two-phase commit overhead.</p>
-    </div>
-  </article>
-
-  <!-- =========================================================
-       FOOTER
-       ========================================================= -->
-  <footer class="footer">
-    <div class="wrap footer-inner">
-      <p>&copy; 2026 Vrushank Patel. All rights reserved.</p>
-      <div class="footer-links">
-        <a href="../index.html" class="footer-link">Portfolio</a>
-        <a href="index.html" class="footer-link">Blog Home</a>
-        <a href="https://vrushankpatel5.medium.com/" target="_blank" rel="noopener noreferrer" class="footer-link">Medium</a>
-        <a href="https://github.com/VrushankPatel" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
-        <a href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
-        <a href="mailto:vrushankpatel5@gmail.com" class="footer-link">Email</a>
-        <a href="../assets/Vrushank_Resume.pdf" target="_blank" rel="noopener noreferrer" class="footer-link">Resume</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- =========================================================
-       JAVASCRIPT
-       ========================================================= -->
-  <script>
-
-  </script>
-</body>
-</html>
+    </div><div class="article-footer"><span>© 2026 Vrushank Patel</span><span><a href="../blog.html">← Back to Blog</a> · <a href="../projects.html">Projects</a></span></div></article></main>
+<script src="../assets/js/site.js" defer></script>
+</body></html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#05070a">
+<title>Projects — Vrushank Patel</title>
+<meta name="description" content="Selected systems projects by Vrushank Patel.">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem("vrushank-theme")==="light"?"light":"dark"}catch(e){}})();</script>
+</head>
+<body>
+<header class="site-header"><div class="container nav">
+      <a class="brand" href="index.html"><span class="brand-mark">VP</span><span>Vrushank Patel</span></a>
+      <div class="nav-right">
+        <nav class="nav-links" data-nav><a class="nav-link" data-nav-link href="index.html">Home</a><a class="nav-link active" data-nav-link href="projects.html">Projects</a><a class="nav-link" data-nav-link href="blog.html">Blog</a><a class="nav-link" data-nav-link href="https://github.com/VrushankPatel" target="_blank" rel="noreferrer">GitHub ↗</a><a class="nav-link" data-nav-link href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noreferrer">LinkedIn ↗</a></nav>
+        <button class="icon-btn" type="button" data-theme-toggle>☀</button>
+        <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false">☰</button>
+      </div>
+    </div></header>
+<main><section class="subpage"><div class="container">
+  <div class="section-head"><div><div class="eyebrow">Featured Systems</div><h1>Systems I’ve built</h1><p>Projects spanning geospatial intelligence, LLM infrastructure, Kubernetes security and service discovery.</p></div>
+  <input id="projectSearch" class="search" type="search" placeholder="Search projects…" aria-label="Search projects"></div>
+  <div id="projectGrid" class="project-grid"><article class="project" data-search="godseye geospatial intelligence aviation satellite disaster weather infrastructure">
+      <div class="index">01 · GEOSPATIAL INTELLIGENCE PLATFORM</div><h2>Godseye</h2><p class="summary">An interactive geospatial intelligence terminal aggregating aviation, satellite, disaster, weather and infrastructure data into a unified 3D operational view.</p>
+      <div class="project-meta"><span class="tag">real-time geospatial data</span><span class="tag">3D visualization</span><span class="tag">encrypted caching</span></div>
+      <div class="stack">React · Vite · CesiumJS · Zustand · Tailwind CSS · Firebase RTDB</div>
+      <div class="project-actions"><a class="small-btn" href="https://github.com/VrushankPatel/godseye" target="_blank" rel="noreferrer">GitHub ↗</a><a class="small-btn" href="https://godseye-x.web.app/" target="_blank" rel="noreferrer">Live Demo ↗</a></div>
+    </article><article class="project" data-search="relay llm infrastructure caching streaming deduplication">
+      <div class="index">02 · LLM INFRASTRUCTURE</div><h2>Relay</h2><p class="summary">A high-performance caching and streaming deduplication proxy for LLM infrastructure. Identical concurrent requests coalesce into one upstream call while the stream is distributed to waiting consumers.</p>
+      <div class="project-meta"><span class="tag">request coalescing</span><span class="tag">streaming caching</span><span class="tag">fuzzy matching</span><span class="tag">provider abstraction</span></div>
+      <div class="stack">TypeScript · Node.js · Docker · Prometheus · AES-256-GCM · tiktoken</div>
+      <div class="project-actions"><a class="small-btn" href="https://github.com/VrushankPatel/relay" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+    </article><article class="project" data-search="pulsaar kubernetes security operations filesystem inspection mtls">
+      <div class="index">03 · KUBERNETES SECURITY / OPERATIONS</div><h2>Pulsaar</h2><p class="summary">Secure filesystem inspection for Kubernetes pods without kubectl exec, shells or elevated credentials. Read-only access is enforced through mTLS and the sidecar pattern.</p>
+      <div class="project-meta"><span class="tag">read-only access</span><span class="tag">mTLS</span><span class="tag">audit logging</span><span class="tag">least privilege</span></div>
+      <div class="stack">Go · gRPC · Kubernetes · Helm · Prometheus · Cobra/TUI</div>
+      <div class="project-actions"><a class="small-btn" href="https://github.com/VrushankPatel/pulsaar" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+    </article><article class="project" data-search="maxine service discovery control plane microservices redis docker">
+      <div class="index">04 · SERVICE DISCOVERY / CONTROL PLANE</div><h2>Maxine</h2><p class="summary">A lightweight service registry, discovery system and operational control plane for microservices, handling registration, heartbeats, weighted round-robin and consistent hashing.</p>
+      <div class="project-meta"><span class="tag">service registration</span><span class="tag">heartbeats</span><span class="tag">weighted RR</span><span class="tag">consistent hashing</span><span class="tag">RBAC</span></div>
+      <div class="stack">Node.js · Express · Redis · Docker · Helm · Prometheus · OpenTelemetry</div>
+      <div class="project-actions"><a class="small-btn" href="https://github.com/VrushankPatel/Maxine" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+    </article></div>
+  <div id="projectEmpty" class="empty">No project matches that search.</div>
+</div></section></main>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

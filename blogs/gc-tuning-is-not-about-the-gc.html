@@ -1,41 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GC Tuning Is Not About the GC — Engineering Insights</title>
-  <meta name="description" content="A guide to diagnosing and fixing Java Garbage Collection issues. Why profiling memory allocation rates, not tweaking JVM collector flags, is the key to latency reduction.">
-  <link rel="stylesheet" href="blog.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#05070a">
+<title>GC Tuning Is Not About the GC — Vrushank Patel</title>
+<meta name="description" content="A guide to diagnosing and fixing Java Garbage Collection issues. Why profiling memory allocation rates, not tweaking JVM collector flags, is the key to latency reduction.">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem("vrushank-theme")==="light"?"light":"dark"}catch(e){}})();</script>
 </head>
 <body>
-
-  <!-- =========================================================
-       NAVIGATION
-       ========================================================= -->
-  <nav class="nav" id="nav">
-    <div class="wrap nav-inner">
-      <a href="../index.html" class="nav-logo">Vrushank.Patel<span>/blog</span></a>
-      <div class="nav-actions">
-        <a href="index.html" class="nav-link">All Posts</a>
-        <a href="../assets/Vrushank_Resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-link">Resume</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- =========================================================
-       ARTICLE CONTENT
-       ========================================================= -->
-  <article class="art-container">
-    <header class="art-header">
-      <div class="art-meta">
-        <span>2024 · 09</span>
-        <span>•</span>
-        <span>11 min read</span>
-      </div>
-      <h1 class="art-title">GC Tuning Is Not About the GC</h1>
-    </header>
-
-    <div class="art-body">
+<header class="site-header"><div class="container nav"><a class="brand" href="../index.html"><span class="brand-mark">VP</span><span>Vrushank Patel</span></a><div class="nav-right"><nav class="nav-links" data-nav><a class="nav-link" data-nav-link href="../index.html">Home</a><a class="nav-link" data-nav-link href="../projects.html">Projects</a><a class="nav-link active" data-nav-link href="../blog.html">Blog</a><a class="nav-link" data-nav-link href="https://github.com/VrushankPatel" target="_blank" rel="noreferrer">GitHub ↗</a><a class="nav-link" data-nav-link href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noreferrer">LinkedIn ↗</a></nav><button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle theme">☀</button><button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-label="Open navigation">☰</button></div></div></header>
+<main><article class="article"><div class="eyebrow">Engineering Notes</div><div class="art-meta">
+<span>2024 · 09</span>
+<span>•</span>
+<span>11 min read</span>
+</div><h1 class="article-title">GC Tuning Is Not About the GC</h1><div class="article-body">
       <p>For three weeks, a platform engineering team iterated on G1 Garbage Collector configurations. The service, a high-throughput Java API, was experiencing tail latency spikes. SREs systematically adjusted JVM flags, changing <code>MaxGCPauseMillis</code> from 200 to 100 and then to 50, altering G1 region sizes, adjusting survivor ratios, and expanding the heap from 8 gigabytes to 16 gigabytes. Each attempt yielded confusing results. The p99 tail latency spikes persisted, and CPU utilization steadily climbed with every new flag added. The team was tuning the collector in the dark.</p>
 
       <p>The breakthrough came when they stopped looking at the collector and started profiling memory allocations. Using a low-overhead Java Flight Recorder profile, the team discovered that a logging statement on a hot request path was implicitly evaluating the <code>toString()</code> method of a large metadata object graph on every request. This single line of code generated over 150 megabytes per second of garbage. Once this logging line was corrected, the allocation rate dropped by 90%, the tail latency spikes disappeared, and the JVM returned to stable operation. The weeks spent tuning GC flags was wasted effort because they treated a code symptom rather than its root cause.</p>
@@ -206,32 +186,6 @@
         <li><strong>Tenuring Threshold:</strong> Monitor the age histogram of survivor space objects. A declining tenuring threshold indicates that survivor spaces are full, forcing G1 to promote young objects early.</li>
         <li><strong>Correlated Latency Dashboards:</strong> Annotate your deploy markers, JVM flag configurations, and application releases directly on your p95 and p99 SLA charts. This visual correlation is essential for verifying cause and effect.</li>
       </ul>
-    </div>
-  </article>
-
-  <!-- =========================================================
-       FOOTER
-       ========================================================= -->
-  <footer class="footer">
-    <div class="wrap footer-inner">
-      <p>&copy; 2026 Vrushank Patel. All rights reserved.</p>
-      <div class="footer-links">
-        <a href="../index.html" class="footer-link">Portfolio</a>
-        <a href="index.html" class="footer-link">Blog Home</a>
-        <a href="https://vrushankpatel5.medium.com/" target="_blank" rel="noopener noreferrer" class="footer-link">Medium</a>
-        <a href="https://github.com/VrushankPatel" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
-        <a href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
-        <a href="mailto:vrushankpatel5@gmail.com" class="footer-link">Email</a>
-        <a href="../assets/Vrushank_Resume.pdf" target="_blank" rel="noopener noreferrer" class="footer-link">Resume</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- =========================================================
-       JAVASCRIPT
-       ========================================================= -->
-  <script>
-
-  </script>
-</body>
-</html>
+    </div><div class="article-footer"><span>© 2026 Vrushank Patel</span><span><a href="../blog.html">← Back to Blog</a> · <a href="../projects.html">Projects</a></span></div></article></main>
+<script src="../assets/js/site.js" defer></script>
+</body></html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#05070a">
+<title>Blog — Vrushank Patel</title>
+<meta name="description" content="Engineering insights by Vrushank Patel.">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem("vrushank-theme")==="light"?"light":"dark"}catch(e){}})();</script>
+</head>
+<body>
+<header class="site-header"><div class="container nav">
+      <a class="brand" href="index.html"><span class="brand-mark">VP</span><span>Vrushank Patel</span></a>
+      <div class="nav-right">
+        <nav class="nav-links" data-nav><a class="nav-link" data-nav-link href="index.html">Home</a><a class="nav-link" data-nav-link href="projects.html">Projects</a><a class="nav-link active" data-nav-link href="blog.html">Blog</a><a class="nav-link" data-nav-link href="https://github.com/VrushankPatel" target="_blank" rel="noreferrer">GitHub ↗</a><a class="nav-link" data-nav-link href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noreferrer">LinkedIn ↗</a></nav>
+        <button class="icon-btn" type="button" data-theme-toggle>☀</button>
+        <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false">☰</button>
+      </div>
+    </div></header>
+<main><section class="subpage"><div class="container">
+  <div class="section-head"><div><div class="eyebrow">Engineering Insights</div><h1>No tutorials. Hard-won operational understanding.</h1><p>Distributed systems, Kafka, Kubernetes, JVM performance and the parts that only become obvious under production pressure.</p></div>
+  <input id="blogSearch" class="search" type="search" placeholder="Search posts…" aria-label="Search posts"></div>
+  <div id="blogList" class="blog-list"><a class="post" data-search="service mesh envoy istio latency networking tls connection pools" href="blogs/why-your-service-mesh-is-slower-than-you-think.html">
+      <div class="date">2026 · 05<br>Engineering note</div>
+      <div><h2>Why Your Service Mesh Is Slower Than You Think</h2><p>The actual latency tax inside sidecar proxies: connection churn, TLS handshakes and filter pipelines.</p><div class="tags"><span class="tag">sidecar interception</span><span class="tag">Envoy</span><span class="tag">TLS</span><span class="tag">tail latency</span></div></div>
+      <div class="arrow">→</div>
+    </a><a class="post" data-search="backpressure kafka reactive streams consumer lag streaming concurrency" href="blogs/the-backpressure-problem-no-one-talks-about.html">
+      <div class="date">2025 · 11<br>Engineering note</div>
+      <div><h2>The Backpressure Problem No One Talks About</h2><p>Why Kafka consumer lag is a symptom, not a mechanism, and how async boundaries silently break downstream pipelines.</p><div class="tags"><span class="tag">Kafka</span><span class="tag">Reactive Streams</span><span class="tag">consumer lag</span><span class="tag">backpressure</span></div></div>
+      <div class="arrow">→</div>
+    </a><a class="post" data-search="kubernetes statefulset production rolling upgrades pvc local storage node drains" href="blogs/kubernetes-statefulset-gotchas-in-production.html">
+      <div class="date">2025 · 07<br>Engineering note</div>
+      <div><h2>Kubernetes StatefulSet Gotchas in Production</h2><p>Ordered rollouts, PVC lifecycle, local PV races and node drains — the StatefulSet behavior that matters under real operations.</p><div class="tags"><span class="tag">Kubernetes</span><span class="tag">StatefulSet</span><span class="tag">PVC</span><span class="tag">node drains</span></div></div>
+      <div class="arrow">→</div>
+    </a><a class="post" data-search="raft distributed systems consensus etcd leader lease snapshot partition" href="blogs/raft-is-not-magic-what-the-paper-does-not-explain.html">
+      <div class="date">2025 · 02<br>Engineering note</div>
+      <div><h2>Raft Is Not Magic: What the Paper Does Not Explain</h2><p>The operational gaps around pre-vote, leader leases, snapshots, partitions and log divergence in production Raft.</p><div class="tags"><span class="tag">Raft</span><span class="tag">consensus</span><span class="tag">etcd</span><span class="tag">distributed systems</span></div></div>
+      <div class="arrow">→</div>
+    </a><a class="post" data-search="gc tuning jvm garbage collection jfr profiling allocation" href="blogs/gc-tuning-is-not-about-the-gc.html">
+      <div class="date">2024 · 09<br>Engineering note</div>
+      <div><h2>GC Tuning Is Not About the GC</h2><p>Why profiling allocation rates and object lifetimes beats blindly tweaking JVM collector flags.</p><div class="tags"><span class="tag">JVM</span><span class="tag">JFR</span><span class="tag">GC</span><span class="tag">profiling</span></div></div>
+      <div class="arrow">→</div>
+    </a><a class="post" data-search="kafka exactly once transactions producer fencing read isolation latency" href="blogs/the-real-cost-of-exactly-once-in-kafka.html">
+      <div class="date">2024 · 03<br>Engineering note</div>
+      <div><h2>The Real Cost of Exactly-Once in Kafka</h2><p>Transactions, producer fencing, read_committed and the latency tax behind stronger guarantees.</p><div class="tags"><span class="tag">Kafka</span><span class="tag">transactions</span><span class="tag">EOS</span><span class="tag">read_committed</span></div></div>
+      <div class="arrow">→</div>
+    </a></div>
+  <div id="blogEmpty" class="empty">No post matches that search.</div>
+</div></section></main>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

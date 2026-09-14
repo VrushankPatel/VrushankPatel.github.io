@@ -1,41 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Backpressure Problem No One Talks About — Engineering Insights</title>
-  <meta name="description" content="A technical deep dive into backpressure in Kafka-based systems. Why Kafka consumer lag is a symptom, not a mechanism, and how async boundaries silently break downstream pipelines.">
-  <link rel="stylesheet" href="blog.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#05070a">
+<title>The Backpressure Problem No One Talks About — Vrushank Patel</title>
+<meta name="description" content="A technical deep dive into backpressure in Kafka-based systems. Why Kafka consumer lag is a symptom, not a mechanism, and how async boundaries silently break downstream pipelines.">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem("vrushank-theme")==="light"?"light":"dark"}catch(e){}})();</script>
 </head>
 <body>
-
-  <!-- =========================================================
-       NAVIGATION
-       ========================================================= -->
-  <nav class="nav" id="nav">
-    <div class="wrap nav-inner">
-      <a href="../index.html" class="nav-logo">Vrushank.Patel<span>/blog</span></a>
-      <div class="nav-actions">
-        <a href="index.html" class="nav-link">All Posts</a>
-        <a href="../assets/Vrushank_Resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-link">Resume</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- =========================================================
-       ARTICLE CONTENT
-       ========================================================= -->
-  <article class="art-container">
-    <header class="art-header">
-      <div class="art-meta">
-        <span>2025 · 11</span>
-        <span>•</span>
-        <span>10 min read</span>
-      </div>
-      <h1 class="art-title">The Backpressure Problem No One Talks About</h1>
-    </header>
-
-    <div class="art-body">
+<header class="site-header"><div class="container nav"><a class="brand" href="../index.html"><span class="brand-mark">VP</span><span>Vrushank Patel</span></a><div class="nav-right"><nav class="nav-links" data-nav><a class="nav-link" data-nav-link href="../index.html">Home</a><a class="nav-link" data-nav-link href="../projects.html">Projects</a><a class="nav-link active" data-nav-link href="../blog.html">Blog</a><a class="nav-link" data-nav-link href="https://github.com/VrushankPatel" target="_blank" rel="noreferrer">GitHub ↗</a><a class="nav-link" data-nav-link href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noreferrer">LinkedIn ↗</a></nav><button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle theme">☀</button><button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-label="Open navigation">☰</button></div></div></header>
+<main><article class="article"><div class="eyebrow">Engineering Notes</div><div class="art-meta">
+<span>2025 · 11</span>
+<span>•</span>
+<span>10 min read</span>
+</div><h1 class="article-title">The Backpressure Problem No One Talks About</h1><div class="article-body">
       <p>During a traffic spike, a monitoring dashboard shows a steady upward slope in a Kafka consumer group lag chart. No alerts trigger because the consumer processes are healthy, the CPU load is moderate, and memory utilization remains stable. It looks like a standard backlog that will clear once the traffic peak passes. However, hours later, downstream analytics databases show gaps in transactional histories. The system has experienced silent data loss because the consumer group lag grew so large that it exceeded the topic retention limit, and Kafka began deleting unconsumed log segments. The service did not crash, yet data was permanently lost.</p>
 
       <p>This failure occurs because of a fundamental misunderstanding of flow control in distributed event streams. Engineers talk about backpressure as if it is a built in feature of Kafka. It is not. Kafka does not have a native backpressure protocol to signal a producer to slow down. Instead, it decouples the producer and consumer through a persistent log. True backpressure is a flow control mechanism. Kafka consumer lag is merely a symptom of a processing mismatch, and if you do not design your applications to handle this separation, your systems will fail under load.</p>
@@ -252,32 +232,6 @@ Time to Data Loss = 864,000,000 records / 3,000 records/sec = 288,000 seconds = 
         <li><strong>Time to Retention Expiry:</strong> Create a calculated metric dividing the current partition lag by the net lag growth rate, and trigger pages if this time is less than 3 hours. This warns you of incoming data deletion.</li>
         <li><strong>Rebalance Counts:</strong> Track the rate of consumer group rebalance events. High rebalance rates indicate poll timeouts caused by slow processing threads or undersized poll intervals.</li>
       </ul>
-    </div>
-  </article>
-
-  <!-- =========================================================
-       FOOTER
-       ========================================================= -->
-  <footer class="footer">
-    <div class="wrap footer-inner">
-      <p>&copy; 2026 Vrushank Patel. All rights reserved.</p>
-      <div class="footer-links">
-        <a href="../index.html" class="footer-link">Portfolio</a>
-        <a href="index.html" class="footer-link">Blog Home</a>
-        <a href="https://vrushankpatel5.medium.com/" target="_blank" rel="noopener noreferrer" class="footer-link">Medium</a>
-        <a href="https://github.com/VrushankPatel" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
-        <a href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
-        <a href="mailto:vrushankpatel5@gmail.com" class="footer-link">Email</a>
-        <a href="../assets/Vrushank_Resume.pdf" target="_blank" rel="noopener noreferrer" class="footer-link">Resume</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- =========================================================
-       JAVASCRIPT
-       ========================================================= -->
-  <script>
-
-  </script>
-</body>
-</html>
+    </div><div class="article-footer"><span>© 2026 Vrushank Patel</span><span><a href="../blog.html">← Back to Blog</a> · <a href="../projects.html">Projects</a></span></div></article></main>
+<script src="../assets/js/site.js" defer></script>
+</body></html>

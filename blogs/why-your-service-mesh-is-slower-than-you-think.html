@@ -1,41 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Why Your Service Mesh Is Slower Than You Think — Engineering Insights</title>
-  <meta name="description" content="A deep dive into Envoy and Istio latency overhead. Why connection pool configuration and Envoy filters, not iptables, are the real causes of service mesh slowdowns.">
-  <link rel="stylesheet" href="blog.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#05070a">
+<title>Why Your Service Mesh Is Slower Than You Think — Vrushank Patel</title>
+<meta name="description" content="A deep dive into Envoy and Istio latency overhead. Why connection pool configuration and Envoy filters, not iptables, are the real causes of service mesh slowdowns.">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem("vrushank-theme")==="light"?"light":"dark"}catch(e){}})();</script>
 </head>
 <body>
-
-  <!-- =========================================================
-       NAVIGATION
-       ========================================================= -->
-  <nav class="nav" id="nav">
-    <div class="wrap nav-inner">
-      <a href="../index.html" class="nav-logo">Vrushank.Patel<span>/blog</span></a>
-      <div class="nav-actions">
-        <a href="index.html" class="nav-link">All Posts</a>
-        <a href="../assets/Vrushank_Resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-link">Resume</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- =========================================================
-       ARTICLE CONTENT
-       ========================================================= -->
-  <article class="art-container">
-    <header class="art-header">
-      <div class="art-meta">
-        <span>2026 · 05</span>
-        <span>•</span>
-        <span>12 min read</span>
-      </div>
-      <h1 class="art-title">Why Your Service Mesh Is Slower Than You Think</h1>
-    </header>
-
-    <div class="art-body">
+<header class="site-header"><div class="container nav"><a class="brand" href="../index.html"><span class="brand-mark">VP</span><span>Vrushank Patel</span></a><div class="nav-right"><nav class="nav-links" data-nav><a class="nav-link" data-nav-link href="../index.html">Home</a><a class="nav-link" data-nav-link href="../projects.html">Projects</a><a class="nav-link active" data-nav-link href="../blog.html">Blog</a><a class="nav-link" data-nav-link href="https://github.com/VrushankPatel" target="_blank" rel="noreferrer">GitHub ↗</a><a class="nav-link" data-nav-link href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noreferrer">LinkedIn ↗</a></nav><button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle theme">☀</button><button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-label="Open navigation">☰</button></div></div></header>
+<main><article class="article"><div class="eyebrow">Engineering Notes</div><div class="art-meta">
+<span>2026 · 05</span>
+<span>•</span>
+<span>12 min read</span>
+</div><h1 class="article-title">Why Your Service Mesh Is Slower Than You Think</h1><div class="article-body">
       <p>It is a scenario played out in platform engineering teams worldwide. A high performance service running in production with a clean single digit millisecond p99 latency profile is onboarded to the corporate service mesh. Seconds after sidecar injection is enabled and traffic routes through the new proxy, the latency dashboard changes. The p99 latency jumps into the double digits. The application code has not changed. The network infrastructure is identical. The CPU allocation is unchanged. Yet the service is suddenly slower and the platform team is left scrambling to explain where the latency budget went.</p>
 
       <p>The immediate reaction in most incidents is to blame the network plumbing. Engineers assume that the process of redirecting packets through the Linux kernel loopback interface using iptables rules must be the primary source of overhead. This intuition is wrong. The actual culprit is almost never the kernel interception itself. The real latency tax is paid inside the user space proxy container. It is consumed by connection establishment churn, cryptographic handshake setup, and the complex filter pipelines that run on every request.</p>
@@ -257,32 +237,6 @@ spec:
       <p>Despite optimizations, a service mesh sidecar will always introduce some overhead. For services operating in deep fan out call chains, this latency compounds. If a single user request triggers a call chain of 10 microservices in series, a 2 millisecond sidecar penalty at each hop translates into a 40 millisecond increase in tail latency for the end user.</p>
 
       <p>If your application domain includes real time ad bidding, low latency gaming, or high frequency matching engines where every single millisecond translates to revenue, a sidecar service mesh is the wrong architecture. In these environments, you should either leverage eBPF host routing to bypass sidecars entirely, migrate to Istio Ambient mode to split out Layer 7 components, or rely on client side library configurations for traffic routing and telemetry.</p>
-    </div>
-  </article>
-
-  <!-- =========================================================
-       FOOTER
-       ========================================================= -->
-  <footer class="footer">
-    <div class="wrap footer-inner">
-      <p>&copy; 2026 Vrushank Patel. All rights reserved.</p>
-      <div class="footer-links">
-        <a href="../index.html" class="footer-link">Portfolio</a>
-        <a href="index.html" class="footer-link">Blog Home</a>
-        <a href="https://vrushankpatel5.medium.com/" target="_blank" rel="noopener noreferrer" class="footer-link">Medium</a>
-        <a href="https://github.com/VrushankPatel" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
-        <a href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
-        <a href="mailto:vrushankpatel5@gmail.com" class="footer-link">Email</a>
-        <a href="../assets/Vrushank_Resume.pdf" target="_blank" rel="noopener noreferrer" class="footer-link">Resume</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- =========================================================
-       JAVASCRIPT
-       ========================================================= -->
-  <script>
-
-  </script>
-</body>
-</html>
+    </div><div class="article-footer"><span>© 2026 Vrushank Patel</span><span><a href="../blog.html">← Back to Blog</a> · <a href="../projects.html">Projects</a></span></div></article></main>
+<script src="../assets/js/site.js" defer></script>
+</body></html>

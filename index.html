@@ -2,376 +2,109 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#08111d">
-<title>Vrushank Patel — Senior Backend Engineer</title>
-<meta name="description" content="Vrushank Patel — Senior Backend Engineer working on low-latency trading infrastructure, distributed systems and production-grade cloud platforms.">
-
-<style>
-:root{
-  --bg:#08111d; --bg2:#0b1624; --surface:#0e1a29; --surface2:#111f31;
-  --ink:#edf3fb; --muted:#91a1b6; --muted2:#6f8095; --line:#1d3045;
-  --accent:#73a3ff; --accent2:#3e79ed; --good:#57c77a; --shadow:0 20px 70px rgba(0,0,0,.24);
-  --max:1240px; --radius:22px; --radius-sm:14px; --sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-}
-html[data-theme="light"]{
-  --bg:#f5f7fa; --bg2:#f9fafc; --surface:rgba(255,255,255,.88); --surface2:#fff;
-  --ink:#102033; --muted:#667385; --muted2:#7d8a9c; --line:#e3e8ef;
-  --accent:#0f5fe9; --accent2:#0b55d0; --shadow:0 20px 60px rgba(26,39,58,.09);
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:92px}
-body{
-  margin:0;color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;
-  background:
-    radial-gradient(circle at 82% 4%,rgba(49,106,219,.13),transparent 28%),
-    radial-gradient(circle at 7% 75%,rgba(34,87,173,.07),transparent 25%),
-    var(--bg);
-}
-body,header,.panel,.project,.post,.metric,.info-card,.btn,.theme-toggle,.contact,.explore,.phi,.nav-links{
-  transition:background-color .22s ease,border-color .22s ease,color .22s ease,box-shadow .22s ease;
-}
-a{color:inherit;text-decoration:none} button,input{font:inherit}
-.wrap{width:min(calc(100% - 40px),var(--max));margin-inline:auto}.muted{color:var(--muted)}
-.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--muted2)}
-.serif{font-family:Georgia,"Times New Roman",serif}
-
-/* header */
-.site-header{position:sticky;top:0;z-index:100;height:72px;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
-.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-.brand{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:850;letter-spacing:-.02em}
-.brand-mark{width:35px;height:35px;border-radius:11px;display:grid;place-items:center;background:var(--ink);color:var(--bg);font-size:11px;font-weight:900}
-.nav-right{display:flex;align-items:center;gap:7px}.nav-links{display:flex;align-items:center;gap:4px}
-.nav-link{padding:9px 11px;border-radius:10px;color:var(--muted);font-size:12px}.nav-link:hover{background:var(--surface);color:var(--ink)}
-.theme-toggle,.menu-btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
-.theme-toggle{width:38px;height:38px;border-radius:11px;font-size:15px}.menu-btn{display:none;width:38px;height:38px;border-radius:11px}
-
-/* shared */
-main{overflow:clip}.section{padding:54px 0}.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:blur(18px)}
-.btn{min-height:42px;padding:0 14px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--surface2);color:var(--ink);font-size:11px;font-weight:850;cursor:pointer}
-.btn:hover{transform:translateY(-1px);box-shadow:0 9px 20px rgba(0,0,0,.10)}.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.tag{display:inline-flex;align-items:center;padding:6px 8px;border-radius:999px;border:1px solid var(--line);background:var(--surface2);color:var(--muted);font-size:9px;font-weight:750}
-.tags{display:flex;flex-wrap:wrap;gap:6px}
-
-/* hero */
-.hero-section{min-height:calc(100svh - 72px);display:grid;align-items:center;padding:28px 0 50px}
-.resume{display:grid;grid-template-columns:315px minmax(0,1fr);gap:16px}
-.profile{padding:22px;min-height:calc(100svh - 130px);display:flex;flex-direction:column}
-.availability{display:inline-flex;align-items:center;gap:8px;width:max-content;padding:7px 9px;border-radius:999px;background:rgba(87,199,122,.10);color:var(--good);font-size:10px;font-weight:800}
-.dot{width:7px;height:7px;border-radius:999px;background:var(--good);box-shadow:0 0 0 4px rgba(87,199,122,.10)}
-.profile-photo{width:100%;aspect-ratio:1;border-radius:18px;object-fit:cover;margin:18px 0 17px;border:1px solid var(--line);background:var(--surface2)}
-.profile h2{margin:0;font-size:29px;line-height:1;letter-spacing:-.05em}.role{margin:8px 0 0;color:var(--muted);font-size:12px;line-height:1.45;font-weight:650}
-.location{margin:11px 0 20px;color:var(--muted2);font-size:11px}
-.contact-list{display:grid;gap:7px;margin-top:auto}.contact{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 11px;border:1px solid var(--line);background:var(--surface2);border-radius:11px;font-size:10px}.contact span:last-child{color:var(--muted);font-weight:700;overflow:hidden;text-overflow:ellipsis}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.resume-link{margin-top:7px;width:100%}
-
-.resume-main{padding:22px;min-height:calc(100svh - 130px)}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1.24fr) minmax(260px,.76fr);gap:22px;align-items:end}
-.hero-copy h1{margin:9px 0 11px;font-size:clamp(41px,4.25vw,64px);line-height:.97;letter-spacing:-.064em;max-width:800px}.accent{color:var(--accent)}
-.hero-copy p{margin:0;max-width:720px;font-size:14px;line-height:1.7;color:var(--muted)}
-.hero-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}
-.quote{padding:16px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(180deg,var(--surface2),color-mix(in srgb,var(--surface2) 82%,var(--bg)))}.quote strong{font-size:10px;color:var(--muted2)}.quote p{margin:8px 0 0;font-family:Georgia,serif;font-size:18px;line-height:1.42}
-
-.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:13px}.metric{padding:13px 14px;border:1px solid var(--line);border-radius:13px;background:var(--surface2)}.metric b{font-size:23px;letter-spacing:-.045em}.metric span{display:block;margin-top:5px;font-size:9px;color:var(--muted2)}
-
-.two-col{display:grid;grid-template-columns:1.15fr .85fr;gap:7px;margin-top:7px}.info-card{padding:14px;border:1px solid var(--line);border-radius:15px;background:var(--surface2)}.info-card h3{font-size:11px;margin:0 0 9px;letter-spacing:-.02em}
-.philosophy{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.phi{padding:10px;border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--surface2) 88%,var(--bg))}.phi .num{font-size:9px;color:var(--muted2);font-weight:800}.phi h4{font-size:11px;margin:5px 0 5px}.phi p{margin:0;font-size:9px;line-height:1.45;color:var(--muted);display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
-.focus-copy{font-size:10px;line-height:1.55;color:var(--muted);margin:9px 0 0}.focus-tags{margin-top:8px}
-
-.explore-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.explore{padding:10px;border:1px solid var(--line);border-radius:11px;background:color-mix(in srgb,var(--surface2) 90%,var(--bg))}.explore b{font-size:10px}.explore span{display:block;margin-top:4px;font-size:8px;line-height:1.35;color:var(--muted2)}
-.footer-strip{display:flex;justify-content:space-between;gap:12px;margin-top:7px;padding-top:8px;border-top:1px solid var(--line);color:var(--muted2);font-size:8px}
-
-/* projects */
-.section-heading{display:flex;justify-content:space-between;align-items:end;gap:22px;margin-bottom:19px}.section-heading h1{font-size:43px;line-height:1;letter-spacing:-.055em;margin:7px 0 0}.section-heading p{max-width:670px;margin:10px 0 0;color:var(--muted);font-size:12px;line-height:1.6}
-.search{width:260px;height:40px;padding:0 12px;border:1px solid var(--line);border-radius:11px;background:var(--surface);color:var(--ink);outline:0;font-size:11px}.search::placeholder{color:var(--muted2)}.search:focus{border-color:color-mix(in srgb,var(--accent) 55%,var(--line));box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 13%,transparent)}
-.project-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.project{padding:18px;border:1px solid var(--line);border-radius:17px;background:var(--surface);min-height:245px;display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(0,0,0,.08)}.project:hover{transform:translateY(-2px);box-shadow:0 18px 50px rgba(0,0,0,.13)}.index{font-size:8px;letter-spacing:.1em;color:var(--muted2);font-weight:850}.project h2{margin:9px 0 7px;font-size:25px;letter-spacing:-.045em}.summary{font-size:11px;line-height:1.6;color:var(--muted);margin:0}.project .project-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;padding-top:13px}.stack{font-size:9px;color:var(--muted2);margin-top:9px}.project-actions{display:flex;gap:6px;margin-top:10px}.small-btn{font-size:9px;font-weight:800;padding:7px 9px;border:1px solid var(--line);border-radius:9px;background:var(--surface2)}.small-btn:hover{border-color:color-mix(in srgb,var(--accent) 55%,var(--line));color:var(--accent)}.empty{display:none;margin-top:10px;padding:26px;text-align:center;border:1px dashed var(--line);border-radius:14px;color:var(--muted)}
-
-/* blog */
-.blog-list{display:grid;gap:8px}.post{display:grid;grid-template-columns:82px minmax(0,1fr) 30px;gap:14px;align-items:center;padding:14px 15px;border:1px solid var(--line);border-radius:15px;background:var(--surface);box-shadow:0 10px 32px rgba(0,0,0,.06)}.post:hover{transform:translateY(-1px);box-shadow:0 16px 40px rgba(0,0,0,.11)}.date{font-size:9px;line-height:1.45;color:var(--muted2);font-weight:800}.post h2{margin:0;font-size:16px;letter-spacing:-.025em}.post p{margin:5px 0 0;font-size:10px;line-height:1.45;color:var(--muted)}.arrow{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:color-mix(in srgb,var(--surface2) 90%,var(--bg));color:var(--muted);font-size:13px}.post .tags{margin-top:7px}.post .tag{font-size:8px;padding:5px 7px}
-
-.site-end{padding:36px 0 65px}.end-panel{padding:22px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}.end-panel h2{font-size:28px;margin:6px 0}.end-panel p{margin:0;color:var(--muted);font-size:11px;line-height:1.6;max-width:670px}
-[data-tip]{position:relative}[data-tip]::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 9px);transform:translate(-50%,4px);width:max-content;max-width:330px;padding:8px 10px;border-radius:9px;background:#0d1928;color:#fff;font-size:10px;line-height:1.35;font-weight:650;opacity:0;pointer-events:none;z-index:50;box-shadow:0 14px 30px rgba(0,0,0,.18);transition:.16s ease}[data-tip]:hover::after{opacity:1;transform:translate(-50%,0)}
-
-@media(max-width:1080px){
-  .hero-section{min-height:auto}.resume{grid-template-columns:1fr}.profile{min-height:auto;display:grid;grid-template-columns:145px 1fr;gap:16px;align-items:start}.profile-photo{grid-row:2 / span 3;width:145px;margin:0}.profile-info{padding-top:4px}.contact-list{grid-column:1/-1;margin-top:0}.actions{grid-column:1/-1}.resume-link{grid-column:1/-1}.resume-main{min-height:auto}.hero-grid{grid-template-columns:1fr}.quote{max-width:none}.explore-grid{grid-template-columns:repeat(3,1fr)}
-}
-@media(max-width:760px){
-  .wrap{width:min(calc(100% - 24px),var(--max))}.site-header,.nav{height:64px}.nav-links{position:absolute;top:59px;left:12px;right:12px;padding:7px;display:none;flex-direction:column;align-items:stretch;border:1px solid var(--line);border-radius:13px;background:var(--surface);box-shadow:var(--shadow)}.nav-links.open{display:flex}.nav-link{padding:10px 11px}.theme-toggle{width:37px;height:37px}.menu-btn{display:block}.hero-section{padding:16px 0 30px}.profile,.resume-main{padding:17px}.hero-copy h1{font-size:40px}.metrics{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}.philosophy{grid-template-columns:1fr}.explore-grid{grid-template-columns:1fr 1fr}.section{padding:38px 0}.section-heading{display:block}.section-heading h1{font-size:40px}.search{width:100%;margin-top:15px}.project-grid{grid-template-columns:1fr}.post{grid-template-columns:1fr 28px}.date{grid-column:1/-1}.end-panel{grid-template-columns:1fr}.footer-strip{display:block}.footer-strip span{display:block;margin-bottom:5px}
-}
-@media(max-width:430px){
-  .profile{grid-template-columns:82px 1fr}.profile-photo{width:82px}.profile h2{font-size:24px}.hero-copy h1{font-size:35px}.actions{grid-template-columns:1fr}
-}
-</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#05070a">
+<title>Home — Vrushank Patel</title>
+<meta name="description" content="Vrushank Patel — Senior Backend Engineer.">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem("vrushank-theme")==="light"?"light":"dark"}catch(e){}})();</script>
 </head>
-
 <body>
-<header class="site-header">
-  <div class="wrap nav">
-    <a class="brand" href="#home" aria-label="Vrushank Patel home"><span class="brand-mark">VP</span><span>Vrushank Patel</span></a>
-    <div class="nav-right">
-      <nav id="navLinks" class="nav-links" aria-label="Primary navigation">
-        <a class="nav-link" href="#home">Home</a>
-        <a class="nav-link" href="#projects">Projects</a>
-        <a class="nav-link" href="#blog">Blog</a>
-        <a class="nav-link" href="https://github.com/VrushankPatel" target="_blank" rel="noreferrer">GitHub ↗</a>
-        <a class="nav-link" href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-      </nav>
-      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">☀</button>
-      <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
-    </div>
+<header class="site-header"><div class="container nav">
+      <a class="brand" href="index.html"><span class="brand-mark">VP</span><span>Vrushank Patel</span></a>
+      <div class="nav-right">
+        <nav class="nav-links" data-nav><a class="nav-link active" data-nav-link href="index.html">Home</a><a class="nav-link" data-nav-link href="projects.html">Projects</a><a class="nav-link" data-nav-link href="blog.html">Blog</a><a class="nav-link" data-nav-link href="https://github.com/VrushankPatel" target="_blank" rel="noreferrer">GitHub ↗</a><a class="nav-link" data-nav-link href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noreferrer">LinkedIn ↗</a></nav>
+        <button class="icon-btn" type="button" data-theme-toggle>☀</button>
+        <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false">☰</button>
+      </div>
+    </div></header>
+<main>
+<section class="home">
+  <div class="container resume">
+    <aside class="panel profile">
+      <span class="availability"><span class="dot"></span> Open to interesting systems problems</span>
+      <img class="profile-photo" src="assets/img/profile-placeholder.jpg"
+           alt="Square profile placeholder"
+           data-tip="Replace assets/img/profile-placeholder.jpg with your own square portrait.">
+      <div class="profile-info">
+        <h2>Vrushank Patel</h2>
+        <p class="role">Senior Backend Engineer · Trading &amp; Market Technology</p>
+        <p class="location">Bengaluru, India</p>
+      </div>
+
+      <div class="contact-list">
+        <a class="contact" href="mailto:vrushankpatel5@gmail.com"><span>Email</span><span>vrushankpatel5@gmail.com</span></a>
+        <a class="contact" href="tel:+919601501725"><span>Phone</span><span>+91 96015 01725</span></a>
+        <a class="contact" href="https://github.com/VrushankPatel" target="_blank" rel="noreferrer"><span>GitHub</span><span>@VrushankPatel ↗</span></a>
+        <a class="contact" href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noreferrer"><span>LinkedIn</span><span>Profile ↗</span></a>
+      </div>
+
+      <div class="actions">
+        <a class="btn primary" href="projects.html">Explore Systems →</a>
+        <a class="btn" href="blog.html">Engineering Notes →</a>
+      </div>
+      <a class="btn resume-link" href="https://vrushankpatel.github.io/assets/Vrushank_Resume.pdf" target="_blank" rel="noreferrer">View PDF Résumé ↗</a>
+    </aside>
+
+    <section class="panel resume-main">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Senior Backend Engineer · Trading &amp; Market Technology</div>
+          <h1>I build systems where <span class="accent">latency, correctness</span> and reliability are not optional.</h1>
+          <p>Senior backend engineer working on low-latency trading infrastructure, matching engines, distributed systems and production-grade cloud platforms.</p>
+          <div class="tags" style="margin-top:14px">
+            <span class="tag">Java</span><span class="tag">JVM</span><span class="tag">Distributed Systems</span><span class="tag">Kafka</span><span class="tag">Kubernetes</span><span class="tag">AWS</span><span class="tag">Linux</span>
+          </div>
+          <div class="hero-actions">
+            <a class="btn primary" href="projects.html">View Systems →</a>
+            <a class="btn" href="blog.html">Read Engineering Notes →</a>
+          </div>
+        </div>
+        <div class="quote"><strong>Engineering principle</strong><p>“I care less about how sophisticated a system looks and more about how well it behaves under pressure.”</p></div>
+      </div>
+
+      <div class="metrics">
+        <div class="metric" data-tip="Engineering experience highlighted on the portfolio."><b>5+</b><span>Years Engineering</span></div>
+        <div class="metric" data-tip="Tail latency is treated as a product requirement for latency-sensitive systems."><b>P99</b><span>Latency Mindset</span></div>
+        <div class="metric" data-tip="JVM runtime, GC, allocation and profiling are core performance areas."><b>JVM</b><span>Performance</span></div>
+        <div class="metric" data-tip="Kubernetes platform, stateful workloads and operations are core focus areas."><b>K8s</b><span>Infrastructure</span></div>
+      </div>
+
+      <div class="two-col">
+        <div class="info-card">
+          <h3>How I think about systems</h3>
+          <div class="philosophy">
+            <article class="phi" data-tip="Understand the whole system boundary before optimizing an isolated component."><div class="num">01</div><h4>Systems Thinking First</h4><p>Architecture starts with boundaries, dependencies, failure modes and operational cost.</p></article>
+            <article class="phi" data-tip="Assume networks, dependencies and capacity will fail."><div class="num">02</div><h4>Build for Failure</h4><p>Design explicit failure modes, bounded blast radius, observability and recovery.</p></article>
+            <article class="phi" data-tip="Profiling, allocation, contention and GC become visible system behavior."><div class="num">03</div><h4>Latency Is a Feature</h4><p>Tail latency is a requirement, not simply an optimization exercise.</p></article>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h3>Deep technical focus</h3>
+          <div class="tags">
+            <span class="tag">Raft / CAP / PACELC</span><span class="tag">Kafka Internals</span><span class="tag">GC / JFR</span><span class="tag">Kubernetes</span><span class="tag">TLS 1.3 / mTLS</span><span class="tag">FIX</span><span class="tag">gRPC / Protobuf</span>
+          </div>
+          <p class="focus-copy">Technologies studied to production depth — internals, failure modes and tradeoffs.</p>
+        </div>
+      </div>
+
+      <div class="info-card explore-card">
+        <h3>Currently exploring</h3>
+        <div class="explore-grid">
+          <div class="explore" data-tip="Kernel observability, networking and infrastructure visibility."><b>eBPF</b><span>Kernel observability</span></div>
+          <div class="explore" data-tip="CFS, NUMA and scheduler behavior under latency pressure."><b>Linux Scheduler Internals</b><span>CFS · NUMA · latency</span></div>
+          <div class="explore"><b>JVM Vector API</b><span>SIMD · Panama</span></div>
+          <div class="explore"><b>Kubernetes Gateway API</b><span>Service networking</span></div>
+          <div class="explore"><b>Deterministic Simulation Testing</b><span>Failure reproduction</span></div>
+        </div>
+      </div>
+
+      <div class="footer-strip"><span>Backend architecture · Distributed systems · Trading infrastructure</span><span>Projects ↗ · Blog ↗</span></div>
+    </section>
   </div>
-</header>
-
-<main id="home">
-  <section class="hero-section">
-    <div class="wrap resume">
-      <aside class="panel profile">
-        <span class="availability"><span class="dot"></span> Open to interesting systems problems</span>
-
-        <img class="profile-photo" src="assets/profile-placeholder.jpg"
-             alt="Placeholder profile portrait"
-             data-tip="Placeholder only — replace assets/profile-placeholder.jpg with your square portrait.">
-
-        <div class="profile-info">
-          <h2>Vrushank Patel</h2>
-          <p class="role">Senior Backend Engineer · Trading &amp; Market Technology</p>
-          <p class="location">Bengaluru, India</p>
-        </div>
-
-        <div class="contact-list">
-          <a class="contact" href="mailto:vrushankpatel5@gmail.com"><span>Email</span><span>vrushankpatel5@gmail.com</span></a>
-          <a class="contact" href="tel:+919601501725"><span>Phone</span><span>+91 96015 01725</span></a>
-          <a class="contact" href="https://github.com/VrushankPatel" target="_blank" rel="noreferrer"><span>GitHub</span><span>@VrushankPatel ↗</span></a>
-          <a class="contact" href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noreferrer"><span>LinkedIn</span><span>Profile ↗</span></a>
-        </div>
-
-        <div class="actions">
-          <a class="btn primary" href="#projects">Explore Systems →</a>
-          <a class="btn" href="#blog">Engineering Notes →</a>
-        </div>
-        <a class="btn resume-link" href="Vrushank_Resume.pdf" target="_blank" rel="noreferrer">View PDF Résumé ↗</a>
-      </aside>
-
-      <section class="panel resume-main">
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <div class="eyebrow">Senior Backend Engineer · Trading &amp; Market Technology</div>
-            <h1>I build systems where <span class="accent">latency, correctness</span> and reliability are not optional.</h1>
-            <p>Senior backend engineer working on low-latency trading infrastructure, matching engines, distributed systems and production-grade cloud platforms.</p>
-            <div class="tags" style="margin-top:13px">
-              <span class="tag">Java</span><span class="tag">JVM</span><span class="tag">Distributed Systems</span><span class="tag">Kafka</span><span class="tag">Kubernetes</span><span class="tag">AWS</span><span class="tag">Linux</span>
-            </div>
-            <div class="hero-actions">
-              <a class="btn primary" href="#projects">View Systems →</a>
-              <a class="btn" href="#blog">Read Engineering Notes →</a>
-            </div>
-          </div>
-          <div class="quote"><strong>Engineering principle</strong><p>“I care less about how sophisticated a system looks and more about how well it behaves under pressure.”</p></div>
-        </div>
-
-        <div class="metrics">
-          <div class="metric" data-tip="Engineering experience highlighted on the portfolio."><b>5+</b><span>Years Engineering</span></div>
-          <div class="metric" data-tip="Tail latency is treated as a product requirement for latency-sensitive systems."><b>P99</b><span>Latency Mindset</span></div>
-          <div class="metric" data-tip="JVM runtime, GC, allocation and profiling are studied to production depth."><b>JVM</b><span>Performance</span></div>
-          <div class="metric" data-tip="Kubernetes platform, stateful workloads and operations are core areas of focus."><b>K8s</b><span>Infrastructure</span></div>
-        </div>
-
-        <div class="two-col">
-          <div class="info-card">
-            <h3>How I think about systems</h3>
-            <div class="philosophy">
-              <article class="phi" data-tip="Understand the system boundary before optimizing an isolated component.">
-                <div class="num">01</div><h4>Systems Thinking First</h4>
-                <p>Architecture starts with boundaries, dependencies, failure modes and operational cost.</p>
-              </article>
-              <article class="phi" data-tip="Assume dependencies, networks, processes and capacity will fail.">
-                <div class="num">02</div><h4>Build for Failure</h4>
-                <p>Design explicit failure modes, bounded blast radius, observability and recovery.</p>
-              </article>
-              <article class="phi" data-tip="Profiling, allocation, contention and GC can become observable product behavior.">
-                <div class="num">03</div><h4>Latency Is a Feature</h4>
-                <p>Tail latency is a requirement, not merely an optimization exercise.</p>
-              </article>
-            </div>
-          </div>
-
-          <div class="info-card">
-            <h3>Deep technical focus</h3>
-            <div class="tags focus-tags">
-              <span class="tag">Raft / CAP / PACELC</span><span class="tag">Kafka Internals</span><span class="tag">GC / JFR</span><span class="tag">Kubernetes</span><span class="tag">TLS 1.3 / mTLS</span><span class="tag">FIX</span><span class="tag">gRPC / Protobuf</span>
-            </div>
-            <p class="focus-copy">Technologies studied to production depth — internals, failure modes and tradeoffs.</p>
-          </div>
-        </div>
-
-        <div class="info-card" style="margin-top:7px">
-          <h3>Currently exploring</h3>
-          <div class="explore-grid">
-            <div class="explore" data-tip="Kernel observability, network policy and infrastructure-level visibility."><b>eBPF</b><span>Kernel observability</span></div>
-            <div class="explore" data-tip="CFS, task groups, NUMA and their effects on tail latency."><b>Linux Scheduler Internals</b><span>CFS · NUMA · latency</span></div>
-            <div class="explore" data-tip="SIMD and high-performance numeric workloads on the JVM."><b>JVM Vector API</b><span>SIMD · Panama</span></div>
-            <div class="explore" data-tip="Modern traffic management and service networking beyond Ingress."><b>Kubernetes Gateway API</b><span>Service networking</span></div>
-            <div class="explore" data-tip="Reproducing distributed-system failures deterministically."><b>Deterministic Simulation Testing</b><span>Failure reproduction</span></div>
-          </div>
-        </div>
-
-        <div class="footer-strip"><span>Backend architecture · Distributed systems · Trading infrastructure</span><span>Projects ↓ · Blog ↓</span></div>
-      </section>
-    </div>
-  </section>
-
-  <section id="projects" class="section">
-    <div class="wrap">
-      <div class="section-heading">
-        <div>
-          <div class="eyebrow">Featured Systems</div>
-          <h1>Systems I’ve built</h1>
-          <p>Projects that explore infrastructure, distributed systems, security and data-intensive applications. Hover for concise context; open GitHub for the implementation.</p>
-        </div>
-        <input id="projectSearch" class="search" type="search" placeholder="Search projects…" aria-label="Search projects">
-      </div>
-
-      <div id="projectGrid" class="project-grid">
-        <article class="project" data-search="godseye geospatial intelligence aviation satellite disaster weather infrastructure react vite cesium">
-          <div class="index">01 · GEOSPATIAL INTELLIGENCE PLATFORM</div>
-          <h2>Godseye</h2>
-          <p class="summary">An interactive geospatial intelligence terminal that aggregates aviation, satellite, disaster, weather and infrastructure data into a unified 3D operational view.</p>
-          <div class="project-meta"><span class="tag">real-time geospatial data</span><span class="tag">3D visualization</span><span class="tag">encrypted caching</span></div>
-          <div class="stack">React · Vite · CesiumJS · Zustand · Tailwind CSS · Firebase RTDB</div>
-          <div class="project-actions"><a class="small-btn" href="https://github.com/VrushankPatel/godseye" target="_blank" rel="noreferrer">GitHub ↗</a><a class="small-btn" href="https://godseye-x.web.app/" target="_blank" rel="noreferrer">Live Demo ↗</a></div>
-        </article>
-
-        <article class="project" data-search="relay llm infrastructure caching streaming deduplication typescript node docker prometheus">
-          <div class="index">02 · LLM INFRASTRUCTURE</div>
-          <h2>Relay</h2>
-          <p class="summary">A high-performance caching and streaming deduplication proxy for LLM infrastructure. Identical concurrent requests coalesce into one upstream call while the resulting stream is distributed to waiting consumers.</p>
-          <div class="project-meta"><span class="tag">request coalescing</span><span class="tag">streaming caching</span><span class="tag">fuzzy matching</span><span class="tag">provider abstraction</span></div>
-          <div class="stack">TypeScript · Node.js · Docker · Prometheus · AES-256-GCM · tiktoken</div>
-          <div class="project-actions"><a class="small-btn" href="https://github.com/VrushankPatel/relay" target="_blank" rel="noreferrer">GitHub ↗</a></div>
-        </article>
-
-        <article class="project" data-search="pulsaar kubernetes security operations filesystem inspection mtls grpc helm prometheus">
-          <div class="index">03 · KUBERNETES SECURITY / OPERATIONS</div>
-          <h2>Pulsaar</h2>
-          <p class="summary">A secure filesystem inspection tool for Kubernetes pods without relying on <code>kubectl exec</code>, shells or elevated credentials. Read-only access is enforced through mTLS and the sidecar pattern.</p>
-          <div class="project-meta"><span class="tag">read-only access</span><span class="tag">mTLS</span><span class="tag">audit logging</span><span class="tag">least privilege</span></div>
-          <div class="stack">Go · gRPC · Kubernetes · Helm · Prometheus · Cobra/TUI</div>
-          <div class="project-actions"><a class="small-btn" href="https://github.com/VrushankPatel/pulsaar" target="_blank" rel="noreferrer">GitHub ↗</a></div>
-        </article>
-
-        <article class="project" data-search="maxine service discovery control plane microservices node express redis docker helm prometheus opentelemetry">
-          <div class="index">04 · SERVICE DISCOVERY / CONTROL PLANE</div>
-          <h2>Maxine</h2>
-          <p class="summary">A lightweight service registry, discovery system and operational control plane for microservices, handling registration, heartbeats, weighted round-robin and consistent hashing.</p>
-          <div class="project-meta"><span class="tag">service registration</span><span class="tag">heartbeats</span><span class="tag">weighted RR</span><span class="tag">consistent hashing</span><span class="tag">RBAC</span></div>
-          <div class="stack">Node.js · Express · Redis · Docker · Helm · Prometheus · OpenTelemetry</div>
-          <div class="project-actions"><a class="small-btn" href="https://github.com/VrushankPatel/Maxine" target="_blank" rel="noreferrer">GitHub ↗</a></div>
-        </article>
-      </div>
-      <div id="projectEmpty" class="empty">No project matches that search.</div>
-    </div>
-  </section>
-
-  <section id="blog" class="section">
-    <div class="wrap">
-      <div class="section-heading">
-        <div>
-          <div class="eyebrow">Engineering Insights</div>
-          <h1>No tutorials. Hard-won operational understanding.</h1>
-          <p>Distributed systems, Kafka, Kubernetes, JVM performance and the parts that only become obvious under production pressure.</p>
-        </div>
-        <input id="blogSearch" class="search" type="search" placeholder="Search posts…" aria-label="Search posts">
-      </div>
-
-      <div id="blogList" class="blog-list">
-        <a class="post" data-search="service mesh envoy istio latency networking tls connection pools" href="blogs/service-mesh.html">
-          <div class="date">2026 · 05<br>12 min read</div><div><h2>Why Your Service Mesh Is Slower Than You Think</h2><p>What actually happens to tail latency when every hop is intercepted, redirected and re-encrypted — and where the hidden costs live.</p><div class="tags"><span class="tag">sidecar interception</span><span class="tag">Envoy</span><span class="tag">TLS</span><span class="tag">tail latency</span></div></div><div class="arrow">→</div>
-        </a>
-        <a class="post" data-search="backpressure kafka reactive streams consumer lag streaming concurrency propagation" href="blogs/backpressure.html">
-          <div class="date">2025 · 11<br>10 min read</div><div><h2>The Backpressure Problem No One Talks About</h2><p>Backpressure is not a feature you add — it is a property that emerges from how boundaries, queues and consumers compose across the system.</p><div class="tags"><span class="tag">Reactive Streams</span><span class="tag">Kafka</span><span class="tag">consumer lag</span><span class="tag">concurrency</span></div></div><div class="arrow">→</div>
-        </a>
-        <a class="post" data-search="kubernetes statefulset production rolling upgrades pvc local storage node drains reliability operations" href="blogs/statefulset.html">
-          <div class="date">2025 · 07<br>11 min read</div><div><h2>Kubernetes StatefulSet Gotchas in Production</h2><p>The ordering guarantee is the obvious part. The interesting failures live in PVCs, node drains, rolling upgrades and the race conditions underneath.</p><div class="tags"><span class="tag">rolling upgrades</span><span class="tag">PVCs</span><span class="tag">local storage</span><span class="tag">node drains</span></div></div><div class="arrow">→</div>
-        </a>
-        <a class="post" data-search="raft distributed systems consensus etcd leader lease snapshot partition follower divergence" href="blogs/raft.html">
-          <div class="date">2025 · 02<br>13 min read</div><div><h2>Raft Is Not Magic: What the Paper Does Not Explain</h2><p>The paper is clean. Production Raft has leader leases, snapshot transfer, partition handling and follower divergence — the parts that actually bite.</p><div class="tags"><span class="tag">Raft</span><span class="tag">consensus</span><span class="tag">partitions</span><span class="tag">etcd</span></div></div><div class="arrow">→</div>
-        </a>
-        <a class="post" data-search="gc tuning jvm performance garbage collection profiling jfr async profiler allocation heap" href="blogs/gc.html">
-          <div class="date">2024 · 09<br>11 min read</div><div><h2>GC Tuning Is Not About the GC</h2><p>Allocation behavior shapes pause times more than any GC flag. Profiling with JFR and async-profiler changes the question from “which GC?” to “which allocations?”</p><div class="tags"><span class="tag">JVM</span><span class="tag">JFR</span><span class="tag">async-profiler</span><span class="tag">performance</span></div></div><div class="arrow">→</div>
-        </a>
-        <a class="post" data-search="kafka exactly once semantics transactions producer fencing epochs read isolation latency tradeoffs" href="blogs/exactly-once.html">
-          <div class="date">2024 · 03<br>10 min read</div><div><h2>The Real Cost of Exactly-Once in Kafka</h2><p>Transactions, producer fencing, epochs and read isolation — and the latency tradeoffs you accept when you ask Kafka for stronger guarantees.</p><div class="tags"><span class="tag">transactions</span><span class="tag">producer fencing</span><span class="tag">read isolation</span><span class="tag">latency</span></div></div><div class="arrow">→</div>
-        </a>
-      </div>
-      <div id="blogEmpty" class="empty">No post matches that search.</div>
-    </div>
-  </section>
-
-  <section class="site-end">
-    <div class="wrap">
-      <div class="panel end-panel">
-        <div>
-          <div class="eyebrow">Contact</div>
-          <h2>Have a hard systems problem?</h2>
-          <p>I’m interested in backend architecture, distributed systems, trading infrastructure, performance engineering and difficult production problems.</p>
-        </div>
-        <div class="actions" style="min-width:225px">
-          <a class="btn primary" href="mailto:vrushankpatel5@gmail.com">Email →</a>
-          <a class="btn" href="https://github.com/VrushankPatel" target="_blank" rel="noreferrer">GitHub ↗</a>
-        </div>
-      </div>
-    </div>
-  </section>
+</section>
 </main>
-
-<script>
-const root = document.documentElement;
-const themeToggle = document.getElementById('themeToggle');
-const storedTheme = localStorage.getItem('vrushank-theme');
-if (storedTheme === 'light') root.dataset.theme = 'light';
-
-function syncThemeButton(){
-  const light = root.dataset.theme === 'light';
-  themeToggle.textContent = light ? '☾' : '☀';
-  themeToggle.setAttribute('aria-label', light ? 'Enable dark mode' : 'Enable light mode');
-  themeToggle.title = light ? 'Switch to dark mode' : 'Switch to light mode';
-}
-syncThemeButton();
-
-themeToggle.addEventListener('click', () => {
-  root.dataset.theme = root.dataset.theme === 'light' ? 'dark' : 'light';
-  localStorage.setItem('vrushank-theme', root.dataset.theme);
-  syncThemeButton();
-});
-
-const nav = document.getElementById('navLinks');
-const menuBtn = document.getElementById('menuBtn');
-menuBtn.addEventListener('click', () => {
-  const open = nav.classList.toggle('open');
-  menuBtn.setAttribute('aria-expanded', String(open));
-});
-document.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', () => {
-  nav.classList.remove('open');
-  menuBtn.setAttribute('aria-expanded','false');
-}));
-
-function wireSearch(inputId, itemSelector, emptyId){
-  const input = document.getElementById(inputId);
-  const items = [...document.querySelectorAll(itemSelector)];
-  const empty = document.getElementById(emptyId);
-  input.addEventListener('input', () => {
-    const q = input.value.trim().toLowerCase();
-    let matches = 0;
-    items.forEach(item => {
-      const ok = !q || item.dataset.search.toLowerCase().includes(q);
-      item.style.display = ok ? '' : 'none';
-      if (ok) matches++;
-    });
-    empty.style.display = matches ? 'none' : 'block';
-  });
-}
-wireSearch('projectSearch','.project','projectEmpty');
-wireSearch('blogSearch','.post','blogEmpty');
-</script>
+<script src="assets/js/site.js" defer></script>
 </body>
 </html>

@@ -1,41 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Raft Is Not Magic: What the Paper Does Not Explain — Engineering Insights</title>
-  <meta name="description" content="A deep dive into the operational gaps of the Raft consensus algorithm. Why production implementations like etcd and TiKV require pre-vote, leader leases, and chunked snapshots.">
-  <link rel="stylesheet" href="blog.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#05070a">
+<title>Raft Is Not Magic: What the Paper Does Not Explain — Vrushank Patel</title>
+<meta name="description" content="A deep dive into the operational gaps of the Raft consensus algorithm. Why production implementations like etcd and TiKV require pre-vote, leader leases, and chunked snapshots.">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem("vrushank-theme")==="light"?"light":"dark"}catch(e){}})();</script>
 </head>
 <body>
-
-  <!-- =========================================================
-       NAVIGATION
-       ========================================================= -->
-  <nav class="nav" id="nav">
-    <div class="wrap nav-inner">
-      <a href="../index.html" class="nav-logo">Vrushank.Patel<span>/blog</span></a>
-      <div class="nav-actions">
-        <a href="index.html" class="nav-link">All Posts</a>
-        <a href="../assets/Vrushank_Resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-link">Resume</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- =========================================================
-       ARTICLE CONTENT
-       ========================================================= -->
-  <article class="art-container">
-    <header class="art-header">
-      <div class="art-meta">
-        <span>2025 · 02</span>
-        <span>•</span>
-        <span>13 min read</span>
-      </div>
-      <h1 class="art-title">Raft Is Not Magic: What the Paper Does Not Explain</h1>
-    </header>
-
-    <div class="art-body">
+<header class="site-header"><div class="container nav"><a class="brand" href="../index.html"><span class="brand-mark">VP</span><span>Vrushank Patel</span></a><div class="nav-right"><nav class="nav-links" data-nav><a class="nav-link" data-nav-link href="../index.html">Home</a><a class="nav-link" data-nav-link href="../projects.html">Projects</a><a class="nav-link active" data-nav-link href="../blog.html">Blog</a><a class="nav-link" data-nav-link href="https://github.com/VrushankPatel" target="_blank" rel="noreferrer">GitHub ↗</a><a class="nav-link" data-nav-link href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noreferrer">LinkedIn ↗</a></nav><button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle theme">☀</button><button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-label="Open navigation">☰</button></div></div></header>
+<main><article class="article"><div class="eyebrow">Engineering Notes</div><div class="art-meta">
+<span>2025 · 02</span>
+<span>•</span>
+<span>13 min read</span>
+</div><h1 class="article-title">Raft Is Not Magic: What the Paper Does Not Explain</h1><div class="article-body">
       <p>The original Raft paper by Diego Ongaro and John Ousterhout, titled "In Search of an Understandable Consensus Algorithm," is a model of clarity in computer science literature. It can be read and fully understood in a single afternoon. The paper describes a system for leader election, log replication, and safety proofs, providing a clean algorithm for maintaining a replicated state machine across independent network hosts. It makes consensus feel approachable.</p>
 
       <p>However, running that same algorithm in production at scale teaches you lessons that are omitted from the academic text. The paper is designed for correctness and understandability. It is not an operations manual. When you build or run a Raft based consensus engine (such as etcd, JRaft, or TiKV), you quickly discover operational gaps. Production systems require extensions like pre-vote protocols, leader leases, and chunked, resumable snapshot transfers. The fact that every major production implementation has built these same extensions independently shows that these gaps are real operational requirements, not minor details.</p>
@@ -178,31 +158,6 @@ func (rf *Raft) updateCommitIndex() {
         <li><strong>Monitor Log Divergence Depth:</strong> Track the difference between the leader's log end index and each follower's <code>matchIndex</code>. A growing gap indicates a slow follower that is at risk of falling behind the compaction threshold, which would trigger a costly snapshot transfer.</li>
         <li><strong>Configure Odd-Numbered Sizing:</strong> Deploy clusters with an odd number of members (typically 3 or 5). An even-numbered cluster (such as 4 nodes) requires a majority of 3 nodes to agree, meaning it can only tolerate 1 failure. A 3 node cluster also tolerates 1 failure, but requires fewer resources and avoids majority tie scenarios during partitions.</li>
       </ul>
-    </div>
-  </article>
-
-  <!-- =========================================================
-       FOOTER
-       ========================================================= -->
-  <footer class="footer">
-    <div class="wrap footer-inner">
-      <p>&copy; 2026 Vrushank Patel. All rights reserved.</p>
-      <div class="footer-links">
-        <a href="../index.html" class="footer-link">Portfolio</a>
-        <a href="index.html" class="footer-link">Blog Home</a>
-        <a href="https://vrushankpatel5.medium.com/" target="_blank" rel="noopener noreferrer" class="footer-link">Medium</a>
-        <a href="https://github.com/VrushankPatel" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
-        <a href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
-        <a href="mailto:vrushankpatel5@gmail.com" class="footer-link">Email</a>
-        <a href="../assets/Vrushank_Resume.pdf" target="_blank" rel="noopener noreferrer" class="footer-link">Resume</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- =========================================================
-       JAVASCRIPT
-       ========================================================= -->
-  <script>
-  </script>
-</body>
-</html>
+    </div><div class="article-footer"><span>© 2026 Vrushank Patel</span><span><a href="../blog.html">← Back to Blog</a> · <a href="../projects.html">Projects</a></span></div></article></main>
+<script src="../assets/js/site.js" defer></script>
+</body></html>
