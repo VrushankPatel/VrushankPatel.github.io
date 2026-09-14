@@ -89,7 +89,7 @@ button,input{font:inherit}
   padding:9px 11px;
   border-radius:10px;
   color:var(--muted);
-  font-size:11px;
+  font-size:13.5px;
   white-space:nowrap;
 }
 .nav-link:hover,.nav-link.active{background:var(--surface);color:var(--text)}
@@ -194,7 +194,7 @@ button,input{font:inherit}
   display:flex;justify-content:space-between;gap:9px;
   min-width:0;padding:10px 11px;
   border:1px solid var(--line);border-radius:10px;background:var(--surface-2);
-  font-size:9px;
+  font-size:12.5px;
 }
 .contact span:last-child{
   min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
@@ -512,16 +512,16 @@ html[data-theme="dark"] .article-body code:not(pre code){background:#111923;bord
 
 /* ===== FINAL TYPOGRAPHY / SCALE PASS ===== */
 body{font-size:16px}
-.hero-copy h1{font-size:clamp(56px,4.7vw,80px);letter-spacing:-.035em;line-height:1.03;font-weight:760}
+.hero-copy h1{font-size:clamp(56px,4.7vw,65px);letter-spacing:-.025em;line-height:1.1;font-weight:725}
 .hero-copy p{font-size:15px;line-height:1.78}
 .tags{gap:7px}.tag{font-size:11px;padding:7px 10px}
 .hero-actions{gap:9px}.btn{min-height:45px;padding:0 15px;font-size:12px}
 .quote strong{font-size:10px}.quote p{font-size:19px;line-height:1.5}
 .metrics{gap:9px}.metric{padding:15px 16px}.metric b{font-size:27px}.metric span{font-size:10px;margin-top:6px}
 .info-card{padding:16px}.info-card h3{font-size:12px;margin-bottom:10px}
-.philosophy{gap:8px}.phi{padding:11px}.phi .num{font-size:9px}.phi h4{font-size:12px;margin:6px 0}.phi p{font-size:10px;line-height:1.55}
-.focus-copy{font-size:10px;line-height:1.6}
-.explore-grid{gap:8px}.explore{padding:11px}.explore b{font-size:11px}.explore span{font-size:9px;line-height:1.45}
+.philosophy{gap:8px}.phi{padding:11px}.phi .num{font-size:9px}.phi h4{font-size:14px;margin:6px 0}.phi p{font-size:12.5px;line-height:1.55}
+.focus-copy{font-size:14px;line-height:1.6}
+.explore-grid{gap:8px}.explore{padding:11px}.explore b{font-size:13px}.explore span{font-size:12px;line-height:1.45}
 .footer-strip{font-size:9px}
 .section-head h1{font-size:56px}.section-head p{font-size:15px}
 .project{min-height:300px;padding:23px}.project .index{font-size:9px}.project h2{font-size:33px}.project .summary{font-size:15px;line-height:1.78;max-width:100%}.project-meta{gap:7px;padding-top:16px}.project .tag{font-size:11px;padding:7px 10px}.stack{font-size:12px;line-height:1.55}.small-btn{font-size:11px;padding:9px 12px}
