@@ -13,7 +13,7 @@
       btn.setAttribute("aria-label",btn.title);
     }
   }
-  try { applyTheme(localStorage.getItem(key)||"dark"); } catch(e){ applyTheme("dark"); }
+  try { applyTheme(localStorage.getItem(key)||"light"); } catch(e){ applyTheme("light"); }
 
   document.addEventListener("click",function(event){
     const themeButton=event.target.closest("[data-theme-toggle]");
