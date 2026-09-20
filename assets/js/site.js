@@ -53,6 +53,64 @@
       if(empty)empty.style.display=count?"none":"block";
     });
   }
+  const viewHost=document.querySelector("[data-view-host]");
+  const homeView=document.querySelector('[data-view="home"]');
+  const resumeMain=document.querySelector(".resume-main");
+  const viewCache={};
+
+  if(resumeMain && homeView){
+    resumeMain.style.height=resumeMain.offsetHeight+"px";
+  }
+
+  let scrollTimer;
+  if(viewHost){
+    viewHost.addEventListener("scroll",function(){
+      viewHost.classList.add("is-scrolling");
+      clearTimeout(scrollTimer);
+      scrollTimer=setTimeout(function(){
+        viewHost.classList.remove("is-scrolling");
+      },700);
+    });
+  }
+
+  async function loadView(view){
+    if(!viewHost || !homeView)return;
+    if(view==="home"){
+      viewHost.hidden=true;
+      viewHost.innerHTML="";
+      homeView.hidden=false;
+      window.scrollTo({top:0,behavior:"smooth"});
+      return;
+    }
+    const url=view+".html";
+    viewHost.hidden=false;
+    homeView.hidden=true;
+    viewHost.innerHTML='<div class="view-loading">Loading '+(view==="projects"?"systems":"engineering notes")+'…</div>';
+    try{
+      if(!viewCache[view]){
+        const response=await fetch(url);
+        if(!response.ok)throw new Error("Unable to load view");
+        const documentText=await response.text();
+        const parsed=new DOMParser().parseFromString(documentText,"text/html");
+        const content=parsed.querySelector(".subpage");
+        if(!content)throw new Error("View content is missing");
+        viewCache[view]=content.innerHTML;
+      }
+      viewHost.innerHTML='<button class="view-back" type="button" data-view-target="home">← Overview</button>'+viewCache[view];
+      wireSearch(view==="projects"?"projectSearch":"blogSearch",view==="projects"?".project":".post",view==="projects"?"projectEmpty":"blogEmpty");
+      window.scrollTo({top:0,behavior:"smooth"});
+    }catch(error){
+      viewHost.innerHTML='<div class="view-error">This section could not be loaded right now.</div>';
+    }
+  }
+
+  document.addEventListener("click",function(event){
+    const viewButton=event.target.closest("[data-view-target]");
+    if(viewButton){
+      event.preventDefault();
+      loadView(viewButton.dataset.viewTarget);
+    }
+  });
   wireSearch("projectSearch",".project","projectEmpty");
   wireSearch("blogSearch",".post","blogEmpty");
 })();

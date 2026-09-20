@@ -10,14 +10,6 @@
 <script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem("vrushank-theme")==="dark"?"dark":"light"}catch(e){}})();</script>
 </head>
 <body>
-<header class="site-header"><div class="container nav">
-      <a class="brand" href="index.html"><span class="brand-mark">VP</span><span>Vrushank Patel</span></a>
-      <div class="nav-right">
-        <nav class="nav-links" data-nav><a class="nav-link active" data-nav-link href="index.html">Home</a><a class="nav-link" data-nav-link href="projects.html">Projects</a><a class="nav-link" data-nav-link href="blog.html">Blog</a><a class="nav-link" data-nav-link href="https://github.com/VrushankPatel" target="_blank" rel="noreferrer">GitHub ↗</a><a class="nav-link" data-nav-link href="https://www.linkedin.com/in/vrushank-patel-69b682180/" target="_blank" rel="noreferrer">LinkedIn ↗</a></nav>
-        <button class="icon-btn" type="button" data-theme-toggle>☀</button>
-        <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false">☰</button>
-      </div>
-    </div></header>
 <main>
 <section class="home">
   <div class="container resume">
@@ -40,13 +32,15 @@
       </div>
 
       <div class="actions">
-        <a class="btn primary" href="projects.html">Explore Systems →</a>
-        <a class="btn" href="blog.html">Engineering Notes →</a>
+        <a class="btn primary" href="#projects" data-view-target="projects">Explore Systems →</a>
+        <a class="btn" href="#blog" data-view-target="blog">Engineering Notes →</a>
       </div>
       <a class="btn resume-link" href="Vrushank_Resume.pdf" target="_blank" rel="noreferrer">View PDF Résumé ↗</a>
     </aside>
 
     <section class="panel resume-main">
+      <button class="theme-corner" type="button" data-theme-toggle aria-label="Toggle theme">☀</button>
+      <div data-view="home">
       <div class="hero-grid">
         <div class="hero-copy">
           <div class="eyebrow">Senior Backend Engineer · Trading &amp; Market Technology</div>
@@ -56,8 +50,8 @@
             <span class="tag">Java</span><span class="tag">JVM</span><span class="tag">Distributed Systems</span><span class="tag">Kafka</span><span class="tag">Kubernetes</span><span class="tag">AWS</span><span class="tag">Linux</span>
           </div>
           <div class="hero-actions">
-            <a class="btn primary" href="projects.html">View Systems →</a>
-            <a class="btn" href="blog.html">Read Engineering Notes →</a>
+            <a class="btn primary" href="#projects" data-view-target="projects">View Systems →</a>
+            <a class="btn" href="#blog" data-view-target="blog">Read Engineering Notes →</a>
           </div>
         </div>
         <div class="quote"><strong>Engineering principle</strong><p>“I care less about how sophisticated a system looks and more about how well it behaves under pressure.”</p></div>
@@ -101,6 +95,8 @@
       </div>
 
       <div class="footer-strip"><span>Backend architecture · Distributed systems · Trading infrastructure</span><span>© Vrushank Patel</span></div>
+      </div>
+      <div class="inline-view" data-view-host hidden></div>
     </section>
   </div>
 </section>
